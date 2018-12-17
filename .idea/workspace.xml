@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="QtSpace" targetName="QtSpace_autogen" />
+      <config projectName="QtSpace" targetName="QtSpace" />
+    </generated>
+  </component>
+  <component name="CMakeSettings" AUTO_RELOAD="true">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug">
+        <ADDITIONAL_GENERATION_ENVIRONMENT>
+          <envs>
+            <env name="QTDIR" value="/usr/local/Qt-5.10.1" />
+          </envs>
+        </ADDITIONAL_GENERATION_ENVIRONMENT>
+      </configuration>
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0a10581a-a5f8-4647-aa9e-964d4e44295d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/QtSpace.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/john.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Include/Application.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Include/MainWindow.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/arch/fbxalloc.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/arch/fbxarch.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/arch/fbxdebug.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/arch/fbxnew.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/arch/fbxstdcompliant.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/arch/fbxtypes.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxarray.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxbitset.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxcharptrset.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxcontainerallocators.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxdynamicarray.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxfile.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxfolder.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxhashmap.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxintrusivelist.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxmap.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxmemorypool.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxmultimap.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxpair.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxredblacktree.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxset.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxstatus.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxstring.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxstringlist.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxtime.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxtimecode.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxutils.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxclassid.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxconnectionpoint.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxdatatypes.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxemitter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxevent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxeventhandler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxlistener.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxloadingstrategy.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxmanager.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxmodule.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxobject.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxperipheral.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxplugin.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxplugincontainer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxproperty.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxpropertydef.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxpropertyhandle.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxpropertypage.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxpropertytypes.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxquery.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxqueryevent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxscopedloadingdirectory.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxscopedloadingfilename.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxstream.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxsymbol.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxsystemunit.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/fbxxref.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/math/fbxaffinematrix.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/math/fbxdualquaternion.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/math/fbxmath.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/math/fbxmatrix.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/math/fbxquaternion.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/math/fbxtransforms.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/math/fbxvector2.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/math/fbxvector4.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/sync/fbxatomic.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/sync/fbxclock.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/sync/fbxsync.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/core/sync/fbxthread.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fbxsdk_def.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fbxsdk_nsbegin.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fbxsdk_nsend.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fbxsdk_version.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/collada/fbxcolladaanimationelement.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/collada/fbxcolladaelement.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/collada/fbxcolladaiostream.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/collada/fbxcolladanamespace.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/collada/fbxcolladatokens.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/collada/fbxcolladautils.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/collada/fbxreadercollada14.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/collada/fbxwritercollada14.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbx/fbxio.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbx/fbxreaderfbx5.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbx/fbxreaderfbx6.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbx/fbxreaderfbx7.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbx/fbxwriterfbx5.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbx/fbxwriterfbx6.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbx/fbxwriterfbx7.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxbase64coder.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxexporter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxexternaldocreflistener.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxfiletokens.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxglobalcamerasettings.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxgloballightsettings.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxglobalsettings.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxgobo.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbximporter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxiobase.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxiopluginregistry.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxiosettings.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxiosettingspath.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxprogress.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxreader.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxstatistics.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxstatisticsfbx.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/fileio/fbxwriter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/libfbxsdk.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/libfbxsdk.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/animation/fbxanimcurve.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/animation/fbxanimcurvebase.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/animation/fbxanimcurvefilters.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/animation/fbxanimcurvenode.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/animation/fbxanimevalclassic.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/animation/fbxanimevalstate.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/animation/fbxanimevaluator.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/animation/fbxanimlayer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/animation/fbxanimstack.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/animation/fbxanimutilities.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxcharacter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxcharacternodename.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxcharacterpose.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxconstraint.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxconstraintaim.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxconstraintcustom.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxconstraintparent.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxconstraintposition.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxconstraintrotation.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxconstraintscale.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxconstraintsinglechainik.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxconstraintutils.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxcontrolset.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/constraint/fbxhik2fbxcharacter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxaudio.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxaudiolayer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxaxissystem.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxcollection.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxcollectionexclusive.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxcontainer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxcontainertemplate.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxdisplaylayer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxdocument.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxdocumentinfo.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxenvironment.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxgroupname.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxlibrary.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxmediaclip.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxobjectfilter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxobjectmetadata.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxobjectscontainer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxpose.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxreference.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxscene.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxselectionnode.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxselectionset.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxtakeinfo.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxthumbnail.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/fbxvideo.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxblendshape.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxblendshapechannel.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxcache.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxcachedeffect.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxcamera.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxcamerastereo.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxcameraswitcher.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxcluster.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxdeformer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxgenericnode.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxgeometry.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxgeometrybase.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxgeometryweightedmap.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxlayer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxlayercontainer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxlight.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxlimitsutilities.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxline.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxlodgroup.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxmarker.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxmesh.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxnode.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxnodeattribute.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxnull.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxnurbs.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxnurbscurve.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxnurbssurface.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxopticalreference.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxpatch.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxproceduralgeometry.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxshape.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxskeleton.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxskin.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxsubdeformer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxsubdiv.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxtrimnurbssurface.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxvertexcachedeformer.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/geometry/fbxweightedmapping.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxbindingoperator.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxbindingsentryview.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxbindingtable.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxbindingtablebase.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxbindingtableentry.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxconstantentryview.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxentryview.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxfiletexture.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbximplementation.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbximplementationfilter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbximplementationutils.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxlayeredtexture.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxlayerentryview.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxoperatorentryview.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxproceduraltexture.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxpropertyentryview.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxsemanticentryview.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxshadingconventions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxsurfacelambert.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxsurfacematerial.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxsurfacephong.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/scene/shading/fbxtexture.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxclonemanager.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxdeformationsevaluator.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxembeddedfilesaccumulator.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxgeometryconverter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxmanipulators.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxmaterialconverter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxnamehandler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxprocessor.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxprocessorshaderdependency.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxprocessorxref.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxprocessorxrefuserlib.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxrenamingstrategy.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxrenamingstrategybase.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxrenamingstrategyfbx5.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxrenamingstrategyfbx6.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxrenamingstrategyfbx7.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxrenamingstrategyutilities.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxrootnodeutility.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxscenecheckutility.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lib/fbxsdk/utils/fbxusernotification.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/MainWindow.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="41" column="45" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Include/Application.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
+              <folding>
+                <element signature="e#61#84#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Include/MainWindow.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+              <folding>
+                <element signature="e#59#81#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Source/MainWindow.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
+              <folding>
+                <element signature="e#0#17#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="17" selection-start-column="17" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>PRJ_INCLUDE_DIRS</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>PRJ_INCLUDES</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Include/Window.h" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/Include/Application.h" />
+        <option value="$PROJECT_DIR$/Include/MainWindow.h" />
+        <option value="$PROJECT_DIR$/Source/MainWindow.cpp" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1280" />
+    <option name="y" value="27" />
+    <option name="width" value="1280" />
+    <option name="height" value="1342" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="QtSpace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QtSpace" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QtSpace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QtSpace" type="462c0819:PsiDirectoryNode" />
+              <item name="Include" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="QtSpace" type="b2602c69:ProjectViewProjectNode" />
+              <item name="QtSpace" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../qspace" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Lib/fbxsdk" />
+      <recent name="$PROJECT_DIR$/Lib" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Lib/fbxsdk" />
+      <recent name="$PROJECT_DIR$/Lib/fbx" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.QtSpace">
+    <configuration name="QtSpace" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QtSpace" TARGET_NAME="QtSpace" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="QtSpace" RUN_TARGET_NAME="QtSpace">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QtSpace_autogen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="QtSpace" TARGET_NAME="QtSpace_autogen" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.QtSpace" />
+      <item itemvalue="Application.QtSpace_autogen" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0a10581a-a5f8-4647-aa9e-964d4e44295d" name="Default Changelist" comment="" />
+      <created>1545030537107</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1545030537107</updated>
+      <workItem from="1545030539180" duration="661000" />
+      <workItem from="1545031207175" duration="3210000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="3871000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="293" y="29" width="2035" height="1309" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28022876" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" weight="0.32073888" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33837113" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3299748" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="CMake" order="11" weight="0.32913518" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Lib/fbxsdk/core/arch/fbxnew.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lib/fbxsdk/core/base/fbxcontainerallocators.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lib/fbxsdk.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Include/Window.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="41" column="45" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Include/MainWindow.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+          <folding>
+            <element signature="e#59#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Include/Application.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#61#84#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Source/MainWindow.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
