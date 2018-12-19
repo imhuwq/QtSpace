@@ -19,3 +19,10 @@ void MainWindow::InitWindow() {
             )
     );
 }
+
+
+void MainWindow::InitGL() {
+    if (!gl_widget_) gl_widget_ = new MainLoop();
+    if (centralWidget()) centralWidget()->setParent(nullptr);
+    setCentralWidget(gl_widget_);
+}

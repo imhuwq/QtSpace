@@ -1068,7 +1068,7 @@
 #define FIELD_EMBEDDED_CONSUMER                      "Consumer"
 
 //
-// Node Attribute
+// GraphNode Attribute
 //
 #define FIELD_NODE_ATTRIBUTE_NAME                   "NodeAttributeName"
 #define FIELD_NODE_ATTRIBUTE_REFTO                  "NodeAttributeRefTo"

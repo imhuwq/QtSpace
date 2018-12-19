@@ -1014,7 +1014,7 @@ protected:
                     }
                     else
                     {
-                        FBX_ASSERT_NOW("Node not found in FbxRedBlackTree");
+                        FBX_ASSERT_NOW("GraphNode not found in FbxRedBlackTree");
                     }
                 }
                 else
@@ -1044,7 +1044,7 @@ protected:
                     }
                     else
                     {
-                        FBX_ASSERT_NOW("Node not found in FbxRedBlackTree");
+                        FBX_ASSERT_NOW("GraphNode not found in FbxRedBlackTree");
                     }
                 }
                 else
@@ -1078,7 +1078,7 @@ protected:
                     }
                     else
                     {
-                        FBX_ASSERT_NOW("Node not found in FbxRedBlackTree");
+                        FBX_ASSERT_NOW("GraphNode not found in FbxRedBlackTree");
                     }
                 }
                 else

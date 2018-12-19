@@ -535,7 +535,7 @@ private:
     //
     xmlDocPtr mXmlDoc;
 
-    // Scene information
+    // Resource information
     FbxScene*	mScene;
 
     // AnimStack/Layer holding the animation

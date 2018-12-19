@@ -133,7 +133,7 @@
 #include <fbxsdk/fileio/fbxstatistics.h>
 
 //---------------------------------------------------------------------------------------
-//Scene Includes
+//Resource Includes
 #include <fbxsdk/scene/fbxaudio.h>
 #include <fbxsdk/scene/fbxaudiolayer.h>
 #include <fbxsdk/scene/fbxcollection.h>
@@ -158,7 +158,7 @@
 #include <fbxsdk/scene/fbxvideo.h>
 
 //---------------------------------------------------------------------------------------
-//Scene Animation Includes
+//Resource Animation Includes
 #include <fbxsdk/scene/animation/fbxanimcurve.h>
 #include <fbxsdk/scene/animation/fbxanimcurvebase.h>
 #include <fbxsdk/scene/animation/fbxanimcurvefilters.h>
@@ -171,7 +171,7 @@
 #include <fbxsdk/scene/animation/fbxanimutilities.h>
 
 //---------------------------------------------------------------------------------------
-//Scene Constraint Includes
+//Resource Constraint Includes
 #include <fbxsdk/scene/constraint/fbxcharacternodename.h>
 #include <fbxsdk/scene/constraint/fbxcharacter.h>
 #include <fbxsdk/scene/constraint/fbxcharacterpose.h>
@@ -188,7 +188,7 @@
 #include <fbxsdk/scene/constraint/fbxhik2fbxcharacter.h>
 
 //---------------------------------------------------------------------------------------
-//Scene Geometry Includes
+//Resource Geometry Includes
 #include <fbxsdk/scene/geometry/fbxblendshape.h>
 #include <fbxsdk/scene/geometry/fbxblendshapechannel.h>
 #include <fbxsdk/scene/geometry/fbxcache.h>
@@ -227,7 +227,7 @@
 #include <fbxsdk/scene/geometry/fbxweightedmapping.h>
 
 //---------------------------------------------------------------------------------------
-//Scene Shading Includes
+//Resource Shading Includes
 #include <fbxsdk/scene/shading/fbxshadingconventions.h>
 #include <fbxsdk/scene/shading/fbxbindingsentryview.h>
 #include <fbxsdk/scene/shading/fbxbindingtable.h>
