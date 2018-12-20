@@ -27,13 +27,21 @@ typedef shared_ptr<const MeshInstance> kMeshInstancePtr;
 class MeshInstance : public Node {
 public:
     MeshInstance(const string &name,
-                 NodeType::Type node_type = NodeType::kMeshInstance) : Node(name, node_type) {}
+                 const kMeshPtr &mesh,
+                 NodeType::Type node_type = NodeType::kMeshInstance) : mesh_(mesh),
+                                                                       Node(name, node_type) {}
 
     kMeshPtr mesh() const { return mesh_; }
 
     string material_name() const { return material_name_; }
 
     size_t triangle_indices_size() const { return triangle_indices_.size(); }
+
+    void AddTriangle(unsigned int p0, unsigned int p1, unsigned int p2) {
+        triangle_indices_.push_back(p0);
+        triangle_indices_.push_back(p1);
+        triangle_indices_.push_back(p2);
+    }
 
     const vector<unsigned int> &triangle_indices() const { return triangle_indices_; }
 

@@ -27,7 +27,7 @@ typedef shared_ptr<SceneRender> SceneRenderPtr;
 typedef shared_ptr<const SceneRender> kSceneRenderPtr;
 
 
-class SceneRender : protected QOpenGLFunctions {
+class SceneRender{
 public:
     SceneRender(kScenePtr scene) : scene_(scene),
                                    vao_(new QOpenGLVertexArrayObject()),
@@ -38,7 +38,8 @@ public:
         LoadGLBuffers();
     }
 
-    void Draw(const ShaderPtr &shader) {
+    void Draw(const ShaderPtr &shader, QOpenGLFunctions *gl_function) {
+        shader->bind();
         shader->setUniformValue("viewMatrix", scene_->camera().transformation());
         shader->setUniformValue("projectionMatrix", scene_->projection());
 
@@ -46,7 +47,7 @@ public:
         vbo_->bind();
         ebo_->bind();
 
-        for (const NodeRenderPtr &node_render:flatten_nodes) node_render->Draw(shader);
+        for (const NodeRenderPtr &node_render:flatten_nodes) node_render->Draw(shader, gl_function);
     }
 
 private:

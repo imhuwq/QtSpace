@@ -19,7 +19,7 @@ typedef shared_ptr<NodeRender> NodeRenderPtr;
 typedef shared_ptr<const NodeRender> kNodeRenderPtr;
 typedef shared_ptr<QOpenGLShaderProgram> ShaderPtr;
 
-class NodeRender : protected QOpenGLFunctions {
+class NodeRender {
 public:
     NodeRender(const kNodePtr &node,
                size_t vertex_buffer_offset,
@@ -29,12 +29,12 @@ public:
                                                    vertex_buffer_offset_(vertex_buffer_offset),
                                                    index_buffer_offset_(index_buffer_offset) {}
 
-    void Draw(const ShaderPtr &shader) {
+    void Draw(const ShaderPtr &shader, QOpenGLFunctions *gl_function) {
         shader->setUniformValue("modelMatrix", transformation_);
 
         if (node_->node_type() == NodeType::kMeshInstance) {
             SetAttributeBuffers(shader);
-            glDrawElements(GL_TRIANGLES, (int) index_buffer_size_, GL_UNSIGNED_INT, (void *) (index_buffer_offset_ * sizeof(unsigned int)));
+            gl_function->glDrawElements(GL_TRIANGLES, (int) index_buffer_size_, GL_UNSIGNED_INT, (void *) (index_buffer_offset_ * sizeof(unsigned int)));
         }
     }
 

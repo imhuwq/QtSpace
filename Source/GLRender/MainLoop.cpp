@@ -11,7 +11,6 @@ MainLoop::MainLoop() : scene_(nullptr),
     format.setDepthBufferSize(24);
     format.setStencilBufferSize(8);
     setFormat(format);
-
 }
 
 
@@ -39,7 +38,8 @@ void MainLoop::resizeGL(int w, int h) {}
 
 void MainLoop::paintGL() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    scene_render_->Draw(shader_);
+    gl_function = QOpenGLContext::currentContext()->functions();
+    scene_render_->Draw(shader_, gl_function);
 }
 
 void MainLoop::TearDownGL() {}

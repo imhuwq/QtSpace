@@ -8,6 +8,7 @@
 
 #include "Resource/Resource.h"
 #include "Resource/Model.h"
+#include "Resource/GraphNode/MeshInstance.h"
 #include "GraphNode/Light.h"
 #include "GraphNode/Camera.h"
 
@@ -28,6 +29,59 @@ public:
 
     static kScenePtr CreateDefault() {
         ScenePtr scene = make_shared<Scene>();
+
+        ModelPtr model = make_shared<Model>();
+
+        VertexSemantic vertex_semantic(false, true, false, false, false);
+        MeshPtr mesh = make_shared<Mesh>(36, vertex_semantic);
+        vector<vector<float>> vertex_buffer = {{-0.5f, -0.5f, -0.5f, 0.0f, 0.0f},
+                                               {0.5f,  -0.5f, -0.5f, 1.0f, 0.0f},
+                                               {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
+                                               {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
+                                               {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f},
+                                               {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f},
+                                               {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
+                                               {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
+                                               {0.5f,  0.5f,  0.5f,  1.0f, 1.0f},
+                                               {0.5f,  0.5f,  0.5f,  1.0f, 1.0f},
+                                               {-0.5f, 0.5f,  0.5f,  0.0f, 1.0f},
+                                               {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
+                                               {-0.5f, 0.5f,  0.5f,  1.0f, 0.0f},
+                                               {-0.5f, 0.5f,  -0.5f, 1.0f, 1.0f},
+                                               {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
+                                               {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
+                                               {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
+                                               {-0.5f, 0.5f,  0.5f,  1.0f, 0.0f},
+                                               {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+                                               {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
+                                               {0.5f,  -0.5f, -0.5f, 0.0f, 1.0f},
+                                               {0.5f,  -0.5f, -0.5f, 0.0f, 1.0f},
+                                               {0.5f,  -0.5f, 0.5f,  0.0f, 0.0f},
+                                               {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+                                               {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
+                                               {0.5f,  -0.5f, -0.5f, 1.0f, 1.0f},
+                                               {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
+                                               {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
+                                               {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
+                                               {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
+                                               {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f},
+                                               {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
+                                               {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+                                               {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+                                               {-0.5f, 0.5f,  0.5f,  0.0f, 0.0f},
+                                               {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f}};
+
+        for (size_t i = 0; i < 36; i++) mesh->SetVertex(vertex_buffer[i], i);
+        model->AddMesh(mesh);
+
+        string mesh_instance_name = "cube";
+        MeshInstancePtr mesh_instance = make_shared<MeshInstance>(mesh_instance_name, mesh);
+        for (unsigned int i = 0; i < 36; i += 3) mesh_instance->AddTriangle(i, i + 1, i + 2);
+
+        NodePtr root_node = model->root_node();
+        root_node->AddChild(mesh_instance);
+
+        scene->AddModel(model);
         return scene;
     }
 
@@ -37,6 +91,8 @@ public:
         if (index > models_.size() - 1) return nullptr;
         return models_[index];
     }
+
+    void AddModel(const ModelPtr &model) { models_.push_back(model); }
 
     QMatrix4x4 transformation() const { return transform_; }
 

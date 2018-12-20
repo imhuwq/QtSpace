@@ -55,6 +55,8 @@ public:
         return children_[index];
     }
 
+    void AddChild(const NodePtr &child) { children_.push_back(child); }
+
     QMatrix4x4 transformation() const { return transformation_; }
 
     virtual ~Node() {}

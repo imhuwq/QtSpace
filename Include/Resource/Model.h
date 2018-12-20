@@ -26,12 +26,16 @@ public:
 
     kNodePtr root_node() const { return root_node_; }
 
+    NodePtr root_node() { return root_node_; }
+
     size_t mesh_size() const { return meshes_.size(); }
 
     kMeshPtr GetMesh(size_t index) const {
         if (index > meshes_.size() - 1) return nullptr;
         return meshes_[index];
     }
+
+    void AddMesh(const MeshPtr &mesh) { meshes_.push_back(mesh); }
 
     const kMaterialPtr GetMaterial(const string &material_name) const {
         return materials_.at(material_name);
