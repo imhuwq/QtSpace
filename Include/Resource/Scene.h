@@ -24,52 +24,67 @@ public:
     Scene() : camera_("camera"),
               light_("sun", NodeType::kLight, LightType::kDirectionLight) {
         transform_.setToIdentity();
+        transform_.rotate(QQuaternion::fromEulerAngles(45.0f, 0, 45.0f));
         projection_.setToIdentity();
+        camera_.Translate(0, 0, -10);
     }
 
-    static kScenePtr CreateDefault() {
+    static ScenePtr CreateDefault() {
         ScenePtr scene = make_shared<Scene>();
 
         ModelPtr model = make_shared<Model>();
 
         VertexSemantic vertex_semantic(false, true, false, false, false);
         MeshPtr mesh = make_shared<Mesh>(36, vertex_semantic);
-        vector<vector<float>> vertex_buffer = {{-0.5f, -0.5f, -0.5f, 0.0f, 0.0f},
-                                               {0.5f,  -0.5f, -0.5f, 1.0f, 0.0f},
-                                               {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
-                                               {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
-                                               {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f},
-                                               {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f},
-                                               {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
-                                               {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
-                                               {0.5f,  0.5f,  0.5f,  1.0f, 1.0f},
-                                               {0.5f,  0.5f,  0.5f,  1.0f, 1.0f},
-                                               {-0.5f, 0.5f,  0.5f,  0.0f, 1.0f},
-                                               {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
-                                               {-0.5f, 0.5f,  0.5f,  1.0f, 0.0f},
-                                               {-0.5f, 0.5f,  -0.5f, 1.0f, 1.0f},
-                                               {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
-                                               {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
-                                               {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
-                                               {-0.5f, 0.5f,  0.5f,  1.0f, 0.0f},
-                                               {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-                                               {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
-                                               {0.5f,  -0.5f, -0.5f, 0.0f, 1.0f},
-                                               {0.5f,  -0.5f, -0.5f, 0.0f, 1.0f},
-                                               {0.5f,  -0.5f, 0.5f,  0.0f, 0.0f},
-                                               {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-                                               {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
-                                               {0.5f,  -0.5f, -0.5f, 1.0f, 1.0f},
-                                               {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
-                                               {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
-                                               {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
-                                               {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
-                                               {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f},
-                                               {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
-                                               {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-                                               {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-                                               {-0.5f, 0.5f,  0.5f,  0.0f, 0.0f},
-                                               {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f}};
+        vector<vector<float>> vertex_buffer = {
+                {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f},
+                {0.5f,  -0.5f, -0.5f, 1.0f, 0.0f},
+                {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
+
+                {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
+                {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f},
+                {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f},
+
+                {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
+                {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
+                {0.5f,  0.5f,  0.5f,  1.0f, 1.0f},
+
+                {0.5f,  0.5f,  0.5f,  1.0f, 1.0f},
+                {-0.5f, 0.5f,  0.5f,  0.0f, 1.0f},
+                {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
+
+                {-0.5f, 0.5f,  0.5f,  1.0f, 0.0f},
+                {-0.5f, 0.5f,  -0.5f, 1.0f, 1.0f},
+                {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
+
+                {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
+                {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
+                {-0.5f, 0.5f,  0.5f,  1.0f, 0.0f},
+
+                {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+                {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
+                {0.5f,  -0.5f, -0.5f, 0.0f, 1.0f},
+
+                {0.5f,  -0.5f, -0.5f, 0.0f, 1.0f},
+                {0.5f,  -0.5f, 0.5f,  0.0f, 0.0f},
+                {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+
+                {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
+                {0.5f,  -0.5f, -0.5f, 1.0f, 1.0f},
+                {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
+
+                {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
+                {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
+                {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
+
+                {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f},
+                {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
+                {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+
+                {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
+                {-0.5f, 0.5f,  0.5f,  0.0f, 0.0f},
+                {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f}
+        };
 
         for (size_t i = 0; i < 36; i++) mesh->SetVertex(vertex_buffer[i], i);
         model->AddMesh(mesh);
@@ -99,6 +114,15 @@ public:
     QMatrix4x4 projection() const { return projection_; }
 
     const Camera &camera() const { return camera_; }
+
+    void Resize(int w, int h) {
+        projection_.setToIdentity();
+        projection_.perspective(camera_.fov(), w / float(h), 0.001, 100.0f);
+    }
+
+    void Animate(float time_delta) {
+        transform_.rotate(QQuaternion::fromAxisAndAngle(1.0f, 1.0f, 0.0f, 50.0f * time_delta));
+    }
 
 private:
     QMatrix4x4 transform_;

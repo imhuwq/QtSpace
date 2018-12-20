@@ -27,7 +27,7 @@ typedef shared_ptr<SceneRender> SceneRenderPtr;
 typedef shared_ptr<const SceneRender> kSceneRenderPtr;
 
 
-class SceneRender{
+class SceneRender {
 public:
     SceneRender(kScenePtr scene) : scene_(scene),
                                    vao_(new QOpenGLVertexArrayObject()),
@@ -40,8 +40,7 @@ public:
 
     void Draw(const ShaderPtr &shader, QOpenGLFunctions *gl_function) {
         shader->bind();
-        shader->setUniformValue("viewMatrix", scene_->camera().transformation());
-        shader->setUniformValue("projectionMatrix", scene_->projection());
+        shader->setUniformValue("mvpMatrix", scene_->projection() * scene_->camera().transformation() * scene_->transformation());
 
         vao_->bind();
         vbo_->bind();
@@ -78,8 +77,9 @@ private:
                 mesh_buffer_size[mesh_uuid] = vbo_size_;
                 vbo_size_ += mesh->vertex_buffer_size();
             }
-            NodeRenderPtr node_render = make_shared<NodeRender>(node, mesh_buffer_size[mesh_uuid], ebo_size_, transformation);
-            ebo_size_ += mesh_instance->triangle_indices_size();
+            size_t index_buffer_size = mesh_instance->triangle_indices_size();
+            NodeRenderPtr node_render = make_shared<NodeRender>(node, index_buffer_size, mesh_buffer_size[mesh_uuid], ebo_size_, transformation);
+            ebo_size_ += index_buffer_size;
 
             flatten_nodes.push_back(node_render);
         }
@@ -93,10 +93,12 @@ private:
         ebo_size_ = 0;
         map<string, size_t> mesh_buffer_size;
 
+        QMatrix4x4 mvp = scene_->projection() * scene_->camera().transformation() * scene_->transformation();
         for (size_t model_index = 0; model_index < scene_->model_size(); model_index++) {
             kModelPtr model = scene_->GetModel(model_index);
             kNodePtr node = model->root_node();
-            QMatrix4x4 transform = scene_->transformation();
+            QMatrix4x4 transform = QMatrix4x4();
+            transform.setToIdentity();
             FlattenNodeTrees(node, mesh_buffer_size, transform);
         }
     }

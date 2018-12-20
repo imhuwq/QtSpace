@@ -14,15 +14,16 @@ namespace VertexShaderLocation {
 const QString DefaultVertexShader = "#version 330\n"
                                     "\n"
                                     "layout(location = 0) in vec3 position;\n"
+                                    "layout(location = 1) in vec3 normal;\n"
+                                    "layout(location = 2) in vec2 uv0;\n"
                                     "\n"
                                     "out vec4 positionColor;\n"
                                     "\n"
-                                    "uniform mat4 modelMatrix;\n"
-                                    "uniform mat4 viewMatrix;\n"
-                                    "uniform mat4 projectionMatrix;\n"
+                                    "uniform mat4 mvpMatrix;\n"
+                                    "uniform mat4 worldMatrix;\n"
                                     "\n"
                                     "void main() {\n"
-                                    "\tgl_Position = vec4(position, 1.0);\n"
+                                    "\tgl_Position = mvpMatrix * worldMatrix * vec4(position, 1.0);\n"
                                     "\tpositionColor = gl_Position;\n"
                                     "}";
 
@@ -32,7 +33,7 @@ const QString DefaultFragmentShader = "#version 330\n"
                                       "out vec4 color;\n"
                                       "\n"
                                       "void main() {\n"
-                                      "    color = positionColor;\n"
+                                      "    color = vec4(0.5, 0, 0, 1);\n"
                                       "}";
 
 #endif //QTSPACE_SHADER_H

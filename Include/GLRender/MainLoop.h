@@ -1,6 +1,7 @@
 #ifndef QTSPACE_GLWIDGET_H
 #define QTSPACE_GLWIDGET_H
 
+#include <QTime>
 #include <QString>
 #include <QOpenGLWidget>
 #include <QOpenGLFunctions>
@@ -37,10 +38,16 @@ protected slots:
     void update();
 
 private:
-    kScenePtr scene_ = nullptr;
+    ScenePtr scene_ = nullptr;
     SceneRenderPtr scene_render_ = nullptr;
     ShaderPtr shader_ = nullptr;
-    QOpenGLFunctions *gl_function;
+    QOpenGLFunctions *gl_function_;
+    size_t gl_frame_count_;
+    QTime gl_frame_timer_;
+    float gl_this_frame_time_;
+    float gl_last_frame_time_;
+    float gl_frame_delta_;
+    float gl_fps_;
 };
 
 #endif //QTSPACE_GLWIDGET_H
