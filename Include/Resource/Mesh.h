@@ -123,6 +123,12 @@ public:
         }
     }
 
+    void SetBuffers(const vector<float> &vertex_buffer, const vector<float> &blend_weights_buffer = {}, const vector<unsigned int> &blend_indices_buffer = {}) {
+        vertex_buffer_ = vertex_buffer;
+        blend_weights_buffer_ = blend_weights_buffer;
+        blend_indices_buffer_ = blend_indices_buffer;
+    }
+
     size_t vertex_buffer_size() const { return vertex_buffer_.size(); }
 
     const vector<float> &vertex_buffer() const { return vertex_buffer_; }

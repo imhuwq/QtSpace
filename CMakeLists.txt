@@ -32,7 +32,9 @@ list(APPEND PRJ_LIBRARIES ${Qt5Widgets_LIBRARIES})
 list(APPEND PRJ_LIBRARIES "${CMAKE_CURRENT_SOURCE_DIR}/Lib/fbxsdk/libfbxsdk.a")
 
 # source files
-list(APPEND PRJ_SOURCES Include/Application.h
+list(APPEND PRJ_SOURCES
+        Include/Files.h
+        Include/Application.h
         Include/MainWindow.h
         Source/MainWindow.cpp
         Include/GLRender/MainLoop.h
@@ -45,12 +47,15 @@ list(APPEND PRJ_SOURCES Include/Application.h
         Include/Resource/GraphNode/Light.h
         Include/Resource/GraphNode/MeshInstance.h
         Include/Resource/Texture.h
+        Source/Resource/Texture.cpp
         Include/Resource/Material.h
         Include/Resource/Model.h
         Include/GLRender/SceneRender.h
-        Include/GLRender/NodeRender.h
+        Include/GLRender/MeshInstanceRender.h
         Include/GLRender/Shader.h
         )
 
 add_executable(QtSpace main.cpp ${PRJ_SOURCES})
 target_link_libraries(QtSpace ${PRJ_LIBRARIES} ${CMAKE_DL_LIBS})
+
+file(COPY File DESTINATION ${CMAKE_BINARY_DIR})

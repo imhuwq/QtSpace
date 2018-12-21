@@ -24,9 +24,8 @@ public:
     Scene() : camera_("camera"),
               light_("sun", NodeType::kLight, LightType::kDirectionLight) {
         transform_.setToIdentity();
-        transform_.rotate(QQuaternion::fromEulerAngles(45.0f, 0, 45.0f));
+//        transform_.rotate(QQuaternion::fromEulerAngles(45.0f, 0, 45.0f));
         projection_.setToIdentity();
-        camera_.Translate(0, 0, -10);
     }
 
     static ScenePtr CreateDefault() {
@@ -34,67 +33,13 @@ public:
 
         ModelPtr model = make_shared<Model>();
 
-        VertexSemantic vertex_semantic(false, true, false, false, false);
-        MeshPtr mesh = make_shared<Mesh>(36, vertex_semantic);
-        vector<vector<float>> vertex_buffer = {
-                {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f},
-                {0.5f,  -0.5f, -0.5f, 1.0f, 0.0f},
-                {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
+        MeshInstancePtr mesh_instance = MeshInstance::CreateDefault();
+        model->AddMesh(const_pointer_cast<Mesh>(mesh_instance->mesh()));
 
-                {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
-                {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f},
-                {-0.5f, -0.5f, -0.5f, 0.0f, 0.0f},
+        MaterialPtr material = const_pointer_cast<Material>(mesh_instance->material());
+        model->AddMaterial(material);
 
-                {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
-                {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
-                {0.5f,  0.5f,  0.5f,  1.0f, 1.0f},
-
-                {0.5f,  0.5f,  0.5f,  1.0f, 1.0f},
-                {-0.5f, 0.5f,  0.5f,  0.0f, 1.0f},
-                {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
-
-                {-0.5f, 0.5f,  0.5f,  1.0f, 0.0f},
-                {-0.5f, 0.5f,  -0.5f, 1.0f, 1.0f},
-                {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
-
-                {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
-                {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
-                {-0.5f, 0.5f,  0.5f,  1.0f, 0.0f},
-
-                {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-                {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
-                {0.5f,  -0.5f, -0.5f, 0.0f, 1.0f},
-
-                {0.5f,  -0.5f, -0.5f, 0.0f, 1.0f},
-                {0.5f,  -0.5f, 0.5f,  0.0f, 0.0f},
-                {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-
-                {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
-                {0.5f,  -0.5f, -0.5f, 1.0f, 1.0f},
-                {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
-
-                {0.5f,  -0.5f, 0.5f,  1.0f, 0.0f},
-                {-0.5f, -0.5f, 0.5f,  0.0f, 0.0f},
-                {-0.5f, -0.5f, -0.5f, 0.0f, 1.0f},
-
-                {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f},
-                {0.5f,  0.5f,  -0.5f, 1.0f, 1.0f},
-                {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-
-                {0.5f,  0.5f,  0.5f,  1.0f, 0.0f},
-                {-0.5f, 0.5f,  0.5f,  0.0f, 0.0f},
-                {-0.5f, 0.5f,  -0.5f, 0.0f, 1.0f}
-        };
-
-        for (size_t i = 0; i < 36; i++) mesh->SetVertex(vertex_buffer[i], i);
-        model->AddMesh(mesh);
-
-        string mesh_instance_name = "cube";
-        MeshInstancePtr mesh_instance = make_shared<MeshInstance>(mesh_instance_name, mesh);
-        for (unsigned int i = 0; i < 36; i += 3) mesh_instance->AddTriangle(i, i + 1, i + 2);
-
-        NodePtr root_node = model->root_node();
-        root_node->AddChild(mesh_instance);
+        model->root_node()->AddChild(mesh_instance);
 
         scene->AddModel(model);
         return scene;
@@ -117,11 +62,11 @@ public:
 
     void Resize(int w, int h) {
         projection_.setToIdentity();
-        projection_.perspective(camera_.fov(), w / float(h), 0.001, 100.0f);
+        projection_.perspective(camera_.fov(), w / float(h), 0.01f, 100.0f);
     }
 
     void Animate(float time_delta) {
-        transform_.rotate(QQuaternion::fromAxisAndAngle(1.0f, 1.0f, 0.0f, 50.0f * time_delta));
+        transform_.rotate(QQuaternion::fromAxisAndAngle(1.0f, 0.0f, 0.0f, 50.0f * time_delta));
     }
 
 private:

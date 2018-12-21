@@ -23,8 +23,6 @@ public:
     }
 
 protected:
-    void CreateShaders();
-
     void initializeGL() override;
 
     void resizeGL(int w, int h) override;
@@ -40,8 +38,6 @@ protected slots:
 private:
     ScenePtr scene_ = nullptr;
     SceneRenderPtr scene_render_ = nullptr;
-    ShaderPtr shader_ = nullptr;
-    QOpenGLFunctions *gl_function_;
     size_t gl_frame_count_;
     QTime gl_frame_timer_;
     float gl_this_frame_time_;

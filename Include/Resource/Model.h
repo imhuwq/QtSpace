@@ -28,24 +28,20 @@ public:
 
     NodePtr root_node() { return root_node_; }
 
-    size_t mesh_size() const { return meshes_.size(); }
-
-    kMeshPtr GetMesh(size_t index) const {
-        if (index > meshes_.size() - 1) return nullptr;
-        return meshes_[index];
-    }
-
     void AddMesh(const MeshPtr &mesh) { meshes_.push_back(mesh); }
 
-    const kMaterialPtr GetMaterial(const string &material_name) const {
-        return materials_.at(material_name);
+    void AddMaterial(const MaterialPtr &material) {
+        materials_[material->uuid()] = material;
+        if (material->ambient_texture()) textures_[material->ambient_texture()->uuid()] = material->ambient_texture();
+        if (material->diffuse_texture()) textures_[material->diffuse_texture()->uuid()] = material->diffuse_texture();
+        if (material->specular_texture()) textures_[material->specular_texture()->uuid()] = material->specular_texture();
     }
 
 private:
     NodePtr root_node_;
-    vector<MeshPtr> meshes_;
-    map<string, MaterialPtr> materials_;
-    map<string, TexturePtr> textures_;
+    vector<kMeshPtr> meshes_;
+    map<string, kMaterialPtr> materials_;
+    map<string, kTexturePtr> textures_;
 };
 
 #endif //QTSPACE_MODEL_H
