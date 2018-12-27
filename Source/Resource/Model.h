@@ -4,7 +4,7 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include "Material.h"
-#include "Resource/GraphNode/Node.h"
+#include "GraphNode/Node.h"
 
 using namespace std;
 

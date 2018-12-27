@@ -1,4 +1,4 @@
-#include "GLRender/SceneRender.h"
+#include "SceneRender.h"
 
 SceneRender::SceneRender(kScenePtr scene) : scene_(scene),
                                             vao_(new QOpenGLVertexArrayObject()),

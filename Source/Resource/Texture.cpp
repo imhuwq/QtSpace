@@ -1,5 +1,5 @@
-#include "Resource/Texture.h"
-#include "Files.h"
+#include "Texture.h"
+#include "Common/Files.h"
 
 kTexturePtr Texture::default_texture_;
 

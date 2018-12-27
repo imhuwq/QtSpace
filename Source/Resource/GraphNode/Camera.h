@@ -1,7 +1,7 @@
 #ifndef QTSPACE_CAMERA_H
 #define QTSPACE_CAMERA_H
 
-#include "Resource/GraphNode/Node.h"
+#include "Node.h"
 
 class Camera : public Node {
 public:

@@ -1,4 +1,4 @@
-#include "Resource/GraphNode/Node.h"
+#include "Node.h"
 
 Node::Node(const string &name,
            NodeType::Type node_type) : name_(name),

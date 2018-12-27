@@ -6,7 +6,7 @@
 
 ### 程序代码
  - [x] 更独立的代码模块
- - [ ] 按模块编译的 CMakeLists.txt
+ - [x] 按模块编译的 CMakeLists.txt
  
 ### 3D 功能
  - [ ] 基于 FBX 的模型加载

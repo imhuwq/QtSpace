@@ -1,4 +1,4 @@
-#include "GLRender/MeshInstanceRender.h"
+#include "MeshInstanceRender.h"
 
 MeshInstanceRender::MeshInstanceRender(const kNodePtr &node,
                                        size_t index_buffer_size,

@@ -1,5 +1,5 @@
-#include "Resource/Scene.h"
-#include "Resource/GraphNode/MeshInstance.h"
+#include "Scene.h"
+#include "GraphNode/MeshInstance.h"
 
 Scene::Scene() : camera_("camera"),
                  light_("sun", NodeType::kLight, LightType::kDirectionLight) {

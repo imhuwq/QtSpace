@@ -1,7 +1,7 @@
 #ifndef QTSPACE_LIGHT_H
 #define QTSPACE_LIGHT_H
 
-#include "Resource/GraphNode/Node.h"
+#include "Node.h"
 
 namespace LightType {
     enum Type {

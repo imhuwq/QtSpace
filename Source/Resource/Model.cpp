@@ -1,4 +1,4 @@
-#include "Resource/Model.h"
+#include "Model.h"
 
 Model::Model() : root_node_(make_shared<Node>("root")) {};
 

@@ -10,9 +10,9 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 
-#include "Resource/Mesh.h"
-#include "Resource/Material.h"
-#include "Resource/GraphNode/Node.h"
+#include "../Mesh.h"
+#include "../Material.h"
+#include "Node.h"
 
 using namespace std;
 

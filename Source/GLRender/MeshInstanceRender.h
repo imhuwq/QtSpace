@@ -3,12 +3,11 @@
 
 #include <memory>
 
-
 #include "Resource/Material.h"
 #include "Resource/Mesh.h"
 #include "Resource/GraphNode/Node.h"
 #include "Resource/GraphNode/MeshInstance.h"
-#include "GLRender/Shader.h"
+#include "Shader.h"
 
 using namespace std;
 

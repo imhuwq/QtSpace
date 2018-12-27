@@ -9,7 +9,7 @@
 #include <QMatrix4x4>
 #include <QVector3D>
 
-#include "Resource/Resource.h"
+#include "../Resource.h"
 
 using namespace std;
 
