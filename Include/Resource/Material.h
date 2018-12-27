@@ -2,11 +2,11 @@
 #define QTSPACE_MATERIAL_H
 
 #include <memory>
+#include <vector>
 #include <string>
 
-#include <QOpenGLShaderProgram>
-
 #include "Resource/Resource.h"
+#include "Resource/Texture.h"
 
 using namespace std;
 
@@ -17,55 +17,41 @@ typedef shared_ptr<const Material> kMaterialPtr;
 
 class Material : public Resource {
 public:
-    Material(const string &name) : name_(name),
-                                   ambient_color_{3, 1.0f},
-                                   diffuse_color_(3, 1.0f),
-                                   specular_color_(3, 1.0f),
-                                   shininess_(0) {
-        kTexturePtr default_texture = Texture::DEFAULT_TEXTURE();
-        ambient_texture_ = default_texture;
-        diffuse_texture_ = default_texture;
-        specular_texture_ = default_texture;
-    }
+    Material(const string &name);
 
-    string name() { return name_; }
+    string name();
 
-    kTexturePtr ambient_texture() const { return ambient_texture_; }
+    kTexturePtr ambient_texture() const;
 
-    void SetAmbientTexture(const TexturePtr &ambient_texture) { ambient_texture_ = ambient_texture; }
+    void SetAmbientTexture(const TexturePtr &ambient_texture);
 
-    vector<float> ambient_color() const { return ambient_color_; }
+    vector<float> ambient_color() const;
 
-    void SetAmbientColor(float x, float y, float z) { ambient_color_ = {x, y, z}; }
+    void SetAmbientColor(float x, float y, float z);
 
-    kTexturePtr diffuse_texture() const { return diffuse_texture_; }
+    kTexturePtr diffuse_texture() const;
 
-    void SetDiffuseTexture(const TexturePtr &diffuse_texture) { diffuse_texture_ = diffuse_texture; }
+    void SetDiffuseTexture(const TexturePtr &diffuse_texture);
 
-    vector<float> diffuse_color() const { return diffuse_color_; }
+    vector<float> diffuse_color() const;
 
-    void SetDiffuseColor(float x, float y, float z) { diffuse_color_ = {x, y, z}; }
+    void SetDiffuseColor(float x, float y, float z);
 
-    kTexturePtr specular_texture() const { return specular_texture_; }
+    kTexturePtr specular_texture() const;
 
-    void SetSpecularTexture(const TexturePtr &specular_texture) { specular_texture_ = specular_texture; }
+    void SetSpecularTexture(const TexturePtr &specular_texture);
 
-    vector<float> specular_color() const { return specular_color_; }
+    vector<float> specular_color() const;
 
-    void SetSpecularColor(float x, float y, float z) { specular_color_ = {x, y, z}; }
+    void SetSpecularColor(float x, float y, float z);
 
-    float shininess() const { return shininess_; }
+    float shininess() const;
 
-    void SetShininess(float shininess) { shininess_ = shininess; }
+    void SetShininess(float shininess);
 
-    vector<kTexturePtr> textures() const { return {ambient_texture_, diffuse_texture_, specular_texture_}; }
+    vector<kTexturePtr> textures() const;
 
-    static MaterialPtr CreateDefault() {
-        MaterialPtr material = make_shared<Material>("default_material");
-        TexturePtr diffuse_texture = make_shared<Texture>("default_diffuse_texture", Files::DefaultDiffuseTexturePath.toStdString());
-        material->SetDiffuseTexture(diffuse_texture);
-        return material;
-    }
+    static MaterialPtr CreateDefault();
 
 private:
     string name_;

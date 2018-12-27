@@ -1,8 +1,15 @@
+#include "MainWindow.h"
+
 #include <QStyle>
 #include <QDesktopWidget>
 
 #include "Application.h"
-#include "MainWindow.h"
+
+MainWindow::MainWindow(QWidget *parent) {
+    InitWindow();
+
+    InitGL();
+}
 
 void MainWindow::InitWindow() {
     setFixedSize(1000, 1000);
@@ -19,7 +26,6 @@ void MainWindow::InitWindow() {
             )
     );
 }
-
 
 void MainWindow::InitGL() {
     if (!gl_widget_) gl_widget_ = new MainLoop();

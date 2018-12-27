@@ -3,17 +3,13 @@
 
 #include <string>
 
-#include <QUuid>
-
 using namespace std;
 
 class Resource {
 public:
-    Resource() {
-        uuid_ = QUuid::createUuid().toString().toStdString();
-    }
+    Resource();
 
-    string uuid() const { return uuid_; }
+    string uuid() const;
 
 private:
     string uuid_;

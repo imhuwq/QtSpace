@@ -4,23 +4,20 @@
 #include <QTime>
 #include <QString>
 #include <QOpenGLWidget>
-#include <QOpenGLFunctions>
-#include <QOpenGLVertexArrayObject>
 #include <QOpenGLBuffer>
+#include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
 
-#include "Resource/Scene.h"
 #include "SceneRender.h"
+#include "Resource/Scene.h"
 
 class MainLoop : public QOpenGLWidget, protected QOpenGLFunctions {
 Q_OBJECT
 public:
     MainLoop();
 
-    ~MainLoop() {
-        makeCurrent();  // http://doc.qt.io/qt-5/qopenglwindow.html#dtor.QOpenGLWindow
-        TearDownGL();
-    }
+    ~MainLoop() override;
 
 protected:
     void initializeGL() override;

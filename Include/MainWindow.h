@@ -1,18 +1,15 @@
 #ifndef QTSPACE_MAINWINDOW_H
 #define QTSPACE_MAINWINDOW_H
 
-#include <QMainWindow>
 #include <QWidget>
+#include <QMainWindow>
 
 #include "GLRender/MainLoop.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
 public:
-    explicit MainWindow(QWidget *parent = nullptr) {
-        InitWindow();
-        InitGL();
-    }
+    explicit MainWindow(QWidget *parent = nullptr);
 
     ~MainWindow() override = default;
 
