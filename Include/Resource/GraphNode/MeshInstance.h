@@ -10,6 +10,8 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 
+#include "Resource/Mesh.h"
+#include "Resource/Material.h"
 #include "Resource/GraphNode/Node.h"
 
 using namespace std;
@@ -30,87 +32,17 @@ public:
                  const kMeshPtr &mesh,
                  const kMaterialPtr &material,
                  const vector<unsigned int> &indices,
-                 NodeType::Type node_type = NodeType::kMeshInstance) : mesh_(mesh),
-                                                                       indices_(indices),
-                                                                       material_(material),
-                                                                       Node(name, node_type) {
-        if (material == nullptr) material_ = Material::CreateDefault();
-    }
+                 NodeType::Type node_type = NodeType::kMeshInstance);
 
-    kMeshPtr mesh() const { return mesh_; }
+    kMeshPtr mesh() const;
 
-    kMaterialPtr material() const { return material_; }
+    kMaterialPtr material() const;
 
-    size_t indices_size() const { return indices_.size(); }
+    size_t indices_size() const;
 
-    const vector<unsigned int> &indices() const { return indices_; }
+    const vector<unsigned int> &indices() const;
 
-    static MeshInstancePtr CreateDefault() {
-        VertexSemantic vertex_semantic(false, true, false, false, false);
-        MeshPtr mesh = make_shared<Mesh>(36, vertex_semantic);
-        vector<float> vertex_buffer = {
-                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-                0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
-                0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-
-                0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-                -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-                -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-
-                0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-                -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-                0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-
-                -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-                -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-                0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-
-                -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-                -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-                -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-
-                -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-                -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-                -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-
-                0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-                0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-                0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-
-                0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-                0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-                0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-
-                0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
-                -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-                0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-
-                -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-                -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-                0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-
-                -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-                0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-                0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-
-                0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-                -0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
-                -0.5f, 0.5f, -0.5f, 0.0f, 1.0f
-        };
-        mesh->SetBuffers(vertex_buffer);
-
-        MaterialPtr material = Material::CreateDefault();
-        vector<unsigned int> index_buffer = {0, 1, 2, 3, 4, 5,
-                                             6, 7, 8, 9, 10, 11,
-                                             12, 13, 14, 15, 16, 17,
-                                             18, 19, 20, 21, 22, 23,
-                                             24, 25, 26, 27, 28, 29,
-                                             30, 31, 32, 33, 34, 35};
-
-        MeshInstancePtr mesh_instance = make_shared<MeshInstance>("cube", mesh, material, index_buffer);
-
-        return mesh_instance;
-    }
+    static MeshInstancePtr CreateCube();
 
 private:
     kMeshPtr mesh_;

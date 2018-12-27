@@ -4,7 +4,6 @@
 #include <string>
 #include <memory>
 
-#include "Files.h"
 #include "Resource/Resource.h"
 
 using namespace std;
@@ -16,18 +15,13 @@ typedef shared_ptr<const Texture> kTexturePtr;
 
 class Texture : public Resource {
 public:
-    Texture(const string &name, const string &path) : name_(name),
-                                                      path_(path) {}
+    Texture(const string &name, const string &path);
 
-    string name() const { return name_; }
+    string name() const;
 
-    string path() const { return path_; }
+    string path() const;
 
-    static kTexturePtr DEFAULT_TEXTURE() {
-        if (!default_texture_) default_texture_ = make_shared<Texture>("default_texture", Files::DefaultTexturePath.toStdString());
-        return default_texture_;
-    }
-
+    static kTexturePtr DEFAULT_TEXTURE();
 
 private:
     string name_;

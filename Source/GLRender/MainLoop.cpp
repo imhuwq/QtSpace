@@ -1,7 +1,7 @@
 #include "GLRender/MainLoop.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
-MainLoop::MainLoop() : scene_(nullptr){
+MainLoop::MainLoop() : scene_(nullptr) {
     QSurfaceFormat format;
     format.setRenderableType(QSurfaceFormat::OpenGL);
     format.setProfile(QSurfaceFormat::CoreProfile);
@@ -10,6 +10,11 @@ MainLoop::MainLoop() : scene_(nullptr){
     format.setDepthBufferSize(24);
     format.setStencilBufferSize(8);
     setFormat(format);
+}
+
+MainLoop::~MainLoop() {
+    makeCurrent();  // http://doc.qt.io/qt-5/qopenglwindow.html#dtor.QOpenGLWindow
+    TearDownGL();
 }
 
 void MainLoop::initializeGL() {
@@ -28,7 +33,7 @@ void MainLoop::initializeGL() {
     glEnable(GL_CULL_FACE);
     glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
 
-    scene_ = Scene::CreateDefault();
+    scene_ = Scene::CreateCube();
     scene_render_ = make_shared<SceneRender>(scene_);
 }
 

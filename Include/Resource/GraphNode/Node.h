@@ -32,65 +32,32 @@ namespace NodeType {
 class Node : public Resource {
 public:
     explicit Node(const string &name,
-                  NodeType::Type node_type = NodeType::kGeneral) : name_(name),
-                                                                   node_type_(node_type),
-                                                                   dirty_(false),
-                                                                   children_(0),
-                                                                   translation_(0, 0, 0),
-                                                                   rotation_(0, 0, 0),
-                                                                   scale_(1, 1, 1) {
-        uuid_ = QUuid::createUuid().toString().toStdString();
-        ComputeTransformation();
-    }
+                  NodeType::Type node_type = NodeType::kGeneral);
 
-    const NodeType::Type node_type() const { return node_type_; }
+    const NodeType::Type node_type() const;
 
-    const string name() const { return name_; }
+    const string name() const;
 
-    string uuid() const { return uuid_; }
+    size_t children_size() const;
 
-    size_t children_size() const { return children_.size(); }
+    kNodePtr GetChild(size_t index) const;
 
-    kNodePtr GetChild(size_t index) const {
-        if (index > children_.size() - 1) return nullptr;
-        return children_[index];
-    }
+    void AddChild(const NodePtr &child);
 
-    void AddChild(const NodePtr &child) { children_.push_back(child); }
+    void ComputeTransformation();
 
-    void ComputeTransformation() {
-        transformation_.setToIdentity();
-        transformation_.translate(translation_);
-        transformation_.rotate(QQuaternion::fromEulerAngles(rotation_));
-        transformation_.scale(scale_);
-        dirty_ = false;
-    }
+    QMatrix4x4 transformation() const;
 
-    QMatrix4x4 transformation() const {
-        if (dirty_) const_cast<Node *>(this)->ComputeTransformation();
-        return transformation_;
-    }
+    virtual void Translate(float x, float y, float z);
 
-    void Translate(float x, float y, float z) {
-        translation_ += QVector3D(x, y, z);
-        dirty_ = true;
-    }
+    virtual void Scale(float x, float y, float z);
 
-    void Scale(float x, float y, float z) {
-        scale_ *= QVector3D(x, y, x);
-        dirty_ = true;
-    }
+    virtual void Rotate(float x, float y, float z);
 
-    void Rotate(float x, float y, float z) {
-        rotation_ = QQuaternion::fromEulerAngles(QVector3D(x, y, z)).rotatedVector(rotation_);
-        dirty_ = true;
-    }
-
-    virtual ~Node() {}
+    virtual ~Node();
 
 protected:
     string name_;
-    string uuid_;
     NodeType::Type node_type_;
     vector<NodePtr> children_;
 

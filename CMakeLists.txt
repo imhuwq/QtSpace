@@ -35,23 +35,35 @@ list(APPEND PRJ_LIBRARIES "${CMAKE_CURRENT_SOURCE_DIR}/Lib/fbxsdk/libfbxsdk.a")
 list(APPEND PRJ_SOURCES
         Include/Files.h
         Include/Application.h
+        Source/Application.cpp
         Include/MainWindow.h
         Source/MainWindow.cpp
         Include/GLRender/MainLoop.h
+        Source/GLRender/SceneRender.cpp
         Source/GLRender/MainLoop.cpp
         Include/Resource/Resource.h
+        Source/Resource/Resource.cpp
         Include/Resource/Scene.h
+        Source/Resource/Scene.cpp
         Include/Resource/Mesh.h
+        Source/Resource/Mesh.cpp
         Include/Resource/GraphNode/Node.h
+        Source/Resource/GraphNode/Node.cpp
         Include/Resource/GraphNode/Camera.h
+        Source/Resource/GraphNode/Camera.cpp
         Include/Resource/GraphNode/Light.h
+        Source/Resource/GraphNode/Light.cpp
         Include/Resource/GraphNode/MeshInstance.h
+        Source/Resource/GraphNode/MeshInstance.cpp
         Include/Resource/Texture.h
         Source/Resource/Texture.cpp
         Include/Resource/Material.h
+        Source/Resource/Material.cpp
         Include/Resource/Model.h
+        Source/Resource/Model.cpp
         Include/GLRender/SceneRender.h
         Include/GLRender/MeshInstanceRender.h
+        Source/GLRender/MeshInstanceRender.cpp
         Include/GLRender/Shader.h
         )
 

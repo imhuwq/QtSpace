@@ -7,15 +7,11 @@
 
 class Application : public QApplication {
 public:
-    Application(int argc, char **argv) : QApplication(argc, argv),
-                                         main_window_(new MainWindow()) {}
+    Application(int argc, char **argv);
 
-    ~Application() { delete main_window_; }
+    ~Application();
 
-    int run() {
-        main_window_->show();
-        return QApplication::exec();
-    }
+    int Run();
 
 private:
     MainWindow *main_window_;
