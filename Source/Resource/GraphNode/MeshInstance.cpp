@@ -1,4 +1,4 @@
-#include "Resource/GraphNode/MeshInstance.h"
+#include "MeshInstance.h"
 
 MeshInstance::MeshInstance(const string &name,
                            const kMeshPtr &mesh,

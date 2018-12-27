@@ -1,4 +1,4 @@
-#include "Resource/GraphNode/Light.h"
+#include "Light.h"
 
 Light::Light(const string &name,
              NodeType::Type node_type,

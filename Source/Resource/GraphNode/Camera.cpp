@@ -1,4 +1,4 @@
-#include "Resource/GraphNode/Camera.h"
+#include "Camera.h"
 
 Camera::Camera(const string &name,
                NodeType::Type node_type) : Node(name, node_type),

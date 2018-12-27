@@ -1,4 +1,4 @@
-#include "Resource/Resource.h"
+#include "Resource.h"
 
 #include <QUuid>
 

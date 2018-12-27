@@ -1,4 +1,4 @@
-#include "Resource/Mesh.h"
+#include "Mesh.h"
 
 VertexSemantic::VertexSemantic(bool has_normal,
                                bool has_uv0,

@@ -1,4 +1,4 @@
-#include "GLRender/MainLoop.h"
+#include "MainLoop.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
 MainLoop::MainLoop() : scene_(nullptr) {

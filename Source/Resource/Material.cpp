@@ -1,5 +1,5 @@
-#include "Resource/Material.h"
-#include "Files.h"
+#include "Material.h"
+#include "Common/Files.h"
 
 Material::Material(const string &name) : name_(name),
                                          ambient_color_{3, 1.0f},

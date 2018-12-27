@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 
-#include "Resource/Resource.h"
+#include "Resource.h"
 
 using namespace std;
 

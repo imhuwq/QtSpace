@@ -12,9 +12,9 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 
-#include "Files.h"
+#include "Common/Files.h"
 #include "Resource/Scene.h"
-#include "GLRender/MeshInstanceRender.h"
+#include "MeshInstanceRender.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
 using namespace std;

@@ -5,8 +5,8 @@
 #include <vector>
 #include <string>
 
-#include "Resource/Resource.h"
-#include "Resource/Texture.h"
+#include "Resource.h"
+#include "Texture.h"
 
 using namespace std;
 

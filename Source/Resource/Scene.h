@@ -3,7 +3,7 @@
 
 #include <QMatrix4x4>
 
-#include "Resource/Model.h"
+#include "Model.h"
 #include "GraphNode/Light.h"
 #include "GraphNode/Camera.h"
 
