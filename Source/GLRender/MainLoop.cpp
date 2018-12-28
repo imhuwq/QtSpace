@@ -33,7 +33,8 @@ void MainLoop::initializeGL() {
     glEnable(GL_CULL_FACE);
     glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
 
-    scene_ = Scene::CreateCube();
+    scene_ = make_shared<Scene>();
+    scene_->LoadModelFile(Files::DefaultCubeModelFile);
     scene_render_ = make_shared<SceneRender>(scene_);
 }
 

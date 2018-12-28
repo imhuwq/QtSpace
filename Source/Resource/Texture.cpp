@@ -11,6 +11,6 @@ string Texture::name() const { return name_; }
 string Texture::path() const { return path_; }
 
 kTexturePtr Texture::DEFAULT_TEXTURE() {
-    if (!default_texture_) default_texture_ = make_shared<Texture>("default_texture", Files::DefaultTexturePath.toStdString());
+    if (!default_texture_) default_texture_ = make_shared<Texture>("default_texture", Files::DefaultTexturePath);
     return default_texture_;
 }

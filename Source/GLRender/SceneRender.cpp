@@ -22,8 +22,8 @@ void SceneRender::SceneRender::Draw() {
 
 void SceneRender::CreateShaderProgram() {
     shader_ = make_shared<QOpenGLShaderProgram>();
-    shader_->addShaderFromSourceFile(QOpenGLShader::Vertex, Files::DefaultVertexShader);
-    shader_->addShaderFromSourceFile(QOpenGLShader::Fragment, Files::DefaultFragmentShader);
+    shader_->addShaderFromSourceFile(QOpenGLShader::Vertex, QString(Files::DefaultVertexShader.c_str()));
+    shader_->addShaderFromSourceFile(QOpenGLShader::Fragment, QString(Files::DefaultFragmentShader.c_str()));
     shader_->link();
 }
 
@@ -53,7 +53,6 @@ void SceneRender::CreateMeshInstanceRenders() {
     ebo_size_ = 0;
     map<string, size_t> mesh_buffer_size;
 
-    QMatrix4x4 mvp = scene_->projection() * scene_->camera().transformation() * scene_->transformation();
     for (size_t model_index = 0; model_index < scene_->model_size(); model_index++) {
         kModelPtr model = scene_->GetModel(model_index);
         kNodePtr node = model->root_node();
