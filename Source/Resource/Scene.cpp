@@ -13,8 +13,7 @@ Scene::Scene() : camera_("camera"),
 }
 
 void Scene::LoadModelFile(const string &file_path) {
-    string ext = Files::GetFileExtension(file_path);
-    ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(ext);
+    ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
     if (!loader) {
         cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;
         return;

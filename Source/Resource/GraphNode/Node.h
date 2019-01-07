@@ -42,6 +42,8 @@ public:
 
     kNodePtr GetChild(size_t index) const;
 
+    NodePtr GetChild(size_t index);
+
     void AddChild(const NodePtr &child);
 
     void ComputeTransformation();

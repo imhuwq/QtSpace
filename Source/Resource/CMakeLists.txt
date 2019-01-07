@@ -24,9 +24,3 @@ list(APPEND RESOURCE_SOURCES
         )
 
 add_library(resource STATIC ${RESOURCE_SOURCES})
-
-list(APPEND RESOURCE_INCLUDES
-        "${CMAKE_SOURCE_DIR}/Source"
-        ${Qt5Widgets_INCLUDE_DIRS}
-        )
-target_include_directories(resource PRIVATE ${RESOURCE_INCLUDES})

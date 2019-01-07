@@ -21,8 +21,8 @@ namespace VertexPropertyType {
         kUV0,
         kUV1,
         kColors,
-        kBlendWeights,
-        kBlendIndices,
+        kTangent0,
+        kTangent1,
         kNumPropertyType
     };
 }
@@ -35,8 +35,8 @@ namespace VertexPropertySize {
         kUV0 = 2,
         kUV1 = 2,
         kColor = 4,
-        kBlendWeights = 4,
-        kBlendIndices = 4,
+        kTangent0 = 3,
+        kTangent1 = 3,
         kNumPropertyTyp
     };
 }
@@ -46,7 +46,8 @@ struct VertexSemantic {
                    bool has_uv0,
                    bool has_uv1,
                    bool has_color,
-                   bool has_blend);
+                   bool has_tangent0,
+                   bool has_tangent1);
 
     size_t vertex_size = 0;
     size_t position_offset = 0;
@@ -54,13 +55,17 @@ struct VertexSemantic {
     size_t uv0_offset = 0;
     size_t uv1_offset = 0;
     size_t color_offset = 0;
-    bool has_blend;
+    size_t tangent0_offset = 0;
+    size_t tangent1_offset = 0;
 };
+
+typedef shared_ptr<VertexSemantic> VertexSemanticPtr;
+typedef shared_ptr<const VertexSemantic> kVertexSemanticPtr;
 
 class Mesh : public Resource {
 public:
-    Mesh(size_t num_vertices,
-         const VertexSemantic &vertex_semantic);
+    Mesh(vector<float> &vertex_buffer,
+         kVertexSemanticPtr &vertex_semantic);
 
     size_t vertex_size() const;
 
@@ -74,25 +79,14 @@ public:
 
     size_t color_offset() const;
 
-    void SetVertex(const vector<float> &vertex_data,
-                   size_t index,
-                   const vector<float> &blend_weights = {},
-                   const vector<unsigned int> &blend_indices = {});
-
-    void SetBuffers(const vector<float> &vertex_buffer,
-                    const vector<float> &blend_weights_buffer = {},
-                    const vector<unsigned int> &blend_indices_buffer = {});
-
     size_t vertex_buffer_size() const;
 
     const vector<float> &vertex_buffer() const;
 
 private:
     size_t num_vertices_;
-    VertexSemantic vertex_semantic_;
+    kVertexSemanticPtr vertex_semantic_;
     vector<float> vertex_buffer_;
-    vector<float> blend_weights_buffer_;
-    vector<unsigned int> blend_indices_buffer_;
 };
 
 #endif //QTSPACE_MESH_H

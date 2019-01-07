@@ -69,8 +69,8 @@ void SceneRender::CreateGLBuffers() {
     vbo_->setUsagePattern(QOpenGLBuffer::StaticDraw);
     ebo_->setUsagePattern(QOpenGLBuffer::StaticDraw);
 
-    float vertex_buffer[vbo_size_];
-    unsigned int index_buffer[ebo_size_];
+    vector<float> vertex_buffer(vbo_size_);
+    vector<unsigned int> index_buffer(ebo_size_);
     size_t vertex_buffer_offset = 0;
     size_t index_buffer_offset = 0;
     map<string, bool> mesh_buffer_loaded;
@@ -79,26 +79,23 @@ void SceneRender::CreateGLBuffers() {
         kMeshInstancePtr mesh_instance = dynamic_pointer_cast<const MeshInstance>(render->node);
         kMeshPtr mesh = mesh_instance->mesh();
         string mesh_uuid = mesh->uuid();
-        size_t buffer_length;
         if (mesh_buffer_loaded.find(mesh_uuid) == mesh_buffer_loaded.end()) {
             const vector<float> &mesh_vertex_buffer = mesh->vertex_buffer();
-            buffer_length = mesh_vertex_buffer.size() * sizeof(float);
-            memcpy(vertex_buffer + vertex_buffer_offset, mesh_vertex_buffer.data(), buffer_length);
+            std::copy(mesh_vertex_buffer.begin(), mesh_vertex_buffer.end(), vertex_buffer.begin() + vertex_buffer_offset);
             mesh_buffer_loaded[mesh_uuid] = true;
-            vertex_buffer_offset += buffer_length;
+            vertex_buffer_offset += mesh_vertex_buffer.size();
         }
 
         const vector<unsigned int> &mesh_index_buffer = mesh_instance->indices();
-        buffer_length = mesh_index_buffer.size() * sizeof(unsigned int);
-        memcpy(index_buffer + index_buffer_offset, mesh_index_buffer.data(), buffer_length);
-        index_buffer_offset += buffer_length;
+        std::copy(mesh_index_buffer.begin(), mesh_index_buffer.end(), index_buffer.begin() + index_buffer_offset);
+        index_buffer_offset += mesh_index_buffer.size();
     }
 
     vao_->bind();
     vbo_->bind();
-    vbo_->allocate(vertex_buffer, (int) vbo_size_ * sizeof(float));
+    vbo_->allocate(vertex_buffer.data(), (int) vbo_size_ * sizeof(float));
     ebo_->bind();
-    ebo_->allocate(index_buffer, (int) ebo_size_ * sizeof(unsigned int));
+    ebo_->allocate(index_buffer.data(), (int) ebo_size_ * sizeof(unsigned int));
 }
 
 void SceneRender::CreateGLTextures() {
