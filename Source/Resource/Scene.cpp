@@ -1,5 +1,9 @@
+#include <iostream>
+
 #include "Scene.h"
+#include "Common/Files.h"
 #include "GraphNode/MeshInstance.h"
+#include "IO/ModelFileLoader/ModelFileLoader.h"
 
 Scene::Scene() : camera_("camera"),
                  light_("sun", NodeType::kLight, LightType::kDirectionLight) {
@@ -8,21 +12,16 @@ Scene::Scene() : camera_("camera"),
     projection_.setToIdentity();
 }
 
-ScenePtr Scene::CreateCube() {
-    ScenePtr scene = make_shared<Scene>();
+void Scene::LoadModelFile(const string &file_path) {
+    ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
+    if (!loader) {
+        cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;
+        return;
+    }
 
-    ModelPtr model = make_shared<Model>();
-
-    MeshInstancePtr mesh_instance = MeshInstance::CreateCube();
-    model->AddMesh(const_pointer_cast<Mesh>(mesh_instance->mesh()));
-
-    MaterialPtr material = const_pointer_cast<Material>(mesh_instance->material());
-    model->AddMaterial(material);
-
-    model->root_node()->AddChild(mesh_instance);
-
-    scene->AddModel(model);
-    return scene;
+    kModelPtr model = nullptr;
+    if (loader) model = loader->Load(file_path);
+    if (model) AddModel(model);
 }
 
 size_t Scene::model_size() const { return models_.size(); }
@@ -32,7 +31,7 @@ kModelPtr Scene::GetModel(size_t index) const {
     return models_[index];
 }
 
-void Scene::AddModel(const ModelPtr &model) { models_.push_back(model); }
+void Scene::AddModel(const kModelPtr &model) { models_.push_back(model); }
 
 QMatrix4x4 Scene::transformation() const { return transform_; }
 

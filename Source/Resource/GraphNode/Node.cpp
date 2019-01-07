@@ -23,6 +23,12 @@ kNodePtr Node::GetChild(size_t index) const {
     return children_[index];
 }
 
+NodePtr Node::GetChild(size_t index) {
+    if (index > children_.size() - 1) return nullptr;
+    return children_[index];
+}
+
+
 void Node::AddChild(const NodePtr &child) { children_.push_back(child); }
 
 void Node::ComputeTransformation() {

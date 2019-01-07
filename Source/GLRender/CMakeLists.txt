@@ -9,12 +9,5 @@ list(APPEND GLRENDER_SOURCES
         MeshInstanceRender.cpp
         Shader.h
         )
+
 add_library(glrender STATIC ${GLRENDER_SOURCES})
-
-
-list(APPEND GLRENDER_INCLUDES
-        "${CMAKE_SOURCE_DIR}/Source"
-        ${Qt5Widgets_INCLUDE_DIRS}
-        )
-message(STATUS ${CMAKE_SOURCE_DIR}/Source)
-target_include_directories(glrender PRIVATE ${GLRENDER_INCLUDES})

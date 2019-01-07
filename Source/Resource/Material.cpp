@@ -46,7 +46,7 @@ vector<kTexturePtr> Material::textures() const { return {ambient_texture_, diffu
 
 MaterialPtr Material::CreateDefault() {
     MaterialPtr material = make_shared<Material>("default_material");
-    TexturePtr diffuse_texture = make_shared<Texture>("default_diffuse_texture", Files::DefaultDiffuseTexturePath.toStdString());
+    TexturePtr diffuse_texture = make_shared<Texture>("default_diffuse_texture", Files::DefaultDiffuseTexturePath);
     material->SetDiffuseTexture(diffuse_texture);
     return material;
 }

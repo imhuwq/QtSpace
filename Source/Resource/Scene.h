@@ -18,13 +18,13 @@ class Scene : public Resource {
 public:
     Scene();
 
-    static ScenePtr CreateCube();
+    void LoadModelFile(const string &file_path);
 
     size_t model_size() const;
 
     kModelPtr GetModel(size_t index) const;
 
-    void AddModel(const ModelPtr &model);
+    void AddModel(const kModelPtr &model);
 
     QMatrix4x4 transformation() const;
 
@@ -41,7 +41,7 @@ private:
     Camera camera_;
     QMatrix4x4 projection_;
     Light light_;
-    vector<ModelPtr> models_;
+    vector<kModelPtr> models_;
 };
 
 #endif //QTSPACE_SCENE_H

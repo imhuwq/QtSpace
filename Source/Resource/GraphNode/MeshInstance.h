@@ -42,8 +42,6 @@ public:
 
     const vector<unsigned int> &indices() const;
 
-    static MeshInstancePtr CreateCube();
-
 private:
     kMeshPtr mesh_;
     kMaterialPtr material_;

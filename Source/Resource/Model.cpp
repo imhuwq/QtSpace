@@ -2,6 +2,8 @@
 
 Model::Model() : root_node_(make_shared<Node>("root")) {};
 
+void Model::SetRootNode(NodePtr &root_node) { root_node_ = root_node; }
+
 kNodePtr Model::root_node() const { return root_node_; }
 
 NodePtr Model::root_node() { return root_node_; }
