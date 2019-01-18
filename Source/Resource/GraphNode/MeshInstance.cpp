@@ -3,11 +3,10 @@
 MeshInstance::MeshInstance(const string &name,
                            const kMeshPtr &mesh,
                            const kMaterialPtr &material,
-                           const vector<unsigned int> &indices,
-                           NodeType::Type node_type) : mesh_(mesh),
-                                                       indices_(indices),
-                                                       material_(material),
-                                                       Node(name, node_type) {
+                           const vector<unsigned int> &indices) : Node(name, NodeType::kMeshInstance),
+                                                                  mesh_(mesh),
+                                                                  indices_(indices),
+                                                                  material_(material) {
     if (material == nullptr) material_ = Material::CreateDefault();
 }
 

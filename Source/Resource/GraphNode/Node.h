@@ -52,9 +52,23 @@ public:
 
     virtual void Translate(float x, float y, float z);
 
+    void TranslateTo(float x, float y, float z);
+
     virtual void Scale(float x, float y, float z);
 
-    virtual void Rotate(float x, float y, float z);
+    void ScaleTo(float x, float y, float z);
+
+    virtual void Rotate(float pitch, float yaw, float row);
+
+    virtual void RotateTo(float pitch, float yaw, float row);
+
+    QVector3D translation() const { return translation_; }
+
+    QVector3D rotation() const { return rotation_; }
+
+    QVector3D scale() const { return scale_; }
+
+    float move_speed() const;
 
     virtual ~Node();
 
@@ -68,6 +82,9 @@ protected:
     QVector3D rotation_;
     QVector3D scale_;
     QMatrix4x4 transformation_;
+
+    float move_speed_;
+
 };
 
 #endif //QTSPACE_NODE_H

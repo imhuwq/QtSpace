@@ -8,6 +8,7 @@ Node::Node(const string &name,
                                        translation_(0, 0, 0),
                                        rotation_(0, 0, 0),
                                        scale_(1, 1, 1),
+                                       move_speed_(0),
                                        Resource() {
     ComputeTransformation();
 }
@@ -49,14 +50,31 @@ void Node::Translate(float x, float y, float z) {
     dirty_ = true;
 }
 
+void Node::TranslateTo(float x, float y, float z) {
+    translation_ = QVector3D(x, y, z);
+    dirty_ = true;
+}
+
 void Node::Scale(float x, float y, float z) {
     scale_ *= QVector3D(x, y, x);
     dirty_ = true;
 }
 
-void Node::Rotate(float x, float y, float z) {
-    rotation_ = QQuaternion::fromEulerAngles(QVector3D(x, y, z)).rotatedVector(rotation_);
+void Node::ScaleTo(float x, float y, float z) {
+    scale_ = QVector3D(x, y, z);
     dirty_ = true;
 }
+
+void Node::Rotate(float pitch, float yaw, float row) {
+    rotation_ += QVector3D(pitch, yaw, row);
+    dirty_ = true;
+}
+
+void Node::RotateTo(float pitch, float yaw, float row) {
+    rotation_ = QVector3D(pitch, yaw, row);
+    dirty_ = true;
+}
+
+float Node::move_speed() const { return move_speed_; }
 
 Node::~Node() {}

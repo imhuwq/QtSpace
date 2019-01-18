@@ -31,8 +31,7 @@ public:
     MeshInstance(const string &name,
                  const kMeshPtr &mesh,
                  const kMaterialPtr &material,
-                 const vector<unsigned int> &indices,
-                 NodeType::Type node_type = NodeType::kMeshInstance);
+                 const vector<unsigned int> &indices);
 
     kMeshPtr mesh() const;
 

@@ -3,6 +3,7 @@
 
 #include <QTime>
 #include <QString>
+#include <QKeyEvent>
 #include <QOpenGLWidget>
 #include <QOpenGLBuffer>
 #include <QOpenGLFunctions>
@@ -11,6 +12,7 @@
 
 #include "SceneRender.h"
 #include "Resource/Scene.h"
+#include "Control/Controller.h"
 
 class MainLoop : public QOpenGLWidget, protected QOpenGLFunctions {
 Q_OBJECT
@@ -26,6 +28,16 @@ protected:
 
     void paintGL() override;
 
+    void keyPressEvent(QKeyEvent *event) override;
+
+    void keyReleaseEvent(QKeyEvent *event) override;
+
+    void mousePressEvent(QMouseEvent *event) override;
+
+    void mouseReleaseEvent(QMouseEvent *event) override;
+
+    void wheelEvent(QWheelEvent * event) override;
+
     void TearDownGL();
 
 protected slots:
@@ -35,12 +47,14 @@ protected slots:
 private:
     ScenePtr scene_ = nullptr;
     SceneRenderPtr scene_render_ = nullptr;
-    size_t gl_frame_count_;
-    QTime gl_frame_timer_;
-    float gl_this_frame_time_;
-    float gl_last_frame_time_;
-    float gl_frame_delta_;
-    float gl_fps_;
+    int frame_count_;
+    QTime timer_;
+    int current_time_;
+    int last_time_;
+    int frame_delta_;
+    int fps_;
+
+    ControllerPtr controller_;
 };
 
 #endif //QTSPACE_GLWIDGET_H

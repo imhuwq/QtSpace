@@ -1,11 +1,13 @@
 #ifndef QTSPACE_SCENE_H
 #define QTSPACE_SCENE_H
 
+#include <QTime>
 #include <QMatrix4x4>
 
 #include "Model.h"
 #include "GraphNode/Light.h"
 #include "GraphNode/Camera.h"
+#include "Control/Controller.h"
 
 using namespace std;
 
@@ -34,7 +36,7 @@ public:
 
     void Resize(int w, int h);
 
-    void Animate(float time_delta);
+    void Animate(int frame_time_delta, const kStatePtr & state);
 
 private:
     QMatrix4x4 transform_;
@@ -42,6 +44,10 @@ private:
     QMatrix4x4 projection_;
     Light light_;
     vector<kModelPtr> models_;
+
+    QTime anim_timer_;
+    int current_anim_time_;
+    int last_anim_time_;
 };
 
 #endif //QTSPACE_SCENE_H

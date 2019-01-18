@@ -5,12 +5,17 @@
 
 class Camera : public Node {
 public:
-    Camera(const string &name,
-           NodeType::Type node_type = NodeType::kCamera);
+    Camera(const string &name);
 
     float fov();
 
     void Translate(float x, float y, float z) override;
+
+    QVector3D direction() const;
+
+    QVector3D up() const;
+
+    QVector3D right() const;
 
     void LookAt(float x, float y, float z);
 
