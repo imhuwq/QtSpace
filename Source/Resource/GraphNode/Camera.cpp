@@ -1,12 +1,16 @@
 #include "Camera.h"
+#include "Common/Consts.h"
 
-Camera::Camera(const string &name) : Node(name, NodeType::kCamera),
-                                     fov_(12.0f) {
+Camera::Camera(const string &name, const QVector3D &target) : Node(name, NodeType::kCamera),
+                                                              target_(target),
+                                                              fov_(12.0f) {
     Translate(0, 0, 25);
     move_speed_ = 2.0f;
 }
 
-float Camera::fov() { return fov_; }
+float Camera::fov() const { return fov_; }
+
+QVector3D Camera::target() const { return target_; }
 
 void Camera::Translate(float x, float y, float z) { Node::Translate(-x, -y, -z); }
 
@@ -31,10 +35,30 @@ QVector3D Camera::up() const {
     return u;
 }
 
-void Camera::LookAt(float x, float y, float z) {
+void Camera::ComputeTransformation() {LookAt(target_);}
+
+void Camera::LookAt(const QVector3D &target) {
     transformation_.setToIdentity();
-    transformation_.lookAt(translation_, QVector3D(x, y, z), up());
+    transformation_.lookAt(translation_, target, Vector3D::Up);
     dirty_ = false;
+    target_ = target;
+}
+
+void Camera::OrbitAround(const QVector3D &target, float axis_y_angle, float axis_x_angle) {
+    // FIXME: 绕 x 轴旋转的问题
+    qDebug() << translation() << transformation();
+    static QMatrix4x4 y_axis_rotation_matrix, x_axis_rotation_matrix;
+
+    y_axis_rotation_matrix.setToIdentity();
+    x_axis_rotation_matrix.setToIdentity();
+    y_axis_rotation_matrix.rotate(axis_y_angle, Vector3D::Up);
+    x_axis_rotation_matrix.rotate(axis_x_angle, Vector3D::Right);
+
+    QVector3D camera_direction = translation() - Vector3D::Origin;
+    camera_direction = y_axis_rotation_matrix * x_axis_rotation_matrix * camera_direction;
+    QVector3D camera_translation = camera_direction + Vector3D::Origin;
+    TranslateTo(camera_translation.x(), camera_translation.y(), camera_translation.z());
+    LookAt(Vector3D::Origin);
 }
 
 void Camera::Rotate(float x, float y, float z) {}

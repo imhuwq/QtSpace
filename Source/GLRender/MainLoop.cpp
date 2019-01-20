@@ -37,6 +37,7 @@ void MainLoop::initializeGL() {
     scene_ = make_shared<Scene>();
     scene_->LoadModelFile(Files::DefaultCubeModelFile);
     scene_render_ = make_shared<SceneRender>(scene_);
+    controller_->StartStateTimer();
 }
 
 void MainLoop::resizeGL(int w, int h) {
@@ -74,6 +75,10 @@ void MainLoop::keyReleaseEvent(QKeyEvent *event) {
 void MainLoop::mousePressEvent(QMouseEvent *event) {
     controller_->ProcessMousePressEvent(event);
 }
+
+void MainLoop::mouseMoveEvent(QMouseEvent *event) {
+    controller_->ProcessMouseMoveEvent(event);
+};
 
 void MainLoop::mouseReleaseEvent(QMouseEvent *event) {
     controller_->ProcessMouseReleaseEvent(event);

@@ -46,7 +46,7 @@ public:
 
     void AddChild(const NodePtr &child);
 
-    void ComputeTransformation();
+    virtual void ComputeTransformation();
 
     QMatrix4x4 transformation() const;
 
@@ -62,11 +62,11 @@ public:
 
     virtual void RotateTo(float pitch, float yaw, float row);
 
-    QVector3D translation() const { return translation_; }
+    QVector3D translation() const;
 
-    QVector3D rotation() const { return rotation_; }
+    QVector3D rotation() const;
 
-    QVector3D scale() const { return scale_; }
+    QVector3D scale() const;
 
     float move_speed() const;
 

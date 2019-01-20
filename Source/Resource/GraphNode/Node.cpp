@@ -75,6 +75,12 @@ void Node::RotateTo(float pitch, float yaw, float row) {
     dirty_ = true;
 }
 
+QVector3D Node::translation() const { return translation_; }
+
+QVector3D Node::rotation() const { return rotation_; }
+
+QVector3D Node::scale() const { return scale_; }
+
 float Node::move_speed() const { return move_speed_; }
 
 Node::~Node() {}

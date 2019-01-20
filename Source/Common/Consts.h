@@ -3,36 +3,20 @@
 
 #include <QVector3D>
 
-struct Vector3D {
-    static QVector3D Left() {
-        static const QVector3D val = QVector3D(-1, 0, 0);
-        return val;
-    }
+namespace Vector3D {
+    static const QVector3D Origin = QVector3D(0, 0, 0);
 
-    static QVector3D Right() {
-        static const QVector3D val = QVector3D(1, 0, 0);
-        return val;
-    }
+    static const QVector3D Left = QVector3D(-1, 0, 0);
 
-    static QVector3D Up() {
-        static const QVector3D val = QVector3D(0, 1, 0);
-        return val;
-    }
+    static const QVector3D Right = QVector3D(1, 0, 0);
 
-    static QVector3D Down() {
-        static const QVector3D val = QVector3D(0, -1, 0);
-        return val;
-    }
+    static const QVector3D Up = QVector3D(0, 1, 0);
 
-    static QVector3D Forward() {
-        static const QVector3D val = QVector3D(0, 0, -1);
-        return val;
-    }
+    static const QVector3D Down = QVector3D(0, -1, 0);
 
-    static QVector3D Backward() {
-        static const QVector3D val = QVector3D(0, 0, 1);
-        return val;
-    }
+    static const QVector3D Forward = QVector3D(0, 0, -1);
+
+    static const QVector3D Backward = QVector3D(0, 0, 1);
 };
 
 #endif //QTSPACE_CONSTS_H
