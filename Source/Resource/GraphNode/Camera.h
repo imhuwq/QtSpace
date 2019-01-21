@@ -2,20 +2,30 @@
 #define QTSPACE_CAMERA_H
 
 #include "Node.h"
+#include "Common/Consts.h"
+
 
 class Camera : public Node {
 public:
-    Camera(const string &name,
-           NodeType::Type node_type = NodeType::kCamera);
+    Camera(const string &name, const QVector3D &target = Vector3D::Origin);
 
-    float fov();
+    float fov() const;
+
+    QVector3D target() const;
 
     void Translate(float x, float y, float z) override;
 
-    void LookAt(float x, float y, float z);
+    void ComputeTransformation() override;
+
+    void Orbit(float around_y_angle, float around_x_angle);
 
 private:
     float fov_;
+
+    QVector3D target_;
+    QVector3D direction_;
+    QVector3D right_;
+    QVector3D up_;
 
     void Rotate(float x, float y, float z) override;
 

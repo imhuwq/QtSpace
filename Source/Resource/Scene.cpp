@@ -1,14 +1,17 @@
 #include <iostream>
+#include <QtMath>
 
 #include "Scene.h"
 #include "Common/Files.h"
+#include "Common/Consts.h"
 #include "GraphNode/MeshInstance.h"
 #include "IO/ModelFileLoader/ModelFileLoader.h"
 
 Scene::Scene() : camera_("camera"),
-                 light_("sun", NodeType::kLight, LightType::kDirectionLight) {
+                 current_anim_time_(0),
+                 last_anim_time_(0),
+                 light_("sun", LightType::kDirectionLight) {
     transform_.setToIdentity();
-//        transform_.rotate(QQuaternion::fromEulerAngles(45.0f, 0, 45.0f));
     projection_.setToIdentity();
 }
 
@@ -44,6 +47,21 @@ void Scene::Resize(int w, int h) {
     projection_.perspective(camera_.fov(), w / float(h), 0.01f, 100.0f);
 }
 
-void Scene::Animate(float time_delta) {
-    transform_.rotate(QQuaternion::fromAxisAndAngle(1.0f, 0.0f, 0.0f, 50.0f * time_delta));
+void Scene::Animate(int frame_time_delta, const kStatePtr &state) {
+    static int anim_timer_offset = 0;
+
+    if (state->animating) {
+        if (anim_timer_.isNull()) anim_timer_.start();
+        current_anim_time_ = anim_timer_.elapsed() - anim_timer_offset;
+        last_anim_time_ = current_anim_time_;
+    } else {
+        anim_timer_offset = anim_timer_.elapsed() - last_anim_time_;
+    }
+
+    if (state->camera_orbiting) {
+        static const float mouse2degree = 9.0f / 25.0f;
+        float camera_orbiting_y_degree = state->mid_mouse_x_delta * mouse2degree;
+        float camera_orbiting_x_degree = state->mid_mouse_y_delta * mouse2degree;
+        camera_.Orbit(camera_orbiting_y_degree, camera_orbiting_x_degree);
+    }
 }

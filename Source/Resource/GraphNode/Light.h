@@ -16,8 +16,7 @@ namespace LightType {
 class Light : public Node {
 public:
     Light(const string &name,
-          NodeType::Type node_type = NodeType::kLight,
-          LightType::Type light_type = LightType::kDotLight);
+            LightType::Type light_type = LightType::kDotLight);
 
 private:
     LightType::Type light_type_;

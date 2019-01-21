@@ -1,7 +1,7 @@
 #include "MainLoop.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
-MainLoop::MainLoop() : scene_(nullptr) {
+MainLoop::MainLoop() : scene_(nullptr), controller_(new Controller()) {
     QSurfaceFormat format;
     format.setRenderableType(QSurfaceFormat::OpenGL);
     format.setProfile(QSurfaceFormat::CoreProfile);
@@ -10,6 +10,7 @@ MainLoop::MainLoop() : scene_(nullptr) {
     format.setDepthBufferSize(24);
     format.setStencilBufferSize(8);
     setFormat(format);
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 MainLoop::~MainLoop() {
@@ -20,12 +21,12 @@ MainLoop::~MainLoop() {
 void MainLoop::initializeGL() {
     initializeOpenGLFunctions();
 
-    gl_fps_ = 0;
-    gl_frame_count_ = 0;
-    gl_this_frame_time_ = 0;
-    gl_last_frame_time_ = 0;
-    gl_frame_delta_ = 0;
-    gl_frame_timer_.start();
+    fps_ = 0;
+    frame_count_ = 0;
+    current_time_ = 0;
+    last_time_ = 0;
+    frame_delta_ = 0;
+    timer_.start();
 
     connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
 
@@ -36,6 +37,7 @@ void MainLoop::initializeGL() {
     scene_ = make_shared<Scene>();
     scene_->LoadModelFile(Files::DefaultCubeModelFile);
     scene_render_ = make_shared<SceneRender>(scene_);
+    controller_->StartStateTimer();
 }
 
 void MainLoop::resizeGL(int w, int h) {
@@ -44,18 +46,44 @@ void MainLoop::resizeGL(int w, int h) {
 
 void MainLoop::paintGL() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    scene_->Animate(gl_frame_delta_);
+
+    scene_->Animate(frame_delta_, controller_->state());
     scene_render_->Draw();
 
-    gl_frame_count_++;
-    gl_this_frame_time_ = (float) gl_frame_timer_.elapsed();
-    gl_frame_delta_ = (gl_this_frame_time_ - gl_last_frame_time_) / float(1000);
-    gl_last_frame_time_ = gl_this_frame_time_;
-    gl_fps_ = gl_frame_count_ * 1000 / gl_this_frame_time_;
+    frame_count_++;
+    current_time_ = timer_.elapsed();
+    frame_delta_ = current_time_ - last_time_;
+    last_time_ = current_time_;
+    fps_ = frame_count_ * 1000 / current_time_;
 }
 
 void MainLoop::TearDownGL() {}
 
 void MainLoop::update() {
     QOpenGLWidget::update();
+}
+
+void MainLoop::keyPressEvent(QKeyEvent *event) {
+    controller_->ProcessKeyPressEvent(event);
+}
+
+void MainLoop::keyReleaseEvent(QKeyEvent *event) {
+    controller_->ProcessKeyReleaseEvent(event);
+
+}
+
+void MainLoop::mousePressEvent(QMouseEvent *event) {
+    controller_->ProcessMousePressEvent(event);
+}
+
+void MainLoop::mouseMoveEvent(QMouseEvent *event) {
+    controller_->ProcessMouseMoveEvent(event);
+};
+
+void MainLoop::mouseReleaseEvent(QMouseEvent *event) {
+    controller_->ProcessMouseReleaseEvent(event);
+}
+
+void MainLoop::wheelEvent(QWheelEvent *event) {
+    controller_->ProcessWheelEvent(event);
 }

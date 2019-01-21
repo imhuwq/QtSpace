@@ -23,6 +23,7 @@ add_subdirectory(Source/IO)
 add_subdirectory(Source/Resource)
 add_subdirectory(Source/GLRender)
 add_subdirectory(Source/Application)
+add_subdirectory(Source/Control)
 
 # libraries
 list(APPEND PRJ_LIBRARIES
@@ -31,6 +32,7 @@ list(APPEND PRJ_LIBRARIES
         glrender
         resource
         io
+        control
         "${CMAKE_CURRENT_SOURCE_DIR}/Lib/fbxsdk/libfbxsdk.so"
         )
 

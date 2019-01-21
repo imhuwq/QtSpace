@@ -1,18 +1,55 @@
 #include "Camera.h"
+#include "Common/Consts.h"
+#include <QtMath>
 
-Camera::Camera(const string &name,
-               NodeType::Type node_type) : Node(name, node_type),
-                                           fov_(12.0f) {
+Camera::Camera(const string &name, const QVector3D &target) : Node(name, NodeType::kCamera),
+                                                              target_(target),
+                                                              fov_(25.0f) {
     Translate(0, 0, 25);
+    move_speed_ = 2.0f;
+
+    direction_ = translation_ - target_;
+    up_ = Vector3D::Up;
+    right_ = QVector3D::crossProduct(up_, direction_);
+    right_.normalize();
+
 }
 
-float Camera::fov() { return fov_; }
+float Camera::fov() const { return fov_; }
+
+QVector3D Camera::target() const { return target_; }
 
 void Camera::Translate(float x, float y, float z) { Node::Translate(-x, -y, -z); }
 
-void Camera::LookAt(float x, float y, float z) {
+void Camera::ComputeTransformation() {
+    TranslateTo(translation_);
     transformation_.setToIdentity();
-    transformation_.lookAt(translation_, QVector3D(x, y, z), QVector3D(0, 1, 0));
+    transformation_.lookAt(translation_, target_, up_);
+
+    dirty_ = false;
+}
+
+void Camera::Orbit(float around_y_angle, float around_x_angle) {
+    static QMatrix4x4 y_axis_rotation_matrix, x_axis_rotation_matrix;
+
+    y_axis_rotation_matrix.setToIdentity();
+    x_axis_rotation_matrix.setToIdentity();
+
+    direction_ = translation_ - target_;
+    y_axis_rotation_matrix.rotate(around_y_angle, up_);
+    translation_ = target_ + y_axis_rotation_matrix * direction_;
+
+    direction_ = translation_ - target_;
+    right_ = QVector3D::crossProduct(up_, direction_);
+    right_.normalize();
+
+    x_axis_rotation_matrix.rotate(around_x_angle, right_);
+    translation_ = target_ + x_axis_rotation_matrix * direction_;
+    up_ = QVector3D::crossProduct(direction_, right_);
+    up_.normalize();
+
+    transformation_.setToIdentity();
+    transformation_.lookAt(translation_, target_, up_);
     dirty_ = false;
 }
 
