@@ -15,22 +15,17 @@ public:
 
     void Translate(float x, float y, float z) override;
 
-    QVector3D direction() const;
-
-    QVector3D up() const;
-
-    QVector3D right() const;
-
     void ComputeTransformation() override;
 
-    void LookAt(const QVector3D &target);
-
-    void OrbitAround(const QVector3D &target, float axis_y_angle, float axis_x_angle);
+    void Orbit(float around_y_angle, float around_x_angle);
 
 private:
     float fov_;
 
     QVector3D target_;
+    QVector3D direction_;
+    QVector3D right_;
+    QVector3D up_;
 
     void Rotate(float x, float y, float z) override;
 

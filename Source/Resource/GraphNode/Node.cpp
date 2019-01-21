@@ -50,6 +50,11 @@ void Node::Translate(float x, float y, float z) {
     dirty_ = true;
 }
 
+void Node::TranslateTo(const QVector3D &translation) {
+    translation_ = translation;
+    dirty_ = true;
+}
+
 void Node::TranslateTo(float x, float y, float z) {
     translation_ = QVector3D(x, y, z);
     dirty_ = true;

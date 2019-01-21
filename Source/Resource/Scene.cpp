@@ -12,7 +12,6 @@ Scene::Scene() : camera_("camera"),
                  last_anim_time_(0),
                  light_("sun", LightType::kDirectionLight) {
     transform_.setToIdentity();
-    transform_.rotate(QQuaternion::fromEulerAngles(15, 15, 15));
     projection_.setToIdentity();
 }
 
@@ -61,8 +60,8 @@ void Scene::Animate(int frame_time_delta, const kStatePtr &state) {
 
     if (state->camera_orbiting) {
         static const float mouse2degree = 9.0f / 25.0f;
-        float camera_orbiting_y_degree = -state->mid_mouse_x_delta * mouse2degree;
+        float camera_orbiting_y_degree = state->mid_mouse_x_delta * mouse2degree;
         float camera_orbiting_x_degree = state->mid_mouse_y_delta * mouse2degree;
-        camera_.OrbitAround(Vector3D::Origin, camera_orbiting_y_degree, camera_orbiting_x_degree);
+        camera_.Orbit(camera_orbiting_y_degree, camera_orbiting_x_degree);
     }
 }

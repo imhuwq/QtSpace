@@ -52,6 +52,8 @@ public:
 
     virtual void Translate(float x, float y, float z);
 
+    void TranslateTo(const QVector3D& translation);
+
     void TranslateTo(float x, float y, float z);
 
     virtual void Scale(float x, float y, float z);
