@@ -36,6 +36,8 @@ public:
 
     void ProcessWheelEvent(QWheelEvent *event);
 
+    void ResizeWindow(int w, int h);
+
     kStatePtr state() const;
 
 private:

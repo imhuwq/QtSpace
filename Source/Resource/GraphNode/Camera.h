@@ -17,6 +17,8 @@ public:
 
     void ComputeTransformation() override;
 
+    void Zoom(float distance);
+
     void Orbit(float around_y_angle, float around_x_angle);
 
 private:

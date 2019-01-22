@@ -5,14 +5,14 @@
 
 #include "Application.h"
 
-MainWindow::MainWindow(QWidget *parent) {
+MainWindow::MainWindow(ControllerPtr controller, QWidget *parent) : controller_(controller) {
     InitWindow();
-
     InitGL();
 }
 
 void MainWindow::InitWindow() {
-    setFixedSize(1000, 1000);
+    kStatePtr state = controller_->state();
+    setFixedSize(state->window_width, state->window_height);
     setWindowTitle("QtSpace");
     setObjectName("main_window");
     setAcceptDrops(true);
@@ -28,7 +28,7 @@ void MainWindow::InitWindow() {
 }
 
 void MainWindow::InitGL() {
-    if (!gl_widget_) gl_widget_ = new MainLoop();
+    if (!gl_widget_) gl_widget_ = new MainLoop(controller_);
     if (centralWidget()) centralWidget()->setParent(nullptr);
     setCentralWidget(gl_widget_);
 }

@@ -5,16 +5,18 @@
 #include <QMainWindow>
 
 #include "GLRender/MainLoop.h"
+#include "Control/Controller.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    MainWindow(ControllerPtr controller, QWidget *parent = nullptr);
 
     ~MainWindow() override = default;
 
 private:
     MainLoop *gl_widget_ = nullptr;
+    ControllerPtr controller_;
 
     void InitWindow();
 

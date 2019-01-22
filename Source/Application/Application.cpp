@@ -1,7 +1,9 @@
 #include "Application.h"
 
 Application::Application(int argc, char **argv) : QApplication(argc, argv),
-                                                  main_window_(new MainWindow()) {}
+                                                  controller_(new Controller()) {
+    main_window_ = new MainWindow(controller_);
+}
 
 Application::~Application() { delete main_window_; }
 

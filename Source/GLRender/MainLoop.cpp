@@ -1,7 +1,7 @@
 #include "MainLoop.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
-MainLoop::MainLoop() : scene_(nullptr), controller_(new Controller()) {
+MainLoop::MainLoop(ControllerPtr controller) : scene_(nullptr), controller_(controller) {
     QSurfaceFormat format;
     format.setRenderableType(QSurfaceFormat::OpenGL);
     format.setProfile(QSurfaceFormat::CoreProfile);
@@ -41,7 +41,8 @@ void MainLoop::initializeGL() {
 }
 
 void MainLoop::resizeGL(int w, int h) {
-    scene_->Resize(w, h);
+    controller_->ResizeWindow(w, h);
+    scene_->Resize(controller_->state());
 }
 
 void MainLoop::paintGL() {

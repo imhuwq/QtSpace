@@ -17,7 +17,7 @@
 class MainLoop : public QOpenGLWidget, protected QOpenGLFunctions {
 Q_OBJECT
 public:
-    MainLoop();
+    MainLoop(ControllerPtr controller);
 
     ~MainLoop() override;
 

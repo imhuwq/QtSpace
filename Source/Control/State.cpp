@@ -8,6 +8,8 @@ State::State() {
 
 void State::Update() {
     camera_orbiting = false;
+    camera_zooming = false;
     mid_mouse_x_delta = 0;
     mid_mouse_y_delta = 0;
+    mid_mouse_z_delta = 0;
 }
