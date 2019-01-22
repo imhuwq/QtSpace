@@ -18,5 +18,5 @@ struct u_material {
 
 
 void main() {
-    gl_Color = texture(u_diffuse_texture, f_uv0);
+    gl_Color = vec4(u_light_color, 1) * texture(u_diffuse_texture, f_uv0);
 }

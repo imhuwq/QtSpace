@@ -34,9 +34,11 @@ public:
 
     const Camera &camera() const;
 
-    void Resize(kStatePtr state);
+    const Light &light() const;
 
-    void Animate(int frame_time_delta, const kStatePtr & state);
+    void Resize(const kStatePtr &state);
+
+    void Animate(const kStatePtr &state, int frame_time_delta);
 
 private:
     QMatrix4x4 transform_;

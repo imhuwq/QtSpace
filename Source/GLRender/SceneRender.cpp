@@ -10,13 +10,12 @@ SceneRender::SceneRender(kScenePtr scene) : scene_(scene),
     CreateGLTextures();
 }
 
-void SceneRender::SceneRender::Draw() {
+void SceneRender::SceneRender::Draw(const kStatePtr &state) {
     gl_functions_ = QOpenGLContext::currentContext()->functions();
-    shader_->bind();
-    vao_->bind();
-    vbo_->bind();
-    ebo_->bind();
-    shader_->setUniformValue("u_vp_matrix", scene_->projection() * scene_->camera().transformation() * scene_->transformation());
+    gl_functions_->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    BindGLObjects();
+
     RenderMeshInstances();
 }
 
@@ -113,6 +112,13 @@ void SceneRender::CreateGLTextures() {
     }
 }
 
+void SceneRender::PrepareGlobalUniforms() {
+    shader_->setUniformValue("u_vp_matrix", scene_->projection() * scene_->camera().transformation() * scene_->transformation());
+
+    vector<float> color = scene_->light().normalized_color();
+    shader_->setUniformValue("u_light_color", color[0], color[1], color[2]);
+}
+
 void SceneRender::PrepareGLBuffers(const kMeshInstanceRenderPtr &render) {
     kMeshInstancePtr mesh_instance = dynamic_pointer_cast<const MeshInstance>(render->node);
     kMeshPtr mesh = mesh_instance->mesh();
@@ -146,7 +152,14 @@ void SceneRender::PrepareGLBuffers(const kMeshInstanceRenderPtr &render) {
     }
 }
 
-void SceneRender::PrepareMaterial() {
+void SceneRender::BindGLObjects() {
+    shader_->bind();
+    vao_->bind();
+    vbo_->bind();
+    ebo_->bind();
+}
+
+void SceneRender::PrepareMaterial(const kMeshInstanceRenderPtr &render) {
 
 }
 
@@ -168,10 +181,12 @@ void SceneRender::PrepareGLTextures(const kMeshInstanceRenderPtr &render) {
 }
 
 void SceneRender::RenderMeshInstances() {
+    PrepareGlobalUniforms();
+
     for (const MeshInstanceRenderPtr &render:mesh_instance_renders_) {
         shader_->setUniformValue("u_model_matrix", render->transformation);
         PrepareGLBuffers(render);
-        PrepareMaterial();
+        PrepareMaterial(render);
         PrepareGLTextures(render);
         gl_functions_->glDrawElements(GL_TRIANGLES, (int) render->index_buffer_size, GL_UNSIGNED_INT, (void *) (render->index_buffer_offset * sizeof(unsigned int)));
     }

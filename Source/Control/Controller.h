@@ -18,11 +18,14 @@ class Controller;
 typedef shared_ptr<Controller> ControllerPtr;
 typedef shared_ptr<const Controller> kControllerPtr;
 
-class Controller {
+class Controller : QObject {
+Q_OBJECT
 public:
     Controller();
 
     void StartStateTimer();
+
+    kStatePtr state() const;
 
     void ProcessKeyPressEvent(QKeyEvent *event);
 
@@ -37,8 +40,6 @@ public:
     void ProcessWheelEvent(QWheelEvent *event);
 
     void ResizeWindow(int w, int h);
-
-    kStatePtr state() const;
 
 private:
     StatePtr state_;

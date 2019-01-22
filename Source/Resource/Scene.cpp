@@ -42,12 +42,14 @@ QMatrix4x4 Scene::projection() const { return projection_; }
 
 const Camera &Scene::camera() const { return camera_; }
 
-void Scene::Resize(kStatePtr state) {
+const Light &Scene::light() const { return light_; }
+
+void Scene::Resize(const kStatePtr &state) {
     projection_.setToIdentity();
     projection_.perspective(camera_.fov(), state->window_width / float(state->window_height), 0.01f, 100.0f);
 }
 
-void Scene::Animate(int frame_time_delta, const kStatePtr &state) {
+void Scene::Animate(const kStatePtr &state, int frame_time_delta) {
     static int anim_timer_offset = 0;
 
     if (state->animating) {
