@@ -89,6 +89,16 @@ void Controller::ProcessMouseReleaseEvent(QMouseEvent *event) {
 
 void Controller::ProcessWheelEvent(QWheelEvent *event) {
     auto point = event->angleDelta();
+    int delta = point.y();
+    if (delta) {
+        state_->camera_zooming = true;
+        state_->mid_mouse_z_delta = delta;
+    }
+}
+
+void Controller::ResizeWindow(int w, int h) {
+    state_->window_width = w;
+    state_->window_height = h;
 }
 
 kStatePtr Controller::state() const { return state_; }

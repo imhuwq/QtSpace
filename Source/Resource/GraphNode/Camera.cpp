@@ -1,6 +1,7 @@
+#include <QtMath>
+
 #include "Camera.h"
 #include "Common/Consts.h"
-#include <QtMath>
 
 Camera::Camera(const string &name, const QVector3D &target) : Node(name, NodeType::kCamera),
                                                               target_(target),
@@ -25,8 +26,14 @@ void Camera::ComputeTransformation() {
     TranslateTo(translation_);
     transformation_.setToIdentity();
     transformation_.lookAt(translation_, target_, up_);
-
     dirty_ = false;
+}
+
+void Camera::Zoom(float fov_delta) {
+    float new_fov = fov_ + fov_delta;
+    new_fov = std::max(new_fov, 10.0f);
+    new_fov = std::min(new_fov, 60.0f);
+    fov_ = new_fov;
 }
 
 void Camera::Orbit(float around_y_angle, float around_x_angle) {
@@ -48,9 +55,7 @@ void Camera::Orbit(float around_y_angle, float around_x_angle) {
     up_ = QVector3D::crossProduct(direction_, right_);
     up_.normalize();
 
-    transformation_.setToIdentity();
-    transformation_.lookAt(translation_, target_, up_);
-    dirty_ = false;
+    dirty_ = true;
 }
 
 void Camera::Rotate(float x, float y, float z) {}

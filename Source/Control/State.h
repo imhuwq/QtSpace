@@ -16,15 +16,20 @@ Q_OBJECT
 public:
     State();
 
+    int window_width = 1000;
+    int window_height = 1000;
+
     bool mid_mouse_pressed = false;
     bool mid_mouse_dragging = false;
     int mid_mouse_x_last = 0;
     int mid_mouse_y_last = 0;
     int mid_mouse_x_delta = 0;
     int mid_mouse_y_delta = 0;
+    int mid_mouse_z_delta = 0;
 
     bool animating = false;
     bool camera_orbiting = false;
+    bool camera_zooming = false;
 
 
 protected slots:

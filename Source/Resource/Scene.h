@@ -34,7 +34,7 @@ public:
 
     const Camera &camera() const;
 
-    void Resize(int w, int h);
+    void Resize(kStatePtr state);
 
     void Animate(int frame_time_delta, const kStatePtr & state);
 
