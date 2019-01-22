@@ -1,20 +1,22 @@
 #version 330
 
-in vec2 vertexUV0;
+in vec2 f_uv0;
 out vec4 gl_Color;
 
-uniform sampler2D ambientTexture;
-uniform sampler2D diffuseTexture;
-uniform sampler2D specularTexture;
+uniform sampler2D u_ambient_texture;
+uniform sampler2D u_diffuse_texture;
+uniform sampler2D u_specular_texture;
 
-struct Material {
-    vec3 ambientColor;
-    vec3 diffuseColor;
-    vec3 specularColor;
+uniform vec3 u_light_color;
+
+struct u_material {
+    vec3 ambient_color;
+    vec3 diffuse_color;
+    vec3 specular_color;
     float shininess;
 };
 
 
 void main() {
-    gl_Color = texture(diffuseTexture, vertexUV0);
+    gl_Color = texture(u_diffuse_texture, f_uv0);
 }

@@ -1,17 +1,17 @@
 #version 330
 
-layout(location = 0) in vec3 position;
-layout(location = 1) in vec3 normal;
-layout(location = 2) in vec2 uv0;
-layout(location = 3) in vec2 uv1;
-layout(location = 4) in vec2 color;
+layout(location = 0) in vec3 v_position;
+layout(location = 1) in vec3 v_normal;
+layout(location = 2) in vec2 v_uv0;
+layout(location = 3) in vec2 v_uv1;
+layout(location = 4) in vec2 v_color;
 
-out vec2 vertexUV0;
+out vec2 f_uv0;
 
-uniform mat4 mvpMatrix;
-uniform mat4 worldMatrix;
+uniform mat4 u_vp_matrix;
+uniform mat4 u_model_matrix;
 
 void main() {
-    gl_Position = mvpMatrix * worldMatrix * vec4(position, 1.0);
-    vertexUV0 = uv0;
+    gl_Position = u_vp_matrix * u_model_matrix * vec4(v_position, 1.0);
+    f_uv0 = v_uv0;
 }

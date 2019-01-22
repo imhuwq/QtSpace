@@ -16,7 +16,7 @@ void SceneRender::SceneRender::Draw() {
     vao_->bind();
     vbo_->bind();
     ebo_->bind();
-    shader_->setUniformValue("mvpMatrix", scene_->projection() * scene_->camera().transformation() * scene_->transformation());
+    shader_->setUniformValue("u_vp_matrix", scene_->projection() * scene_->camera().transformation() * scene_->transformation());
     RenderMeshInstances();
 }
 
@@ -156,20 +156,20 @@ void SceneRender::PrepareGLTextures(const kMeshInstanceRenderPtr &render) {
 
     kTexturePtr texture = material->ambient_texture();
     textures_[texture->uuid()]->bind(TextureUnitLocation::kAmbient);
-    shader_->setUniformValue("ambientTexture", TextureUnitLocation::kAmbient);
+    shader_->setUniformValue("u_ambient_texture", TextureUnitLocation::kAmbient);
 
     texture = material->diffuse_texture();
     textures_[texture->uuid()]->bind(TextureUnitLocation::kDiffuse);
-    shader_->setUniformValue("diffuseTexture", TextureUnitLocation::kDiffuse);
+    shader_->setUniformValue("u_diffuse_texture", TextureUnitLocation::kDiffuse);
 
     texture = material->specular_texture();
     textures_[texture->uuid()]->bind(TextureUnitLocation::kSpecular);
-    shader_->setUniformValue("specularTexture", TextureUnitLocation::kSpecular);
+    shader_->setUniformValue("u_specular_texture", TextureUnitLocation::kSpecular);
 }
 
 void SceneRender::RenderMeshInstances() {
     for (const MeshInstanceRenderPtr &render:mesh_instance_renders_) {
-        shader_->setUniformValue("worldMatrix", render->transformation);
+        shader_->setUniformValue("u_model_matrix", render->transformation);
         PrepareGLBuffers(render);
         PrepareMaterial();
         PrepareGLTextures(render);
