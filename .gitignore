@@ -1,3 +1,4 @@
 .idea
-cmake-build-debug
 File/Model
+copy_files.sh
+cmake-build-debug

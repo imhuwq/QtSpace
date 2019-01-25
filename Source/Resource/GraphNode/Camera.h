@@ -34,4 +34,7 @@ private:
     void Scale(float x, float y, float z) override;
 };
 
+typedef shared_ptr<Camera> CameraPtr;
+typedef shared_ptr<const Camera> kCameraPtr;
+
 #endif //QTSPACE_CAMERA_H

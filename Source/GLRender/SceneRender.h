@@ -53,19 +53,17 @@ private:
 
     void CreateMeshInstanceRenders();
 
-    void CreateGLBuffers();
+    void CreateBuffers();
 
-    void CreateGLTextures();
+    void CreateTextures();
 
-    void BindGLObjects();
+    void BindObjects();
 
     void PrepareGlobalUniforms();
 
-    void PrepareGLBuffers(const kMeshInstanceRenderPtr &render);
+    void PrepareBuffers(const kMeshInstanceRenderPtr &render);
 
-    void PrepareMaterial(const kMeshInstanceRenderPtr &render);
-
-    void PrepareGLTextures(const kMeshInstanceRenderPtr &render);
+    void PrepareMaterials(const kMeshInstanceRenderPtr &render);
 
     void RenderMeshInstances();
 };

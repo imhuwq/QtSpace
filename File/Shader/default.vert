@@ -6,12 +6,17 @@ layout(location = 2) in vec2 v_uv0;
 layout(location = 3) in vec2 v_uv1;
 layout(location = 4) in vec2 v_color;
 
+out vec3 f_position;
+out vec3 f_normal;
 out vec2 f_uv0;
 
 uniform mat4 u_vp_matrix;
 uniform mat4 u_model_matrix;
 
 void main() {
-    gl_Position = u_vp_matrix * u_model_matrix * vec4(v_position, 1.0);
+    f_position = (u_model_matrix * vec4(v_position, 1.0)).xyz;
+    f_normal = v_normal;
     f_uv0 = v_uv0;
+
+    gl_Position = u_vp_matrix * u_model_matrix * vec4(f_position, 1.0);
 }

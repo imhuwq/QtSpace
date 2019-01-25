@@ -32,10 +32,10 @@ void MainLoop::initializeGL() {
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-    glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
+    glClearColor(0, 0, 0, 0);
 
     scene_ = make_shared<Scene>();
-    scene_->LoadModelFile(Files::DefaultCubeModelFile);
+    scene_->LoadModelFile(Files::DefaultCubeModel);
     scene_render_ = make_shared<SceneRender>(scene_);
     controller_->StartStateTimer();
 }

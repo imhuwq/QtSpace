@@ -6,17 +6,18 @@ SceneRender::SceneRender(kScenePtr scene) : scene_(scene),
                                             ebo_(new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer)) {
     CreateShaderProgram();
     CreateMeshInstanceRenders();
-    CreateGLBuffers();
-    CreateGLTextures();
+    CreateBuffers();
+    CreateTextures();
 }
 
 void SceneRender::SceneRender::Draw(const kStatePtr &state) {
     gl_functions_ = QOpenGLContext::currentContext()->functions();
     gl_functions_->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    BindGLObjects();
+    BindObjects();
 
     RenderMeshInstances();
+    static QVector3D a, b;
 }
 
 void SceneRender::CreateShaderProgram() {
@@ -61,7 +62,7 @@ void SceneRender::CreateMeshInstanceRenders() {
     }
 }
 
-void SceneRender::CreateGLBuffers() {
+void SceneRender::CreateBuffers() {
     vao_->create();
     vbo_->create();
     ebo_->create();
@@ -97,7 +98,7 @@ void SceneRender::CreateGLBuffers() {
     ebo_->allocate(index_buffer.data(), (int) ebo_size_ * sizeof(unsigned int));
 }
 
-void SceneRender::CreateGLTextures() {
+void SceneRender::CreateTextures() {
     for (const auto &render:mesh_instance_renders_) {
         kMeshInstancePtr mesh_instance = dynamic_pointer_cast<const MeshInstance>(render->node);
         kMaterialPtr material = mesh_instance->material();
@@ -112,14 +113,29 @@ void SceneRender::CreateGLTextures() {
     }
 }
 
-void SceneRender::PrepareGlobalUniforms() {
-    shader_->setUniformValue("u_vp_matrix", scene_->projection() * scene_->camera().transformation() * scene_->transformation());
-
-    vector<float> color = scene_->light().normalized_color();
-    shader_->setUniformValue("u_light_color", color[0], color[1], color[2]);
+void SceneRender::BindObjects() {
+    shader_->bind();
+    vao_->bind();
+    vbo_->bind();
+    ebo_->bind();
 }
 
-void SceneRender::PrepareGLBuffers(const kMeshInstanceRenderPtr &render) {
+void SceneRender::PrepareGlobalUniforms() {
+    shader_->setUniformValue("u_vp_matrix", scene_->projection() * scene_->camera()->transformation() * scene_->transformation());
+
+    const kLightPtr light = scene_->light();
+    vector<float> color = light->color();
+    QVector3D position = light->translation();
+    shader_->setUniformValue("u_global_light.color", color[0], color[1], color[2]);
+    shader_->setUniformValue("u_global_light.strength", light->strength());
+    shader_->setUniformValue("u_global_light.position", position[0], position[1], position[2]);
+
+    const kCameraPtr camera = scene_->camera();
+    position = camera->translation();
+    shader_->setUniformValue("u_camera_position", position[0], position[1], position[2]);
+}
+
+void SceneRender::PrepareBuffers(const kMeshInstanceRenderPtr &render) {
     kMeshInstancePtr mesh_instance = dynamic_pointer_cast<const MeshInstance>(render->node);
     kMeshPtr mesh = mesh_instance->mesh();
     int offset = (int) (render->vertex_buffer_offset + mesh->position_offset()) * sizeof(float);
@@ -152,32 +168,35 @@ void SceneRender::PrepareGLBuffers(const kMeshInstanceRenderPtr &render) {
     }
 }
 
-void SceneRender::BindGLObjects() {
-    shader_->bind();
-    vao_->bind();
-    vbo_->bind();
-    ebo_->bind();
-}
-
-void SceneRender::PrepareMaterial(const kMeshInstanceRenderPtr &render) {
-
-}
-
-void SceneRender::PrepareGLTextures(const kMeshInstanceRenderPtr &render) {
+void SceneRender::PrepareMaterials(const kMeshInstanceRenderPtr &render) {
     kMeshInstancePtr mesh_instance = dynamic_pointer_cast<const MeshInstance>(render->node);
     kMaterialPtr material = mesh_instance->material();
 
     kTexturePtr texture = material->ambient_texture();
+    vector<float> color = material->ambient_color();
+    float strength = material->ambient_strength();
     textures_[texture->uuid()]->bind(TextureUnitLocation::kAmbient);
-    shader_->setUniformValue("u_ambient_texture", TextureUnitLocation::kAmbient);
+    shader_->setUniformValue("u_material.ambient_texture", TextureUnitLocation::kAmbient);
+    shader_->setUniformValue("u_material.ambient_color", color[0], color[1], color[2]);
+    shader_->setUniformValue("u_material.ambient_strength", strength);
 
     texture = material->diffuse_texture();
+    color = material->diffuse_color();
+    strength = material->diffuse_strength();
     textures_[texture->uuid()]->bind(TextureUnitLocation::kDiffuse);
-    shader_->setUniformValue("u_diffuse_texture", TextureUnitLocation::kDiffuse);
+    shader_->setUniformValue("u_material.diffuse_texture", TextureUnitLocation::kDiffuse);
+    shader_->setUniformValue("u_material.diffuse_color", color[0], color[1], color[2]);
+    shader_->setUniformValue("u_material.diffuse_strength", strength);
 
     texture = material->specular_texture();
+    color = material->specular_color();
+    strength = material->specular_strength();
     textures_[texture->uuid()]->bind(TextureUnitLocation::kSpecular);
-    shader_->setUniformValue("u_specular_texture", TextureUnitLocation::kSpecular);
+    shader_->setUniformValue("u_material.specular_texture", TextureUnitLocation::kSpecular);
+    shader_->setUniformValue("u_material.specular_color", color[0], color[1], color[2]);
+    shader_->setUniformValue("u_material.specular_strength", strength);
+
+    shader_->setUniformValue("u_material.shininess", material->shininess());
 }
 
 void SceneRender::RenderMeshInstances() {
@@ -185,9 +204,8 @@ void SceneRender::RenderMeshInstances() {
 
     for (const MeshInstanceRenderPtr &render:mesh_instance_renders_) {
         shader_->setUniformValue("u_model_matrix", render->transformation);
-        PrepareGLBuffers(render);
-        PrepareMaterial(render);
-        PrepareGLTextures(render);
+        PrepareBuffers(render);
+        PrepareMaterials(render);
         gl_functions_->glDrawElements(GL_TRIANGLES, (int) render->index_buffer_size, GL_UNSIGNED_INT, (void *) (render->index_buffer_offset * sizeof(unsigned int)));
     }
 }
