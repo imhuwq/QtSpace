@@ -7,6 +7,7 @@ State::State() {
 }
 
 void State::Update() {
+// TODO: 这里可能会出问题，比如 fps 小于 (1000 / timer_interval) 的时候
     camera_orbiting = false;
     camera_zooming = false;
     mid_mouse_x_delta = 0;

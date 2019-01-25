@@ -5,7 +5,7 @@
 #include <QMatrix4x4>
 
 #include "Model.h"
-#include "GraphNode/Light.h"
+#include "Resource/GraphNode/Light/Light.h"
 #include "GraphNode/Camera.h"
 #include "Control/Controller.h"
 
@@ -32,17 +32,19 @@ public:
 
     QMatrix4x4 projection() const;
 
-    const Camera &camera() const;
+    const kCameraPtr camera() const;
 
-    void Resize(kStatePtr state);
+    const kLightPtr light() const;
 
-    void Animate(int frame_time_delta, const kStatePtr & state);
+    void Resize(const kStatePtr &state);
+
+    void Animate(const kStatePtr &state, int frame_time_delta);
 
 private:
     QMatrix4x4 transform_;
-    Camera camera_;
+    CameraPtr camera_;
     QMatrix4x4 projection_;
-    Light light_;
+    LightPtr light_;
     vector<kModelPtr> models_;
 
     QTime anim_timer_;

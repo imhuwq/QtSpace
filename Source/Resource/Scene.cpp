@@ -5,12 +5,14 @@
 #include "Common/Files.h"
 #include "Common/Consts.h"
 #include "GraphNode/MeshInstance.h"
+#include "GraphNode/Light/DirectionLight.h"
 #include "IO/ModelFileLoader/ModelFileLoader.h"
 
-Scene::Scene() : camera_("camera"),
-                 current_anim_time_(0),
-                 last_anim_time_(0),
-                 light_("sun", LightType::kDirectionLight) {
+Scene::Scene() : current_anim_time_(0),
+                 last_anim_time_(0) {
+    camera_ = make_shared<Camera>("camera");
+    light_ = make_shared<DirectionLight>("light");
+    light_->TranslateTo(45, 45, -45);
     transform_.setToIdentity();
     projection_.setToIdentity();
 }
@@ -40,14 +42,16 @@ QMatrix4x4 Scene::transformation() const { return transform_; }
 
 QMatrix4x4 Scene::projection() const { return projection_; }
 
-const Camera &Scene::camera() const { return camera_; }
+const kCameraPtr Scene::camera() const { return camera_; }
 
-void Scene::Resize(kStatePtr state) {
+const kLightPtr Scene::light() const { return light_; }
+
+void Scene::Resize(const kStatePtr &state) {
     projection_.setToIdentity();
-    projection_.perspective(camera_.fov(), state->window_width / float(state->window_height), 0.01f, 100.0f);
+    projection_.perspective(camera_->fov(), state->window_width / float(state->window_height), 0.01f, 100.0f);
 }
 
-void Scene::Animate(int frame_time_delta, const kStatePtr &state) {
+void Scene::Animate(const kStatePtr &state, int frame_time_delta) {
     static int anim_timer_offset = 0;
 
     if (state->animating) {
@@ -62,13 +66,13 @@ void Scene::Animate(int frame_time_delta, const kStatePtr &state) {
         static const float mouse2degree = 9.0f / 25.0f;
         float camera_orbiting_y_degree = state->mid_mouse_x_delta * mouse2degree;
         float camera_orbiting_x_degree = state->mid_mouse_y_delta * mouse2degree;
-        camera_.Orbit(camera_orbiting_y_degree, camera_orbiting_x_degree);
+        camera_->Orbit(camera_orbiting_y_degree, camera_orbiting_x_degree);
     }
 
     if (state->camera_zooming) {
         float camera_fov_delta = -state->mid_mouse_z_delta / 120.0f;
-        camera_.Zoom(camera_fov_delta);
+        camera_->Zoom(camera_fov_delta);
         projection_.setToIdentity();
-        projection_.perspective(camera_.fov(), state->window_width / float(state->window_height), 0.01f, 100.0f);
+        projection_.perspective(camera_->fov(), state->window_width / float(state->window_height), 0.01f, 100.0f);
     }
 }

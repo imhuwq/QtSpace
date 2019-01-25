@@ -7,8 +7,7 @@ Controller::Controller() {
 }
 
 void Controller::StartStateTimer() {
-    // 认定所有的渲染行为都在设置状态后的 0.1 秒之内完成，否则 fps 小于 10，那时候再来优化吧
-    state_->timer_->start(100);
+    state_->timer_->start(state_->timer_interval);
 }
 
 void Controller::ProcessKeyPressEvent(QKeyEvent *event) {

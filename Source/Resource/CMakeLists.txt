@@ -17,8 +17,14 @@ list(APPEND RESOURCE_SOURCES
         GraphNode/Node.cpp
         GraphNode/Camera.h
         GraphNode/Camera.cpp
-        GraphNode/Light.h
-        GraphNode/Light.cpp
+        GraphNode/Light/Light.h
+        GraphNode/Light/Light.cpp
+        GraphNode/Light/DotLight.h
+        GraphNode/Light/DotLight.cpp
+        GraphNode/Light/SpotLight.h
+        GraphNode/Light/SpotLight.cpp
+        GraphNode/Light/DirectionLight.h
+        GraphNode/Light/DirectionLight.cpp
         GraphNode/MeshInstance.h
         GraphNode/MeshInstance.cpp
         )

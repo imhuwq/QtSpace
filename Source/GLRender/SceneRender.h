@@ -32,7 +32,7 @@ class SceneRender : protected QOpenGLFunctions {
 public:
     explicit SceneRender(kScenePtr scene);
 
-    void Draw();
+    void Draw(const kStatePtr& state);
 
 private:
     kScenePtr scene_;
@@ -53,15 +53,17 @@ private:
 
     void CreateMeshInstanceRenders();
 
-    void CreateGLBuffers();
+    void CreateBuffers();
 
-    void CreateGLTextures();
+    void CreateTextures();
 
-    void PrepareGLBuffers(const kMeshInstanceRenderPtr &render);
+    void BindObjects();
 
-    void PrepareMaterial();
+    void PrepareGlobalUniforms();
 
-    void PrepareGLTextures(const kMeshInstanceRenderPtr &render);
+    void PrepareBuffers(const kMeshInstanceRenderPtr &render);
+
+    void PrepareMaterials(const kMeshInstanceRenderPtr &render);
 
     void RenderMeshInstances();
 };

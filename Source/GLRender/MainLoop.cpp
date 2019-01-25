@@ -1,7 +1,7 @@
 #include "MainLoop.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
-MainLoop::MainLoop(ControllerPtr controller) : scene_(nullptr), controller_(controller) {
+MainLoop::MainLoop(ControllerPtr controller) : controller_(controller) {
     QSurfaceFormat format;
     format.setRenderableType(QSurfaceFormat::OpenGL);
     format.setProfile(QSurfaceFormat::CoreProfile);
@@ -32,10 +32,10 @@ void MainLoop::initializeGL() {
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-    glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
+    glClearColor(0, 0, 0, 0);
 
     scene_ = make_shared<Scene>();
-    scene_->LoadModelFile(Files::DefaultCubeModelFile);
+    scene_->LoadModelFile(Files::DefaultCubeModel);
     scene_render_ = make_shared<SceneRender>(scene_);
     controller_->StartStateTimer();
 }
@@ -46,10 +46,8 @@ void MainLoop::resizeGL(int w, int h) {
 }
 
 void MainLoop::paintGL() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    scene_->Animate(frame_delta_, controller_->state());
-    scene_render_->Draw();
+    scene_->Animate(controller_->state(), frame_delta_);
+    scene_render_->Draw(controller_->state());
 
     frame_count_++;
     current_time_ = timer_.elapsed();

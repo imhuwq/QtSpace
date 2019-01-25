@@ -31,12 +31,12 @@ public:
     bool camera_orbiting = false;
     bool camera_zooming = false;
 
-
 protected slots:
 
     void Update();
 
 private:
+    int timer_interval = 100;
     bool timer_started_ = false;
     shared_ptr<QTimer> timer_;
 };
