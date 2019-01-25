@@ -5,8 +5,8 @@
 #include <QMatrix4x4>
 
 #include "Model.h"
-#include "Resource/GraphNode/Light/Light.h"
 #include "GraphNode/Camera.h"
+#include "GraphNode/Light/Light.h"
 #include "Control/Controller.h"
 
 using namespace std;

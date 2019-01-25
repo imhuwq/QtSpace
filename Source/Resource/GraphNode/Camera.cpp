@@ -10,10 +10,9 @@ Camera::Camera(const string &name, const QVector3D &target) : Node(name, NodeTyp
     move_speed_ = 2.0f;
 
     direction_ = translation_ - target_;
-    up_ = Vector3D::Up;
+    up_ = translation_ + Vector3D::Up;
     right_ = QVector3D::crossProduct(up_, direction_);
     right_.normalize();
-
 }
 
 float Camera::fov() const { return fov_; }

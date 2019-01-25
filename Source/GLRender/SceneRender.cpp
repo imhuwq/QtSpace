@@ -17,7 +17,6 @@ void SceneRender::SceneRender::Draw(const kStatePtr &state) {
     BindObjects();
 
     RenderMeshInstances();
-    static QVector3D a, b;
 }
 
 void SceneRender::CreateShaderProgram() {
@@ -126,6 +125,7 @@ void SceneRender::PrepareGlobalUniforms() {
     const kLightPtr light = scene_->light();
     vector<float> color = light->color();
     QVector3D position = light->translation();
+    position = scene_->camera()->transformation() * scene_->transformation() * position;
     shader_->setUniformValue("u_global_light.color", color[0], color[1], color[2]);
     shader_->setUniformValue("u_global_light.strength", light->strength());
     shader_->setUniformValue("u_global_light.position", position[0], position[1], position[2]);
