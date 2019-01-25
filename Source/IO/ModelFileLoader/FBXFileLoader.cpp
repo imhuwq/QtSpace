@@ -163,18 +163,14 @@ FbxAMatrix ComputeTransformMatrix(FbxNode *pFbxNode) {
     return transform_matrix;
 }
 
-void CollectVertexPosition(VertexPackPtr &pack,
-                           FbxMesh *fbx_mesh,
-                           const VertexContext &context) {
+void CollectVertexPosition(VertexPackPtr &pack, FbxMesh *fbx_mesh, const VertexContext &context) {
     FbxVector4 *control_points = fbx_mesh->GetControlPoints();
     double *positions = control_points[context.vertex_index];
     positions = context.position_offset_matrix.MultT(positions);
     pack->positions = {(float) positions[0], (float) positions[1], (float) positions[2]};
 }
 
-void CollectVertexNormal(VertexPackPtr &pack,
-                         FbxMesh *fbx_mesh,
-                         const VertexContext &context) {
+void CollectVertexNormal(VertexPackPtr &pack, FbxMesh *fbx_mesh, const VertexContext &context) {
     FbxGeometryElementNormal *fbx_normal = fbx_mesh->GetElementNormal(0);
     if (!fbx_normal) return;
 
@@ -183,9 +179,7 @@ void CollectVertexNormal(VertexPackPtr &pack,
     if (found) pack->normals = {(float) normal[0], (float) normal[1], (float) normal[2]};
 }
 
-void CollectVertexUV0(VertexPackPtr &pack,
-                      FbxMesh *fbx_mesh,
-                      const VertexContext &context) {
+void CollectVertexUV0(VertexPackPtr &pack, FbxMesh *fbx_mesh, const VertexContext &context) {
     FbxGeometryElementUV *fbx_uv = fbx_mesh->GetElementUV(0);
     if (!fbx_uv) return;
 
@@ -195,9 +189,7 @@ void CollectVertexUV0(VertexPackPtr &pack,
     if (found) pack->uv0 = {(float) uv[0], (float) uv[1]};
 }
 
-void CollectVertexUV1(VertexPackPtr &pack,
-                      FbxMesh *fbx_mesh,
-                      const VertexContext &context) {
+void CollectVertexUV1(VertexPackPtr &pack, FbxMesh *fbx_mesh, const VertexContext &context) {
     FbxGeometryElementUV *fbx_uv = fbx_mesh->GetElementUV(1);
     if (!fbx_uv) return;
 
@@ -207,9 +199,7 @@ void CollectVertexUV1(VertexPackPtr &pack,
     if (found) pack->uv1 = {(float) uv[0], (float) uv[1]};
 }
 
-void CollectVertexColor(VertexPackPtr &pack,
-                        FbxMesh *fbx_mesh,
-                        const VertexContext &context) {
+void CollectVertexColor(VertexPackPtr &pack, FbxMesh *fbx_mesh, const VertexContext &context) {
     FbxGeometryElementVertexColor *fbx_color = fbx_mesh->GetElementVertexColor(0);
     if (!fbx_color) return;
 
@@ -234,9 +224,7 @@ void CollectVertexColor(VertexPackPtr &pack,
     if (found) pack->colors = {(float) (color.mRed), (float) (color.mGreen), (float) (color.mBlue), (float) (color.mAlpha)};
 }
 
-void CollectVertexTangent0(VertexPackPtr &pack,
-                           FbxMesh *fbx_mesh,
-                           const VertexContext &context) {
+void CollectVertexTangent0(VertexPackPtr &pack, FbxMesh *fbx_mesh, const VertexContext &context) {
     FbxGeometryElementTangent *fbx_tangent = fbx_mesh->GetElementTangent(0);
     if (!fbx_tangent) return;
 
@@ -261,9 +249,7 @@ void CollectVertexTangent0(VertexPackPtr &pack,
     if (found) { pack->tangent0 = {(float) tangent[0], (float) tangent[1], (float) tangent[2]}; }
 }
 
-void CollectVertexTangent1(VertexPackPtr &pack,
-                           FbxMesh *fbx_mesh,
-                           const VertexContext &context) {
+void CollectVertexTangent1(VertexPackPtr &pack, FbxMesh *fbx_mesh, const VertexContext &context) {
     FbxGeometryElementTangent *fbx_tangent = fbx_mesh->GetElementTangent(1);
     if (!fbx_tangent) return;
 
