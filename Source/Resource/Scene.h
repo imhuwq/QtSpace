@@ -22,6 +22,10 @@ public:
 
     void LoadModelFile(const string &file_path);
 
+    void AddCamera();
+
+    void AddLight();
+
     size_t model_size() const;
 
     kModelPtr GetModel(size_t index) const;

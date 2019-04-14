@@ -27,8 +27,10 @@ void SceneRender::CreateShaderProgram() {
 }
 
 void SceneRender::CreateMeshInstanceRenders(kNodePtr node, map<string, size_t> &mesh_buffer_size, QMatrix4x4 transformation) {
-    transformation *= node->transformation();
+    transformation = transformation * node->transformation();
+
     if (node->node_type() == NodeType::kMeshInstance) {
+
         kMeshInstancePtr mesh_instance = dynamic_pointer_cast<const MeshInstance>(node);
         kMeshPtr mesh = mesh_instance->mesh();
         string mesh_uuid = mesh->uuid();
@@ -125,7 +127,6 @@ void SceneRender::PrepareGlobalUniforms() {
     const kLightPtr light = scene_->light();
     vector<float> color = light->color();
     QVector3D position = light->translation();
-    position = scene_->camera()->transformation() * scene_->transformation() * position;
     shader_->setUniformValue("u_global_light.color", color[0], color[1], color[2]);
     shader_->setUniformValue("u_global_light.strength", light->strength());
     shader_->setUniformValue("u_global_light.position", position[0], position[1], position[2]);

@@ -29,19 +29,11 @@ add_subdirectory(Source/Control)
 list(APPEND PRJ_LIBRARIES
         ${CMAKE_DL_LIBS}
         ${Qt5Widgets_LIBRARIES}
-        glrender
-        resource
-        io
-        control
-        "${CMAKE_CURRENT_SOURCE_DIR}/Lib/fbxsdk/libfbxsdk.so"
-        )
+        glrender resource io control)
+
+if (UNIX)
+    list(APPEND PRJ_LIBRARIES "${CMAKE_CURRENT_SOURCE_DIR}/Lib/fbxsdk/libfbxsdk.so")
+endif ()
 
 add_executable(QtSpace Source/Application/main.cpp)
 target_link_libraries(QtSpace application ${PRJ_LIBRARIES})
-
-# model loader cli runner, for profile purpose
-add_executable(model_loader Source/IO/ModelFileLoader/CommandLineTool.cpp)
-target_include_directories(model_loader PRIVATE "/usr/local/include")
-target_link_libraries(model_loader ${CMAKE_DL_LIBS} ${Qt5Widgets_LIBRARIES} io resource
-        "${CMAKE_CURRENT_SOURCE_DIR}/Lib/fbxsdk/libfbxsdk.so"
-        "/usr/local/lib/libtcmalloc_and_profiler.so")
