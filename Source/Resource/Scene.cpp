@@ -1,4 +1,5 @@
-#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 #include <QtMath>
 
 #include "Scene.h"
@@ -10,11 +11,10 @@
 
 Scene::Scene() : current_anim_time_(0),
                  last_anim_time_(0) {
-    camera_ = make_shared<Camera>("camera");
-    light_ = make_shared<DirectionLight>("light");
-    light_->TranslateTo(45, 45, -45);
     transform_.setToIdentity();
     projection_.setToIdentity();
+    AddCamera();
+    AddLight();
 }
 
 void Scene::LoadModelFile(const string &file_path) {
@@ -25,8 +25,32 @@ void Scene::LoadModelFile(const string &file_path) {
     }
 
     kModelPtr model = nullptr;
-    if (loader) model = loader->Load(file_path);
+    model = loader->Load(file_path, nullptr);
     if (model) AddModel(model);
+    else cerr << "Scene::LoadModelFile: Cannot load file '" << file_path << "'." << endl;
+}
+
+void Scene::AddCamera() { camera_ = make_shared<Camera>("camera"); }
+
+void Scene::AddLight() {
+    light_ = make_shared<DirectionLight>("light");
+    light_->TranslateTo(0, 2, 0);
+
+    string file_path = Files::DefaultSphereModel;
+    ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
+    if (!loader) {
+        cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;
+        return;
+    }
+
+    ModelPtr light_model = nullptr;
+    light_model = loader->Load(file_path, light_);
+
+    if (!light_model) {
+        cerr << "Scene::LoadModelFile: Cannot load file '" << file_path << "'." << endl;
+        return;
+    }
+    AddModel(light_model);
 }
 
 size_t Scene::model_size() const { return models_.size(); }
@@ -64,8 +88,13 @@ void Scene::Animate(const kStatePtr &state, int frame_time_delta) {
 
     if (state->camera_orbiting) {
         static const float mouse2degree = 9.0f / 25.0f;
-        float camera_orbiting_y_degree = state->mid_mouse_x_delta * mouse2degree;
-        float camera_orbiting_x_degree = state->mid_mouse_y_delta * mouse2degree;
+        float camera_orbiting_y_degree = 0;
+        float camera_orbiting_x_degree = 0;
+        if (abs(state->mid_mouse_x_delta) > abs(state->mid_mouse_y_delta)) {
+            camera_orbiting_y_degree = state->mid_mouse_x_delta * mouse2degree;
+        } else {
+            camera_orbiting_x_degree = state->mid_mouse_y_delta * mouse2degree;
+        }
         camera_->Orbit(camera_orbiting_y_degree, camera_orbiting_x_degree);
     }
 

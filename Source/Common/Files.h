@@ -7,6 +7,7 @@ using namespace std;
 
 namespace Files {
     static const string DefaultCubeModel = "File/Model/cube.fbx";
+    static const string DefaultSphereModel = "File/Model/sphere.fbx";
     static const string DefaultVertexShader = "File/Shader/default.vert";
     static const string DefaultFragmentShader = "File/Shader/default.frag";
     static const string DefaultTexturePath = "File/Texture/Default.png";

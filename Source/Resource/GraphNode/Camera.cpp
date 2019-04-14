@@ -19,7 +19,7 @@ float Camera::fov() const { return fov_; }
 
 QVector3D Camera::target() const { return target_; }
 
-void Camera::Translate(float x, float y, float z) { Node::Translate(-x, -y, -z); }
+void Camera::Translate(float x, float y, float z) { Node::Translate(-x, -y, z); }
 
 void Camera::ComputeTransformation() {
     TranslateTo(translation_);

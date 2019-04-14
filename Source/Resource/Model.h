@@ -17,7 +17,7 @@ class Model : public Resource {
 public:
     Model();
 
-    void SetRootNode(NodePtr& root_node);
+    void SetRootNode(NodePtr &root_node);
 
     kNodePtr root_node() const;
 

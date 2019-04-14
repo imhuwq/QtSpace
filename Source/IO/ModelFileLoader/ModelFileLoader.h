@@ -2,6 +2,7 @@
 #define QTSPACE_MODELFILELOADER_H
 
 #include <memory>
+#include <iostream>
 
 #include "Resource/Model.h"
 
@@ -30,9 +31,9 @@ class ModelFileLoader {
 public:
     virtual ~ModelFileLoader();
 
-    static ModelFileLoaderPtr CreateLoader(const string &extension);
+    static ModelFileLoaderPtr CreateLoader(const string &file_path);
 
-    virtual kModelPtr Load(const string &file_path) = 0;
+    virtual ModelPtr Load(const string &file_path, NodePtr parent_node) = 0;
 };
 
 #endif //QTSPACE_MODELFILELOADER_H

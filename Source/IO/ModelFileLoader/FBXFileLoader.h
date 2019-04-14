@@ -74,10 +74,11 @@ public:
 
     ~FBXFileLoader() override;
 
-    kModelPtr Load(const string &file_path) override;
+    ModelPtr Load(const string &file_path, NodePtr parent_node) override;
 
 private:
     ModelPtr model_;
+    NodePtr parent_node_;
     FbxManager *fbx_manager_;
     FbxScene *fbx_scene_;
     string model_file_;
@@ -91,8 +92,6 @@ private:
     NodePtr CollectFbxNodeData(FbxNode *fbx_node, NodePtr &parent_node);
 
     void WalkFbxNodeTree(FbxNode *fbx_node, NodePtr &parent_node);
-
-    float GetScaleRatio();
 
     bool ParseModelFile();
 

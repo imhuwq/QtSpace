@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "Common/Files.h"
 #include "FBXFileLoader.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
@@ -83,14 +84,16 @@ kVertexSemanticPtr VertexTable::Flatten(vector<float> &buffer) {
 }
 
 FBXFileLoader::FBXFileLoader() : model_(nullptr),
+                                 parent_node_(nullptr),
                                  fbx_manager_(nullptr),
                                  fbx_scene_(nullptr),
                                  model_file_("") {};
 
 FBXFileLoader::~FBXFileLoader() = default;
 
-kModelPtr FBXFileLoader::Load(const string &file_path) {
+ModelPtr FBXFileLoader::Load(const string &file_path, NodePtr parent_node) {
     model_file_ = file_path;
+    parent_node_ = parent_node;
 
     if (!InitializeSDK()) return nullptr;
 
@@ -348,9 +351,12 @@ void FBXFileLoader::CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr &paren
 NodePtr FBXFileLoader::CollectFbxNodeData(FbxNode *fbx_node, NodePtr &parent_node) {
     string node_name = fbx_node->GetName();
     FbxAMatrix local_transform = fbx_node->EvaluateLocalTransform();
-    FbxVector4 local_position = local_transform.GetT();
-    FbxVector4 local_rotation = local_transform.GetR();
-    FbxVector4 local_scale = local_transform.GetS();
+//    FbxVector4 local_position = local_transform.GetT();
+//    FbxVector4 local_rotation = local_transform.GetR();
+//    FbxVector4 local_scale = local_transform.GetS();
+    FbxVector4 local_position = fbx_node->GetGeometricTranslation(FbxNode::eSourcePivot);
+    FbxVector4 local_rotation = fbx_node->GetGeometricRotation(FbxNode::eSourcePivot);
+    FbxVector4 local_scale = fbx_node->GetGeometricScaling(FbxNode::eSourcePivot);
     NodePtr node = make_shared<Node>(node_name);
     node->Translate((float) local_position[0], (float) local_position[1], (float) local_position[2]);
     node->Rotate((float) local_rotation[0], (float) local_rotation[1], (float) local_rotation[2]);
@@ -370,29 +376,18 @@ void FBXFileLoader::WalkFbxNodeTree(FbxNode *fbx_node, NodePtr &parent_node) {
     }
 }
 
-float FBXFileLoader::GetScaleRatio() {
-    FbxSystemUnit unit = fbx_scene_->GetGlobalSettings().GetSystemUnit();
-    if (unit == FbxSystemUnit::mm) return 0.001f;
-    if (unit == FbxSystemUnit::dm) return 0.1f;
-    if (unit == FbxSystemUnit::cm) return 0.01f;
-    if (unit == FbxSystemUnit::m) return 1.0f;
-    if (unit == FbxSystemUnit::km) return 1000.0f;
-    if (unit == FbxSystemUnit::Inch) return 0.0254f;
-    if (unit == FbxSystemUnit::Foot) return 0.3048f;
-    if (unit == FbxSystemUnit::Mile) return 1609.344f;
-    if (unit == FbxSystemUnit::Yard) return 0.9144f;
-    return 1.0f;
-}
-
 bool FBXFileLoader::ParseModelFile() {
     model_ = make_shared<Model>();
     FbxNode *fbx_root_node = fbx_scene_->GetRootNode();
     NodePtr node = make_shared<Node>(fbx_root_node->GetName());
     WalkFbxNodeTree(fbx_root_node, node);
     node = node->GetChild(0);
-    float scale = GetScaleRatio();
-    node->Scale(scale, scale, scale);
-    model_->SetRootNode(node);
+    if (parent_node_) {
+        parent_node_->AddChild(node);
+        model_->SetRootNode(parent_node_);
+    } else {
+        model_->SetRootNode(node);
+    }
     return true;
 }
 
