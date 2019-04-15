@@ -11,7 +11,7 @@
 
 using namespace std;
 
-class MeshInstanceRender;
+struct MeshInstanceRender;
 
 typedef shared_ptr<MeshInstanceRender> MeshInstanceRenderPtr;
 typedef shared_ptr<const MeshInstanceRender> kMeshInstanceRenderPtr;

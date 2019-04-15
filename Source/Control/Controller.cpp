@@ -25,11 +25,6 @@ void Controller::ProcessKeyPressEvent(QKeyEvent *event) {
 
 void Controller::ProcessKeyReleaseEvent(QKeyEvent *event) {
     auto key = event->key();
-    switch (key) {
-
-        default:
-            break;
-    }
 }
 
 void Controller::ProcessMousePressEvent(QMouseEvent *event) {

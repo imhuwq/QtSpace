@@ -68,7 +68,6 @@ void MainLoop::keyPressEvent(QKeyEvent *event) {
 
 void MainLoop::keyReleaseEvent(QKeyEvent *event) {
     controller_->ProcessKeyReleaseEvent(event);
-
 }
 
 void MainLoop::mousePressEvent(QMouseEvent *event) {

@@ -39,10 +39,10 @@ struct VertexPack {
 };
 
 inline bool operator==(const VertexPack &lhs, const VertexPack &rhs) {
-    return lhs.positions == rhs.positions and
-           lhs.normals == rhs.normals and
-           lhs.uv0 == rhs.uv0 and
-           lhs.uv1 == rhs.uv1 and
+    return lhs.positions == rhs.positions &&
+           lhs.normals == rhs.normals &&
+           lhs.uv0 == rhs.uv0 &&
+           lhs.uv1 == rhs.uv1 &&
            lhs.colors == rhs.colors;
 }
 

@@ -138,7 +138,7 @@ bool FBXFileLoader::ImportModelFile() {
 bool IsMeshNode(FbxNode *fbx_node) {
     FbxNodeAttribute *fbx_node_attribute = fbx_node->GetNodeAttribute();
     if (!fbx_node_attribute) return false;
-    return fbx_node_attribute->GetAttributeType() == FbxNodeAttribute::eMesh and (bool) fbx_node->Visibility.Get();
+    return fbx_node_attribute->GetAttributeType() == FbxNodeAttribute::eMesh && (bool) fbx_node->Visibility.Get();
 }
 
 FbxAMatrix ComputeTransformMatrix(FbxNode *pFbxNode) {
