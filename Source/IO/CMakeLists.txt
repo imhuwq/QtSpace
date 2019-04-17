@@ -10,6 +10,8 @@ list(APPEND IO_SOURCES
 		ModelFileLoader/VertexTable.h
 		ModelFileLoader/VertexTable.cpp
 		ModelFileLoader/VertexContext.h
+		ModelFileLoader/VertexSemantic.h
+		ModelFileLoader/VertexSemantic.cpp
         )
 
 add_library(io STATIC ${IO_SOURCES})

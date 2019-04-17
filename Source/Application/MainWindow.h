@@ -16,7 +16,7 @@ public:
 
 private:
     MainLoopPtr gl_widget_ = nullptr;
-    ControllerPtr controller_;
+    ControllerPtr controller_ = nullptr;
 
     void InitWindow();
 
