@@ -5,8 +5,8 @@
 #include <memory>
 
 #include "Resource.h"
-#include "VertexSemantic.h"
 #include "Common/TypeDef.h"
+#include "IO/ModelFileLoader/VertexSemantic.h"
 
 class Mesh : public Resource {
 public:

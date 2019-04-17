@@ -15,7 +15,7 @@ public:
     int Run();
 
 private:
-    MainWindowPtr main_window_;
+    MainWindow* main_window_;
     ControllerPtr controller_;
 };
 

@@ -1,5 +1,5 @@
 #include "VertexTable.h"
-#include "Resource/VertexSemantic.h"
+#include "VertexSemantic.h"
 
 bool VertexTable::Insert(VertexPackPtr &pack, VertexContext &context) {
 	empty = false;

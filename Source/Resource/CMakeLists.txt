@@ -13,8 +13,6 @@ list(APPEND RESOURCE_SOURCES
         Model.cpp
         Scene.h
         Scene.cpp
-		VertexSemantic.h
-		VertexSemantic.cpp
         GraphNode/Node.h
         GraphNode/Node.cpp
         GraphNode/Camera.h
