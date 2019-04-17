@@ -13,11 +13,6 @@
 
 using namespace std;
 
-class Controller;
-
-typedef shared_ptr<Controller> ControllerPtr;
-typedef shared_ptr<const Controller> kControllerPtr;
-
 class Controller : QObject {
 Q_OBJECT
 public:

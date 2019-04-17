@@ -2,8 +2,7 @@
 #define QTSPACE_RESOURCE_H
 
 #include <string>
-
-using namespace std;
+#include "Common/TypeDef.h"
 
 class Resource {
 public:

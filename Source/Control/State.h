@@ -1,14 +1,7 @@
 #ifndef QTSPACE_STATE_H
 #define QTSPACE_STATE_H
 
-#include <memory>
-
-#include <QTimer>
-#include <QObject>
-
-using namespace std;
-
-class Controller;
+#include "Common/TypeDef.h"
 
 class State : public QObject {
     friend Controller;
@@ -38,10 +31,8 @@ protected slots:
 private:
     int timer_interval = 100;
     bool timer_started_ = false;
-    shared_ptr<QTimer> timer_;
+    QTimerPtr timer_;
 };
 
-typedef shared_ptr<State> StatePtr;
-typedef shared_ptr<const State> kStatePtr;
 
 #endif //QTSPACE_STATE_H

@@ -5,13 +5,7 @@
 #include "Texture.h"
 #include "Material.h"
 #include "GraphNode/Node.h"
-
-using namespace std;
-
-class Model;
-
-typedef shared_ptr<Model> ModelPtr;
-typedef shared_ptr<const Model> kModelPtr;
+#include "Common/TypeDef.h"
 
 class Model : public Resource {
 public:

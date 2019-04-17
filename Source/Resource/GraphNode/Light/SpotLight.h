@@ -1,8 +1,8 @@
 #ifndef QTSPACE_SPOTLIGHT_H
 #define QTSPACE_SPOTLIGHT_H
 
+#include "Common/TypeDef.h"
 #include "Resource/GraphNode/Light/Light.h"
-
 
 class SpotLight : public Light {
 public:
@@ -20,9 +20,5 @@ private:
     float angle_;
     float distance_;
 };
-
-
-typedef shared_ptr<SpotLight> SpotLightPtr;
-typedef shared_ptr<const SpotLight> kSpotLightPtr;
 
 #endif //QTSPACE_SPOTLIGHT_H

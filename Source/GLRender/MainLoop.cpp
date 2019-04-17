@@ -1,16 +1,8 @@
 #include "MainLoop.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
-MainLoop::MainLoop(ControllerPtr controller) : controller_(controller) {
-    QSurfaceFormat format;
-    format.setRenderableType(QSurfaceFormat::OpenGL);
-    format.setProfile(QSurfaceFormat::CoreProfile);
-    format.setVersion(3, 3);
-    format.setSamples(16);
-    format.setDepthBufferSize(24);
-    format.setStencilBufferSize(8);
-    setFormat(format);
-    setFocusPolicy(Qt::StrongFocus);
+MainLoop::MainLoop(ControllerPtr controller) : controller_(controller), timer_(new QTime()) {
+	InitializeOpenGLFormat();
 }
 
 MainLoop::~MainLoop() {
@@ -19,25 +11,10 @@ MainLoop::~MainLoop() {
 }
 
 void MainLoop::initializeGL() {
-    initializeOpenGLFunctions();
+	InitializeOpenGLFunctions();
+	InitializeOpenGLFeatures();
 
-    fps_ = 0;
-    frame_count_ = 0;
-    current_time_ = 0;
-    last_time_ = 0;
-    frame_delta_ = 0;
-    timer_.start();
-
-    connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
-
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glClearColor(0, 0, 0, 0);
-
-    scene_ = make_shared<Scene>();
-    scene_->LoadModelFile(Files::DefaultCubeModel);
-    scene_render_ = make_shared<SceneRender>(scene_);
-    controller_->StartStateTimer();
+	InitializeScene();
 }
 
 void MainLoop::resizeGL(int w, int h) {
@@ -46,14 +23,47 @@ void MainLoop::resizeGL(int w, int h) {
 }
 
 void MainLoop::paintGL() {
-    scene_->Animate(controller_->state(), frame_delta_);
-    scene_render_->Draw(controller_->state());
+	scene_animator_->Animate(controller_->state(), frame_delta_, gl_functions_);
+    scene_render_->Render(controller_->state(), gl_functions_);
 
     frame_count_++;
-    current_time_ = timer_.elapsed();
+    current_time_ = timer_->elapsed();
     frame_delta_ = current_time_ - last_time_;
     last_time_ = current_time_;
     fps_ = frame_count_ * 1000 / current_time_;
+}
+
+void MainLoop::InitializeOpenGLFormat() {
+	QSurfaceFormat format;
+	format.setRenderableType(QSurfaceFormat::OpenGL);
+	format.setProfile(QSurfaceFormat::CoreProfile);
+	format.setVersion(3, 3);
+	format.setSamples(16);
+	format.setDepthBufferSize(24);
+	format.setStencilBufferSize(8);
+	setFormat(format);
+	setFocusPolicy(Qt::StrongFocus);
+}
+
+void MainLoop::InitializeOpenGLFunctions() {
+	initializeOpenGLFunctions();
+	gl_functions_ = QOpenGLFunctionsPtr(QOpenGLContext::currentContext()->functions());
+	connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
+}
+
+void MainLoop::InitializeOpenGLFeatures() {
+	gl_functions_->glEnable(GL_DEPTH_TEST);
+	gl_functions_->glEnable(GL_CULL_FACE);
+	gl_functions_->glClearColor(0, 0, 0, 0);
+}
+
+void MainLoop::InitializeScene() {
+	timer_->start();
+	scene_ = make_shared<Scene>();
+	scene_->LoadModelFile(Files::DefaultCubeModel);
+	scene_animator_ = make_shared<SceneAnimator>(scene_);
+	scene_render_ = make_shared<SceneRender>(scene_);
+	controller_->StartStateTimer();
 }
 
 void MainLoop::TearDownGL() {}

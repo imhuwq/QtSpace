@@ -15,7 +15,7 @@ public:
     ~MainWindow() override = default;
 
 private:
-    MainLoop *gl_widget_ = nullptr;
+    MainLoopPtr gl_widget_ = nullptr;
     ControllerPtr controller_;
 
     void InitWindow();

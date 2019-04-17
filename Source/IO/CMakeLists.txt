@@ -5,6 +5,11 @@ list(APPEND IO_SOURCES
         ModelFileLoader/ModelFileLoader.cpp
         ModelFileLoader/FBXFileLoader.h
         ModelFileLoader/FBXFileLoader.cpp
+		ModelFileLoader/VertexPack.h
+		ModelFileLoader/VertexPack.cpp
+		ModelFileLoader/VertexTable.h
+		ModelFileLoader/VertexTable.cpp
+		ModelFileLoader/VertexContext.h
         )
 
 add_library(io STATIC ${IO_SOURCES})

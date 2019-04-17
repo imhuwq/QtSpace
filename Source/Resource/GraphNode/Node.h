@@ -2,32 +2,14 @@
 #define QTSPACE_NODE_H
 
 #include <string>
-#include <vector>
-#include <memory>
 
 #include <QUuid>
 #include <QMatrix4x4>
 #include <QVector3D>
 
 #include "../Resource.h"
-
-using namespace std;
-
-class Node;
-
-typedef shared_ptr<Node> NodePtr;
-typedef shared_ptr<const Node> kNodePtr;
-
-namespace NodeType {
-    enum Type {
-        kGeneral = 0,
-        kCamera,
-        kLight,
-        kMeshInstance,
-        kNumGraphNodeType
-    };
-}
-
+#include "Common/Consts.h"
+#include "Common/TypeDef.h"
 
 class Node : public Resource {
 public:

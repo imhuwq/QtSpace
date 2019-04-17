@@ -3,36 +3,22 @@
 
 #include <map>
 #include <stack>
-#include <memory>
 #include <cstring>
 
-#include <QOpenGLBuffer>
-#include <QOpenGLTexture>
-#include <QOpenGLFunctions>
-#include <QOpenGLShaderProgram>
-#include <QOpenGLVertexArrayObject>
-
 #include "Common/Files.h"
+#include "Common/TypeDef.h"
 #include "Resource/Scene.h"
+#include "GLRender/MainLoop.h"
 #include "MeshInstanceRender.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
 using namespace std;
 
-typedef shared_ptr<QOpenGLBuffer> glVBOPtr;
-typedef shared_ptr<QOpenGLVertexArrayObject> glVAOPtr;
-typedef shared_ptr<QOpenGLTexture> glTexturePtr;
-
-class SceneRender;
-
-typedef shared_ptr<SceneRender> SceneRenderPtr;
-typedef shared_ptr<const SceneRender> kSceneRenderPtr;
-
 class SceneRender : protected QOpenGLFunctions {
 public:
     explicit SceneRender(kScenePtr scene);
 
-    void Draw(const kStatePtr& state);
+    void Render(kStatePtr state, QOpenGLFunctionsPtr gl_functions);
 
 private:
     kScenePtr scene_;
@@ -40,12 +26,11 @@ private:
     size_t vbo_size_;
     size_t ebo_size_;
 
-    glShaderPtr shader_;
-    glVAOPtr vao_;
-    glVBOPtr vbo_;
-    glVBOPtr ebo_;
-    map<string, glTexturePtr> textures_;
-    QOpenGLFunctions *gl_functions_;
+    QGLShaderPtr shader_;
+    QGLVAOPtr vao_;
+    QGLVBOPtr vbo_;
+    QGLVBOPtr ebo_;
+    map<string, QOpenGLTexturePtr> textures_;
 
     void CreateShaderProgram();
 
@@ -57,15 +42,15 @@ private:
 
     void CreateTextures();
 
-    void BindObjects();
+    void PrepareGLBuffers(QOpenGLFunctionsPtr gl_functions);
 
-    void PrepareGlobalUniforms();
+    void PrepareGLShaderPrograms(QOpenGLFunctionsPtr gl_functions);
 
     void PrepareBuffers(const kMeshInstanceRenderPtr &render);
 
     void PrepareMaterials(const kMeshInstanceRenderPtr &render);
 
-    void RenderMeshInstances();
+    void RenderMeshInstances(QOpenGLFunctionsPtr gl_functions);
 };
 
 #endif //QTSPACE_SCENERENDER_H

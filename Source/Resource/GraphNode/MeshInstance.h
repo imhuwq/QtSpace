@@ -1,18 +1,10 @@
 #ifndef QTSPACE_MESHINSTANCE_H
 #define QTSPACE_MESHINSTANCE_H
 
-#include <vector>
-#include <memory>
-
-#include <QOpenGLBuffer>
-#include <QOpenGLContext>
-#include <QOpenGLFunctions>
-#include <QOpenGLShaderProgram>
-#include <QOpenGLVertexArrayObject>
-
+#include "Node.h"
 #include "../Mesh.h"
 #include "../Material.h"
-#include "Node.h"
+#include "Common/TypeDef.h"
 
 using namespace std;
 

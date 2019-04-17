@@ -10,9 +10,11 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 
+#include "SceneAnimator.h"
 #include "SceneRender.h"
 #include "Resource/Scene.h"
 #include "Control/Controller.h"
+
 
 class MainLoop : public QOpenGLWidget, protected QOpenGLFunctions {
 Q_OBJECT
@@ -47,16 +49,27 @@ protected slots:
     void update();
 
 private:
-    ScenePtr scene_ = nullptr;
-    SceneRenderPtr scene_render_ = nullptr;
-    int frame_count_;
-    QTime timer_;
-    int current_time_;
-    int last_time_;
-    int frame_delta_;
-    int fps_;
+	ControllerPtr controller_ = nullptr;
+	QTimePtr timer_ = nullptr;
+	QOpenGLFunctionsPtr gl_functions_ = nullptr;
 
-    ControllerPtr controller_;
+	SceneAnimatorPtr scene_animator_ = nullptr;
+	SceneRenderPtr scene_render_ = nullptr;
+    ScenePtr scene_ = nullptr;
+
+    int frame_count_ = 0;
+    int current_time_ = 0;
+    int last_time_ = 0;
+    int frame_delta_ = 0;
+    int fps_ = 0;
+
+	void InitializeOpenGLFormat();
+
+	void InitializeOpenGLFunctions();
+
+	void InitializeOpenGLFeatures();
+
+	void InitializeScene();
 };
 
 #endif //QTSPACE_GLWIDGET_H

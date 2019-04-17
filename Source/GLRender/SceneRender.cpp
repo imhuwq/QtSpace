@@ -10,13 +10,12 @@ SceneRender::SceneRender(kScenePtr scene) : scene_(scene),
     CreateTextures();
 }
 
-void SceneRender::SceneRender::Draw(const kStatePtr &state) {
-    gl_functions_ = QOpenGLContext::currentContext()->functions();
-    gl_functions_->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void SceneRender::Render(kStatePtr state, QOpenGLFunctionsPtr gl_functions) {
+    gl_functions->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    BindObjects();
-
-    RenderMeshInstances();
+    PrepareGLBuffers(gl_functions);
+	PrepareGLShaderPrograms(gl_functions);
+    RenderMeshInstances(gl_functions);
 }
 
 void SceneRender::CreateShaderProgram() {
@@ -105,7 +104,7 @@ void SceneRender::CreateTextures() {
         kMaterialPtr material = mesh_instance->material();
         for (const auto &texture:material->textures()) {
             if (textures_.find(texture->uuid()) == textures_.end()) {
-                glTexturePtr gl_texture = make_shared<QOpenGLTexture>(QImage(texture->path().c_str()).mirrored());
+                QOpenGLTexturePtr gl_texture = make_shared<QOpenGLTexture>(QImage(texture->path().c_str()).mirrored());
                 gl_texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
                 gl_texture->setMagnificationFilter(QOpenGLTexture::Linear);
                 textures_[texture->uuid()] = gl_texture;
@@ -114,14 +113,14 @@ void SceneRender::CreateTextures() {
     }
 }
 
-void SceneRender::BindObjects() {
+void SceneRender::PrepareGLBuffers(QOpenGLFunctionsPtr gl_functions) {
     shader_->bind();
     vao_->bind();
     vbo_->bind();
     ebo_->bind();
 }
 
-void SceneRender::PrepareGlobalUniforms() {
+void SceneRender::PrepareGLShaderPrograms(QOpenGLFunctionsPtr gl_functions) {
     shader_->setUniformValue("u_vp_matrix", scene_->projection() * scene_->camera()->transformation() * scene_->transformation());
 
     const kLightPtr light = scene_->light();
@@ -200,13 +199,12 @@ void SceneRender::PrepareMaterials(const kMeshInstanceRenderPtr &render) {
     shader_->setUniformValue("u_material.shininess", material->shininess());
 }
 
-void SceneRender::RenderMeshInstances() {
-    PrepareGlobalUniforms();
+void SceneRender::RenderMeshInstances(QOpenGLFunctionsPtr gl_functions) {
 
     for (const MeshInstanceRenderPtr &render:mesh_instance_renders_) {
         shader_->setUniformValue("u_model_matrix", render->transformation);
         PrepareBuffers(render);
         PrepareMaterials(render);
-        gl_functions_->glDrawElements(GL_TRIANGLES, (int) render->index_buffer_size, GL_UNSIGNED_INT, (void *) (render->index_buffer_offset * sizeof(unsigned int)));
+        gl_functions->glDrawElements(GL_TRIANGLES, (int) render->index_buffer_size, GL_UNSIGNED_INT, (void *) (render->index_buffer_offset * sizeof(unsigned int)));
     }
 }

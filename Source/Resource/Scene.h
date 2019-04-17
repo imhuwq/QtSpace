@@ -5,26 +5,23 @@
 #include <QMatrix4x4>
 
 #include "Model.h"
+#include "Common/TypeDef.h"
 #include "GraphNode/Camera.h"
-#include "GraphNode/Light/Light.h"
 #include "Control/Controller.h"
-
-using namespace std;
-
-class Scene;
-
-typedef shared_ptr<Scene> ScenePtr;
-typedef shared_ptr<const Scene> kScenePtr;
+#include "GraphNode/Light/Light.h"
 
 class Scene : public Resource {
+	friend class SceneAnimator;
+	friend class SceneRender;
+
 public:
     Scene();
 
     void LoadModelFile(const string &file_path);
 
-    void AddCamera();
+    void InitCamera();
 
-    void AddLight();
+    void InitLight();
 
     size_t model_size() const;
 
@@ -42,18 +39,12 @@ public:
 
     void Resize(const kStatePtr &state);
 
-    void Animate(const kStatePtr &state, int frame_time_delta);
-
 private:
     QMatrix4x4 transform_;
     CameraPtr camera_;
     QMatrix4x4 projection_;
     LightPtr light_;
     vector<kModelPtr> models_;
-
-    QTime anim_timer_;
-    int current_anim_time_;
-    int last_anim_time_;
 };
 
 #endif //QTSPACE_SCENE_H

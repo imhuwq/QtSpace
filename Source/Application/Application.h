@@ -3,6 +3,7 @@
 
 #include <QApplication>
 
+#include "Common/TypeDef.h"
 #include "MainWindow.h"
 #include "Control/State.h"
 #include "Control/Controller.h"
@@ -11,12 +12,10 @@ class Application : public QApplication {
 public:
     Application(int argc, char **argv);
 
-    ~Application();
-
     int Run();
 
 private:
-    MainWindow *main_window_;
+    MainWindowPtr main_window_;
     ControllerPtr controller_;
 };
 

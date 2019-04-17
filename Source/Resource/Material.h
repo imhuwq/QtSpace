@@ -7,13 +7,7 @@
 
 #include "Resource.h"
 #include "Texture.h"
-
-using namespace std;
-
-class Material;
-
-typedef shared_ptr<Material> MaterialPtr;
-typedef shared_ptr<const Material> kMaterialPtr;
+#include "Common/TypeDef.h"
 
 class Material : public Resource {
 public:

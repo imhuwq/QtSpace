@@ -21,4 +21,18 @@ namespace Files {
     }
 }
 
+struct ModelFileType {
+	ModelFileType() = delete;
+
+	static string OBJ() {
+		const static string ext = ".obj";
+		return ext;
+	}
+
+	static string FBX() {
+		const static string ext = ".fbx";
+		return ext;
+	}
+};
+
 #endif //QTSPACE_FILES_H

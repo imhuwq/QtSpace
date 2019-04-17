@@ -2,16 +2,9 @@
 #define QTSPACE_TEXTURE_H
 
 #include <string>
-#include <memory>
 
 #include "Resource.h"
-
-using namespace std;
-
-class Texture;
-
-typedef shared_ptr<Texture> TexturePtr;
-typedef shared_ptr<const Texture> kTexturePtr;
+#include "Common/TypeDef.h"
 
 class Texture : public Resource {
 public:

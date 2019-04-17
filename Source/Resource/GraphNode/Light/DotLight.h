@@ -1,6 +1,7 @@
 #ifndef QTSPACE_DOTLIGHT_H
 #define QTSPACE_DOTLIGHT_H
 
+#include "Common/TypeDef.h"
 #include "Resource/GraphNode/Light/Light.h"
 
 class DotLight : public Light {
@@ -14,8 +15,5 @@ public:
 private:
     float radius_;
 };
-
-typedef shared_ptr<DotLight> DotLightPtr;
-typedef shared_ptr<const DotLight> kDotLightPtr;
 
 #endif //QTSPACE_DOTLIGHT_H

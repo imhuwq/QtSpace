@@ -19,4 +19,70 @@ namespace Vector3D {
     static const QVector3D Backward = QVector3D(0, 0, 1);
 };
 
+namespace VertexPropertyType {
+	enum Type {
+		kGeneral = 0,
+		kPosition,
+		kNormal,
+		kUV0,
+		kUV1,
+		kColors,
+		kTangent0,
+		kTangent1,
+		kNumPropertyType
+	};
+}
+
+namespace VertexPropertySize {
+	enum Size {
+		kGeneral = 0,
+		kPosition = 3,
+		kNormal = 3,
+		kUV0 = 2,
+		kUV1 = 2,
+		kColor = 4,
+		kTangent0 = 3,
+		kTangent1 = 3,
+		kNumPropertyTyp
+	};
+}
+
+namespace VertexAttributeLocation {
+	enum Location {
+		kPosition = 0,
+		kNormal = 1,
+		kUV0 = 2,
+		kUV1 = 3,
+		kColor = 4
+	};
+}
+
+namespace TextureUnitLocation {
+	enum Location {
+		kAmbient = 0,
+		kDiffuse = 1,
+		kSpecular = 2
+	};
+}
+
+namespace NodeType {
+	enum Type {
+		kGeneral = 0,
+		kCamera,
+		kLight,
+		kMeshInstance,
+		kNumGraphNodeType
+	};
+}
+
+namespace LightType {
+	enum Type {
+		kGeneralLight = 0,
+		kDotLight,
+		kSpotLight,
+		kDirectionLight,
+		kNumLightType
+	};
+}
+
 #endif //QTSPACE_CONSTS_H

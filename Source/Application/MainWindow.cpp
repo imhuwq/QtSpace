@@ -28,7 +28,7 @@ void MainWindow::InitWindow() {
 }
 
 void MainWindow::InitGL() {
-    if (!gl_widget_) gl_widget_ = new MainLoop(controller_);
+    gl_widget_ = make_shared<MainLoop>(controller_);
     if (centralWidget()) centralWidget()->setParent(nullptr);
-    setCentralWidget(gl_widget_);
+    setCentralWidget(gl_widget_.get());
 }

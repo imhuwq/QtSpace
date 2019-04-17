@@ -3,17 +3,9 @@
 
 #include <QColor>
 
+#include "Common/Consts.h"
+#include "Common/TypeDef.h"
 #include "Resource/GraphNode/Node.h"
-
-namespace LightType {
-    enum Type {
-        kGeneralLight = 0,
-        kDotLight,
-        kSpotLight,
-        kDirectionLight,
-        kNumLightType
-    };
-}
 
 class Light : public Node {
 public:
@@ -36,8 +28,5 @@ protected:
     vector<float> color_;
     float strength_;
 };
-
-typedef shared_ptr<Light> LightPtr;
-typedef shared_ptr<const Light> kLightPtr;
 
 #endif //QTSPACE_LIGHT_H
