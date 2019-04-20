@@ -20,13 +20,13 @@ public:
 
     const string name() const;
 
-    size_t children_size() const;
+    size_t node_size() const;
 
-    kNodePtr GetChild(size_t index) const;
+    vector<kNodePtr> nodes() const;
 
-    NodePtr GetChild(size_t index);
+    vector<NodePtr> nodes();
 
-    void AddChild(const NodePtr &child);
+    void AddNode(const NodePtr &child);
 
     virtual void ComputeTransformation();
 
@@ -59,7 +59,7 @@ public:
 protected:
     string name_;
     NodeType::Type node_type_;
-    vector<NodePtr> children_;
+    vector<NodePtr> nodes_;
 
     bool dirty_;
     QVector3D translation_;

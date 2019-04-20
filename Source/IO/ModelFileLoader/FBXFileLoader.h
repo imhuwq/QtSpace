@@ -14,11 +14,10 @@ public:
 
     ~FBXFileLoader() override;
 
-    ModelPtr Load(const string &file_path, NodePtr parent_node) override;
+    NodePtr Load(const string &file_path) override;
 
 private:
-    ModelPtr model_;
-    NodePtr parent_node_;
+    NodePtr root_node_;
     FbxManager *fbx_manager_;
     FbxScene *fbx_scene_;
     string model_file_;
@@ -29,7 +28,7 @@ private:
 
     void CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr &parent_node);
 
-    NodePtr CollectFbxNodeData(FbxNode *fbx_node, NodePtr &parent_node);
+    NodePtr CollectFbxNodeData(FbxNode *fbx_node);
 
     void WalkFbxNodeTree(FbxNode *fbx_node, NodePtr &parent_node);
 

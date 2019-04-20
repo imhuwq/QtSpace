@@ -5,29 +5,28 @@
 #include "Common/Files.h"
 #include "FBXFileLoader.h"
 #include "VertexContext.h"
+#include "Resource/Scene.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
-FBXFileLoader::FBXFileLoader() : model_(nullptr),
-                                 parent_node_(nullptr),
+FBXFileLoader::FBXFileLoader() : root_node_(nullptr),
                                  fbx_manager_(nullptr),
                                  fbx_scene_(nullptr),
                                  model_file_("") {};
 
 FBXFileLoader::~FBXFileLoader() = default;
 
-ModelPtr FBXFileLoader::Load(const string &file_path, NodePtr parent_node) {
+NodePtr FBXFileLoader::Load(const string &file_path) {
     model_file_ = file_path;
-    parent_node_ = parent_node;
 
     if (!InitializeSDK()) return nullptr;
 
-    if (!ImportModelFile()) return nullptr;
+    if (!ImportModelFile()) return nullptr ;
 
     if (!ParseModelFile()) return nullptr;
 
     DestroySDK();
 
-    return model_;
+    return root_node_;
 }
 
 bool FBXFileLoader::InitializeSDK() {
@@ -262,22 +261,18 @@ void FBXFileLoader::CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr &paren
     vector<float> buffer;
     kVertexSemanticPtr semantic = table.Flatten(buffer);
     MeshPtr mesh = make_shared<Mesh>(buffer, semantic);
-    model_->AddMesh(mesh);
 
     for (auto &mesh_instance:mesh_instances) {
         string name = fbx_node_name + "_" + mesh_instance.first;
         MaterialPtr material = Material::CreateDefault();
         MeshInstancePtr node = make_shared<MeshInstance>(name, mesh, material, mesh_instance.second);
-        parent_node->AddChild(node);
+        parent_node->AddNode(node);
     }
 }
 
-NodePtr FBXFileLoader::CollectFbxNodeData(FbxNode *fbx_node, NodePtr &parent_node) {
+NodePtr FBXFileLoader::CollectFbxNodeData(FbxNode *fbx_node) {
     string node_name = fbx_node->GetName();
     FbxAMatrix local_transform = fbx_node->EvaluateLocalTransform();
-//    FbxVector4 local_position = local_transform.GetT();
-//    FbxVector4 local_rotation = local_transform.GetR();
-//    FbxVector4 local_scale = local_transform.GetS();
     FbxVector4 local_position = fbx_node->GetGeometricTranslation(FbxNode::eSourcePivot);
     FbxVector4 local_rotation = fbx_node->GetGeometricRotation(FbxNode::eSourcePivot);
     FbxVector4 local_scale = fbx_node->GetGeometricScaling(FbxNode::eSourcePivot);
@@ -288,12 +283,13 @@ NodePtr FBXFileLoader::CollectFbxNodeData(FbxNode *fbx_node, NodePtr &parent_nod
     node->ComputeTransformation();
 
     if (IsMeshNode(fbx_node)) CollectFbxMeshInstanceData(fbx_node, node);
-    parent_node->AddChild(node);
     return node;
 }
 
 void FBXFileLoader::WalkFbxNodeTree(FbxNode *fbx_node, NodePtr &parent_node) {
-    NodePtr node = CollectFbxNodeData(fbx_node, parent_node);
+    NodePtr node = CollectFbxNodeData(fbx_node);
+    parent_node->AddNode(node);
+
     for (int index = 0; index < fbx_node->GetChildCount(); index++) {
         FbxNode *fbx_child_node = fbx_node->GetChild(index);
         WalkFbxNodeTree(fbx_child_node, node);
@@ -301,16 +297,12 @@ void FBXFileLoader::WalkFbxNodeTree(FbxNode *fbx_node, NodePtr &parent_node) {
 }
 
 bool FBXFileLoader::ParseModelFile() {
-    model_ = make_shared<Model>();
     FbxNode *fbx_root_node = fbx_scene_->GetRootNode();
-    NodePtr node = make_shared<Node>(fbx_root_node->GetName());
-    WalkFbxNodeTree(fbx_root_node, node);
-    node = node->GetChild(0);
-    if (parent_node_) {
-        parent_node_->AddChild(node);
-        model_->SetRootNode(parent_node_);
-    } else {
-        model_->SetRootNode(node);
+    root_node_ = CollectFbxNodeData(fbx_root_node);
+
+    for (int index = 0; index < fbx_root_node->GetChildCount(); index++) {
+        FbxNode *fbx_child_node = fbx_root_node->GetChild(index);
+        WalkFbxNodeTree(fbx_child_node, root_node_);
     }
     return true;
 }
