@@ -19,10 +19,11 @@ public:
 
     void LoadModelFile(const string &file_path);
 
+    void LoadDefaultModelFile();
+
     void InitCamera();
 
     void InitLight();
-
 
     QMatrix4x4 transformation() const;
 
@@ -47,9 +48,9 @@ private:
     LightPtr light_;
 
     vector<NodePtr> nodes_;
-    map<string, kMeshPtr> meshes_;
-    map<string, kMaterialPtr> materials_;
-    map<string, kTexturePtr> textures_;
+    map<string, wkMeshPtr> meshes_;
+    map<string, wkMaterialPtr> materials_;
+    map<string, wkTexturePtr> textures_;
 };
 
 #endif //QTSPACE_SCENE_H
