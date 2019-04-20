@@ -40,9 +40,6 @@ public:
 
     const kLightPtr light() const;
 
-    // TODO: remove this out of Scene class
-    void Resize(const kStatePtr &state);
-
 private:
     QMatrix4x4 transform_;
     CameraPtr camera_;

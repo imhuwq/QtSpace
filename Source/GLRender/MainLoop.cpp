@@ -19,7 +19,7 @@ void MainLoop::initializeGL() {
 
 void MainLoop::resizeGL(int w, int h) {
     controller_->ResizeWindow(w, h);
-    scene_->Resize(controller_->state());
+    scene_animator_->Resize(controller_->state());
 }
 
 void MainLoop::paintGL() {
