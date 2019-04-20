@@ -9,8 +9,6 @@ list(APPEND RESOURCE_SOURCES
         Material.cpp
         Mesh.h
         Mesh.cpp
-        Model.h
-        Model.cpp
         Scene.h
         Scene.cpp
         GraphNode/Node.h

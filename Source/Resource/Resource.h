@@ -8,6 +8,10 @@ class Resource {
 public:
     Resource();
 
+    Resource(const Resource& rhs);
+
+    Resource&operator=(const Resource& rhs);
+
     string uuid() const;
 
 private:

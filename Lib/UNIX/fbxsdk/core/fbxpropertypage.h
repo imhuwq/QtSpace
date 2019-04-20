@@ -1241,7 +1241,7 @@ public:
 					lParentEntry = FbxPropertyEntry::Create( lEntry->GetParentId(), 0, 0, 0 );
 					mInstanceOf->mEntryMap.Insert( i, lParentEntry );
 
-					//mInstanceOf->AddChild(i);
+					//mInstanceOf->AddNode(i);
 
 				}
 

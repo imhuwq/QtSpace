@@ -4,7 +4,7 @@ Node::Node(const string &name,
            NodeType::Type node_type) : name_(name),
                                        node_type_(node_type),
                                        dirty_(false),
-                                       children_(0),
+                                       nodes_(0),
                                        translation_(0, 0, 0),
                                        rotation_(0, 0, 0),
                                        scale_(1, 1, 1),
@@ -17,19 +17,17 @@ const NodeType::Type Node::node_type() const { return node_type_; }
 
 const string Node::name() const { return name_; }
 
-size_t Node::children_size() const { return children_.size(); }
+size_t Node::node_size() const { return nodes_.size(); }
 
-kNodePtr Node::GetChild(size_t index) const {
-    if (index > children_.size() - 1) return nullptr;
-    return children_[index];
+vector<kNodePtr> Node::nodes() const {
+    vector<kNodePtr> nodes_vec;
+    for (auto node: nodes_) nodes_vec.push_back(node);
+    return nodes_vec;
 }
 
-NodePtr Node::GetChild(size_t index) {
-    if (index > children_.size() - 1) return nullptr;
-    return children_[index];
-}
+vector<NodePtr> Node::nodes() { return nodes_; }
 
-void Node::AddChild(const NodePtr &child) { children_.push_back(child); }
+void Node::AddNode(const NodePtr &child) { nodes_.push_back(child); }
 
 void Node::ComputeTransformation() {
     transformation_.setToIdentity();

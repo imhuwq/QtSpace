@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <queue>
 #include <QtMath>
 
 #include "Scene.h"
@@ -24,10 +25,8 @@ void Scene::LoadModelFile(const string &file_path) {
         return;
     }
 
-    kModelPtr model = nullptr;
-    model = loader->Load(file_path, nullptr);
-    if (model) AddModel(model);
-    else cerr << "Scene::LoadModelFile: Cannot load file '" << file_path << "'." << endl;
+    NodePtr model_root_node = loader->Load(file_path);
+    AddNode(model_root_node);
 }
 
 void Scene::InitCamera() { camera_ = make_shared<Camera>("camera"); }
@@ -43,28 +42,48 @@ void Scene::InitLight() {
         return;
     }
 
-    ModelPtr light_model = nullptr;
-    light_model = loader->Load(file_path, light_);
+    NodePtr light_model_root = loader->Load(file_path);
+    light_->AddNode(light_model_root);
+    AddNode(light_);
+}
 
-    if (!light_model) {
-        cerr << "Scene::LoadModelFile: Cannot load file '" << file_path << "'." << endl;
-        return;
+void Scene::AddNode(NodePtr node) {
+    nodes_.push_back(node);
+
+    queue<NodePtr> nodes_queue;
+    nodes_queue.push(node);
+    while (!nodes_queue.empty()) {
+        node = nodes_queue.front();
+        nodes_queue.pop();
+
+        if (node->node_type() == NodeType::kMeshInstance) {
+            auto mesh_instance = dynamic_pointer_cast<MeshInstance>(node);
+
+            auto mesh = mesh_instance->mesh();
+            meshes_[mesh->uuid()] = mesh;
+
+            auto material = mesh_instance->material();
+            materials_[material->uuid()] = material;
+            for (auto texture :material->textures()) textures_[texture->uuid()] = texture;
+        }
+
+        for (auto child_node: node->nodes()) nodes_queue.push(child_node);
     }
-    AddModel(light_model);
 }
-
-size_t Scene::model_size() const { return models_.size(); }
-
-kModelPtr Scene::GetModel(size_t index) const {
-    if (index > models_.size() - 1) return nullptr;
-    return models_[index];
-}
-
-void Scene::AddModel(const kModelPtr &model) { models_.push_back(model); }
 
 QMatrix4x4 Scene::transformation() const { return transform_; }
 
 QMatrix4x4 Scene::projection() const { return projection_; }
+
+vector<kNodePtr> Scene::nodes() const {
+    vector<kNodePtr> nodes_vec;
+    for (NodePtr node: nodes_) nodes_vec.push_back(node);
+    return nodes_vec;
+}
+
+vector<NodePtr> Scene::nodes() { return nodes_; }
+
+size_t Scene::nodes_size() const { return nodes_.size(); }
 
 const kCameraPtr Scene::camera() const { return camera_; }
 

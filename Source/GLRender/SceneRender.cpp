@@ -14,7 +14,7 @@ void SceneRender::Render(kStatePtr state, QOpenGLFunctionsPtr gl_functions) {
     gl_functions->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     PrepareGLBuffers(gl_functions);
-	PrepareGLShaderPrograms(gl_functions);
+    PrepareGLShaderPrograms(gl_functions);
     RenderMeshInstances(gl_functions);
 }
 
@@ -43,9 +43,7 @@ void SceneRender::CreateMeshInstanceRenders(kNodePtr node, map<string, size_t> &
 
         mesh_instance_renders_.push_back(mesh_instance_render);
     }
-    for (size_t child_index = 0; child_index < node->children_size(); child_index++) {
-        CreateMeshInstanceRenders(node->GetChild(child_index), mesh_buffer_size, transformation);
-    }
+    for (auto child_node: node->nodes()) CreateMeshInstanceRenders(child_node, mesh_buffer_size, transformation);
 }
 
 void SceneRender::CreateMeshInstanceRenders() {
@@ -53,9 +51,7 @@ void SceneRender::CreateMeshInstanceRenders() {
     ebo_size_ = 0;
     map<string, size_t> mesh_buffer_size;
 
-    for (size_t model_index = 0; model_index < scene_->model_size(); model_index++) {
-        kModelPtr model = scene_->GetModel(model_index);
-        kNodePtr node = model->root_node();
+    for (kNodePtr &node: scene_->nodes()) {
         QMatrix4x4 transform = QMatrix4x4();
         transform.setToIdentity();
         CreateMeshInstanceRenders(node, mesh_buffer_size, transform);
