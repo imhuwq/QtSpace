@@ -60,7 +60,7 @@ void MainLoop::InitializeOpenGLFeatures() {
 void MainLoop::InitializeScene() {
 	timer_->start();
 	scene_ = make_shared<Scene>();
-	scene_->LoadModelFile(Files::DefaultCubeModel);
+	scene_->LoadDefaultModelFile();
 	scene_animator_ = make_shared<SceneAnimator>(scene_);
 	scene_render_ = make_shared<SceneRender>(scene_);
 	controller_->StartStateTimer();

@@ -264,8 +264,7 @@ void FBXFileLoader::CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr &paren
 
     for (auto &mesh_instance:mesh_instances) {
         string name = fbx_node_name + "_" + mesh_instance.first;
-        MaterialPtr material = Material::CreateDefault();
-        MeshInstancePtr node = make_shared<MeshInstance>(name, mesh, material, mesh_instance.second);
+        MeshInstancePtr node = make_shared<MeshInstance>(name, mesh, nullptr, mesh_instance.second);
         parent_node->AddNode(node);
     }
 }

@@ -161,6 +161,9 @@ void SceneRender::PrepareBuffers(const kMeshInstanceRenderPtr &render) {
         offset = (int) (render->vertex_buffer_offset + mesh->color_offset()) * sizeof(float);
         shader_->enableAttributeArray(VertexAttributeLocation::kColor);
         shader_->setAttributeBuffer(VertexAttributeLocation::kColor, GL_FLOAT, offset, VertexPropertySize::kColor, stride);
+        shader_->setUniformValue("u_vertex_color", true);
+    } else {
+        shader_->setUniformValue("u_vertex_color", false);
     }
 }
 

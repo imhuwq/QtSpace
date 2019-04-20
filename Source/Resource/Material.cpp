@@ -59,16 +59,6 @@ void Material::SetShininess(float shininess) { shininess_ = shininess; }
 
 vector<kTexturePtr> Material::textures() const { return {ambient_texture_, diffuse_texture_, specular_texture_}; }
 
-MaterialPtr Material::CreateDefault() {
-    MaterialPtr material = make_shared<Material>("default_material");
-
-    TexturePtr ambient_texture = make_shared<Texture>("default_ambient_texture", Files::DefaultCubeAmbientTexture);
-    material->SetAmbientTexture(ambient_texture);
-
-    TexturePtr diffuse_texture = make_shared<Texture>("default_diffuse_texture", Files::DefaultCubeDiffuseTexture);
-    material->SetDiffuseTexture(diffuse_texture);
-
-    TexturePtr specular_texture = make_shared<Texture>("default_specular_texture", Files::DefaultCubeSpecularTexture);
-    material->SetSpecularTexture(specular_texture);
-    return material;
+MaterialPtr Material::Default() {
+    return make_shared<Material>("default_material");
 }

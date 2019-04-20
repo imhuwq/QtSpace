@@ -29,11 +29,18 @@ void Scene::LoadModelFile(const string &file_path) {
     AddNode(model_root_node);
 }
 
+void Scene::LoadDefaultModelFile() {
+    LoadModelFile(Files::DefaultCubeModel);
+}
+
 void Scene::InitCamera() { camera_ = make_shared<Camera>("camera"); }
 
 void Scene::InitLight() {
     light_ = make_shared<DirectionLight>("light");
-    light_->TranslateTo(0, 2, 0);
+    light_->TranslateTo(-2, 2, 2);
+    light_->Scale(0.8, 0.8, 0.8);
+    vector<float> light_color = {255/255.0f, 183/255.0f, 130/255.0f};
+    light_->SetColor(light_color[0], light_color[1], light_color[2]);
 
     string file_path = Files::DefaultSphereModel;
     ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
@@ -42,8 +49,17 @@ void Scene::InitLight() {
         return;
     }
 
-    NodePtr light_model_root = loader->Load(file_path);
-    light_->AddNode(light_model_root);
+    NodePtr light_model = loader->Load(file_path)->nodes()[0]->nodes()[0];
+    MeshInstancePtr light_instance = dynamic_pointer_cast<MeshInstance>(light_model);
+    MaterialPtr light_material = light_instance->material();
+    light_material->SetDiffuseColor(light_color[0], light_color[1], light_color[2]);
+    light_material->SetAmbientColor(light_color[0], light_color[1], light_color[2]);
+    light_material->SetSpecularColor(light_color[0], light_color[1], light_color[2]);
+    light_material->SetDiffuseStrength(1.0f);
+    light_material->SetAmbientStrength(1.0f);
+    light_material->SetSpecularStrength(1.0f);
+
+    light_->AddNode(light_model);
     AddNode(light_);
 }
 
@@ -88,4 +104,3 @@ size_t Scene::nodes_size() const { return nodes_.size(); }
 const kCameraPtr Scene::camera() const { return camera_; }
 
 const kLightPtr Scene::light() const { return light_; }
-

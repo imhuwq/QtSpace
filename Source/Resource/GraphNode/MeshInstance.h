@@ -21,13 +21,15 @@ typedef shared_ptr<const MeshInstance> kMeshInstancePtr;
 class MeshInstance : public Node {
 public:
     MeshInstance(const string &name,
-                 const kMeshPtr &mesh,
-                 const kMaterialPtr &material,
+                 kMeshPtr mesh,
+                 MaterialPtr material,
                  const vector<unsigned int> &indices);
 
     kMeshPtr mesh() const;
 
     kMaterialPtr material() const;
+
+    MaterialPtr material();
 
     size_t indices_size() const;
 
@@ -35,7 +37,7 @@ public:
 
 private:
     kMeshPtr mesh_;
-    kMaterialPtr material_;
+    MaterialPtr material_;
     vector<unsigned int> indices_;
 };
 
