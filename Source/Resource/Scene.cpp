@@ -89,7 +89,3 @@ const kCameraPtr Scene::camera() const { return camera_; }
 
 const kLightPtr Scene::light() const { return light_; }
 
-void Scene::Resize(const kStatePtr &state) {
-    projection_.setToIdentity();
-    projection_.perspective(camera_->fov(), state->window_width / float(state->window_height), 0.01f, 100.0f);
-}

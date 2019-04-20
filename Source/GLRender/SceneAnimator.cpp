@@ -34,3 +34,8 @@ void SceneAnimator::Animate(kStatePtr state, int frame_time_delta, QOpenGLFuncti
 		scene_->projection_.perspective(scene_->camera()->fov(), state->window_width / float(state->window_height), 0.01f, 100.0f);
 	}
 }
+
+void SceneAnimator::Resize(kStatePtr state) {
+	scene_->projection_.setToIdentity();
+	scene_->projection_.perspective(scene_->camera_->fov(), state->window_width / float(state->window_height), 0.01f, 100.0f);
+}

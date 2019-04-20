@@ -13,6 +13,8 @@ public:
 
 	void Animate(kStatePtr state, int frame_time_delta, QOpenGLFunctionsPtr gl_functions_);
 
+	void Resize(kStatePtr state);
+
 private:
 	ScenePtr scene_ = nullptr;
 	QTimePtr anim_timer_ = nullptr;
