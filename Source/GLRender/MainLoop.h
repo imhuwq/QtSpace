@@ -50,7 +50,7 @@ protected slots:
 private:
 	ControllerPtr controller_ = nullptr;
 	QTimePtr timer_ = nullptr;
-	QOpenGLFunctionsPtr gl_functions_ = nullptr;
+	QGLFunctionsPtr gl_functions_ = nullptr;
 
 	SceneAnimatorPtr scene_animator_ = nullptr;
 	SceneRenderPtr scene_render_ = nullptr;

@@ -5,10 +5,10 @@ list(APPEND GLRENDER_SOURCES
         MainLoop.cpp
 		SceneAnimator.h
 		SceneAnimator.cpp
+		MeshInstanceRender.h
+        MeshInstanceRender.cpp
         SceneRender.h
         SceneRender.cpp
-        MeshInstanceRender.h
-        MeshInstanceRender.cpp
         )
 
 add_library(glrender STATIC ${GLRENDER_SOURCES})

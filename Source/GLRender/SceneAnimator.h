@@ -9,7 +9,7 @@ class SceneAnimator {
 public:
 	explicit SceneAnimator(ScenePtr scene);
 
-	void Animate(kStatePtr state, int frame_time_delta, QOpenGLFunctionsPtr gl_functions_);
+	void Animate(kStatePtr state, int frame_time_delta, QGLFunctionsPtr gl_functions_);
 
 	void Resize(kStatePtr state);
 

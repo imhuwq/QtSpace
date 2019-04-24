@@ -2,7 +2,7 @@
 
 SceneAnimator::SceneAnimator(ScenePtr scene) : scene_(scene), anim_timer_(new QTime()) {}
 
-void SceneAnimator::Animate(kStatePtr state, int frame_time_delta, QOpenGLFunctionsPtr gl_functions_) {
+void SceneAnimator::Animate(kStatePtr state, int frame_time_delta, QGLFunctionsPtr gl_functions_) {
 	static int anim_timer_offset = 0;
 
 	if (state->animating) {

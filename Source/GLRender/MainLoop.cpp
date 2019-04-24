@@ -49,7 +49,7 @@ void MainLoop::InitializeOpenGLFormat() {
 
 void MainLoop::InitializeOpenGLFunctions() {
 	initializeOpenGLFunctions();
-	gl_functions_ = QOpenGLFunctionsPtr(QOpenGLContext::currentContext()->functions());
+	gl_functions_ = QGLFunctionsPtr(QOpenGLContext::currentContext()->functions());
 	connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
 }
 

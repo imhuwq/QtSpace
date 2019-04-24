@@ -36,11 +36,11 @@
 // Lib - Qt
 DEF_PTR(QTime);
 DEF_PTR(QTimer);
-DEF_PTR(QOpenGLTexture);
-DEF_PTR(QOpenGLFunctions);
 DEF_PTR_ALIAS(QOpenGLBuffer, QGLVBO);
-DEF_PTR_ALIAS(QOpenGLVertexArrayObject, QGLVAO);
+DEF_PTR_ALIAS(QOpenGLTexture, QGLTexture);
+DEF_PTR_ALIAS(QOpenGLFunctions, QGLFunctions);
 DEF_PTR_ALIAS(QOpenGLShaderProgram, QGLShader);
+DEF_PTR_ALIAS(QOpenGLVertexArrayObject, QGLVAO);
 
 // Application
 DEF_CLS(Application);
