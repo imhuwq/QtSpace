@@ -2,28 +2,16 @@
 #define QTSPACE_MESHINSTANCE_H
 
 #include "Node.h"
-#include "../Mesh.h"
-#include "../Material.h"
 #include "Common/TypeDef.h"
-
-using namespace std;
-
-class Mesh;
-
-class MeshInstance;
-
-typedef shared_ptr<Mesh> MeshPtr;
-typedef shared_ptr<const Mesh> kMeshPtr;
-typedef shared_ptr<MeshInstance> MeshInstancePtr;
-typedef shared_ptr<const MeshInstance> kMeshInstancePtr;
-
+#include "Resource/Mesh.h"
+#include "Resource/Material.h"
 
 class MeshInstance : public Node {
 public:
-    MeshInstance(const string &name,
+    MeshInstance(const std::string &name,
                  kMeshPtr mesh,
                  MaterialPtr material,
-                 const vector<unsigned int> &indices);
+                 const std::vector<unsigned int> &indices);
 
     kMeshPtr mesh() const;
 
@@ -33,12 +21,12 @@ public:
 
     size_t indices_size() const;
 
-    const vector<unsigned int> &indices() const;
+    const std::vector<unsigned int> &indices() const;
 
 private:
     kMeshPtr mesh_;
     MaterialPtr material_;
-    vector<unsigned int> indices_;
+	std::vector<unsigned int> indices_;
 };
 
 #endif //QTSPACE_MESHINSTANCE_H

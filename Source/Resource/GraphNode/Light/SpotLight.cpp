@@ -1,5 +1,6 @@
 #include "SpotLight.h"
 
+using namespace std;
 
 SpotLight::SpotLight(const string &name,
                      float angle,

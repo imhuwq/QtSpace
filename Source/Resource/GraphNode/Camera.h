@@ -7,7 +7,7 @@
 
 class Camera : public Node {
 public:
-    Camera(const string &name, const QVector3D &target = Vector3D::Origin);
+    Camera(const std::string &name, const QVector3D &target = Vector3D::Origin);
 
     float fov() const;
 

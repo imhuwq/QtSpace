@@ -1,10 +1,6 @@
 #ifndef QTSPACE_SCENERENDER_H
 #define QTSPACE_SCENERENDER_H
 
-#include <map>
-#include <stack>
-#include <cstring>
-
 #include "Common/Files.h"
 #include "Common/TypeDef.h"
 #include "Resource/Scene.h"

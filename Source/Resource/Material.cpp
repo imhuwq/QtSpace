@@ -1,6 +1,8 @@
 #include "Material.h"
 #include "Common/Files.h"
 
+using namespace std;
+
 Material::Material(const string &name) : name_(name),
                                          ambient_color_(3, 1.0f),
                                          ambient_strength_(0.25f),

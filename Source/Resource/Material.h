@@ -11,15 +11,15 @@
 
 class Material : public Resource {
 public:
-    Material(const string &name);
+    Material(const std::string &name);
 
-    string name();
+	std::string name();
 
     kTexturePtr ambient_texture() const;
 
     void SetAmbientTexture(const kTexturePtr &ambient_texture);
 
-    vector<float> ambient_color() const;
+	std::vector<float> ambient_color() const;
 
     void SetAmbientColor(float x, float y, float z);
 
@@ -31,7 +31,7 @@ public:
 
     void SetDiffuseTexture(const kTexturePtr &diffuse_texture);
 
-    vector<float> diffuse_color() const;
+	std::vector<float> diffuse_color() const;
 
     void SetDiffuseColor(float x, float y, float z);
 
@@ -43,7 +43,7 @@ public:
 
     void SetSpecularTexture(const kTexturePtr &specular_texture);
 
-    vector<float> specular_color() const;
+	std::vector<float> specular_color() const;
 
     void SetSpecularColor(float x, float y, float z);
 
@@ -55,23 +55,23 @@ public:
 
     void SetShininess(float shininess);
 
-    vector<kTexturePtr> textures() const;
+	std::vector<kTexturePtr> textures() const;
 
     static MaterialPtr Default();
 
 private:
-    string name_;
+	std::string name_;
 
     kTexturePtr ambient_texture_;
-    vector<float> ambient_color_;
+	std::vector<float> ambient_color_;
     float ambient_strength_;
 
     kTexturePtr diffuse_texture_;
-    vector<float> diffuse_color_;
+	std::vector<float> diffuse_color_;
     float diffuse_strength_;
 
     kTexturePtr specular_texture_;
-    vector<float> specular_color_;
+	std::vector<float> specular_color_;
     float specular_strength_;
 
     float shininess_;

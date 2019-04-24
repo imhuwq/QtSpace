@@ -15,19 +15,17 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 
-using namespace std;
+#define DEF_SHR_PTR(cls) typedef std::shared_ptr<cls> cls##Ptr;\
+                         typedef std::shared_ptr<const cls> k##cls##Ptr
 
-#define DEF_SHR_PTR(cls) typedef shared_ptr<cls> cls##Ptr;\
-                         typedef shared_ptr<const cls> k##cls##Ptr
+#define DEF_SHR_PTR_ALIAS(cls, alias) typedef std::shared_ptr<cls> alias##Ptr;\
+                                      typedef std::shared_ptr<const cls> k##alias##Ptr
 
-#define DEF_SHR_PTR_ALIAS(cls, alias) typedef shared_ptr<cls> alias##Ptr;\
-                                      typedef shared_ptr<const cls> k##alias##Ptr
+#define DEF_WEK_PTR(cls) typedef std::weak_ptr<cls> w##cls##Ptr;\
+                         typedef std::weak_ptr<const cls> wk##cls##Ptr
 
-#define DEF_WEK_PTR(cls) typedef weak_ptr<cls> w##cls##Ptr;\
-                         typedef weak_ptr<const cls> wk##cls##Ptr
-
-#define DEF_WEK_PTR_ALIAS(cls, alias) typedef weak_ptr<cls> w##alias##Ptr;\
-                                      typedef weak_ptr<const cls> wk##alias##Ptr
+#define DEF_WEK_PTR_ALIAS(cls, alias) typedef std::weak_ptr<cls> w##alias##Ptr;\
+                                      typedef std::weak_ptr<const cls> wk##alias##Ptr
 
 #define DEF_PTR(cls) DEF_SHR_PTR(cls); DEF_WEK_PTR(cls)
 

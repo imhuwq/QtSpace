@@ -6,12 +6,10 @@
 #include "VertexContext.h"
 #include "Common/TypeDef.h"
 
-using namespace std;
-
 class VertexTable {
 public:
 	size_t size;
-	vector<vector<kVertexPackPtr>> table;
+	std::vector<std::vector<kVertexPackPtr>> table;
 	VertexSemanticPtr semantic;
 	VertexPackPtr sample;
 	bool empty;
@@ -24,7 +22,7 @@ public:
 
 	void FillEmptySlots();
 
-	kVertexSemanticPtr Flatten(vector<float> &buffer);
+	kVertexSemanticPtr Flatten(std::vector<float> &buffer);
 };
 
 #endif // QTSPACE_VERTEXTABLE_H

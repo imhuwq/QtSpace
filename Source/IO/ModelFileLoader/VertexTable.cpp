@@ -1,6 +1,8 @@
 #include "VertexTable.h"
 #include "VertexSemantic.h"
 
+using namespace std;
+
 bool VertexTable::Insert(VertexPackPtr &pack, VertexContext &context) {
 	empty = false;
 	sample = pack;

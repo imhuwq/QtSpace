@@ -2,6 +2,8 @@
 #include "FBXFileLoader.h"
 #include "ModelFileLoader.h"
 
+using namespace std;
+
 ModelFileLoader::~ModelFileLoader() = default;
 
 ModelFileLoaderPtr ModelFileLoader::CreateLoader(const string &file_path) {

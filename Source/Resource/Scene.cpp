@@ -11,6 +11,8 @@
 #include "GraphNode/Light/DirectionLight.h"
 #include "IO/ModelFileLoader/ModelFileLoader.h"
 
+using namespace std;
+
 Scene::Scene() {
     transform_.setToIdentity();
     projection_.setToIdentity();

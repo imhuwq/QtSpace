@@ -3,19 +3,17 @@
 
 #include <string>
 
-using namespace std;
-
 namespace Files {
-    static const string DefaultCubeModel = "File/Model/cube.fbx";
-    static const string DefaultSphereModel = "File/Model/sphere.fbx";
-    static const string DefaultVertexShader = "File/Shader/default.vert";
-    static const string DefaultFragmentShader = "File/Shader/default.frag";
-    static const string DefaultTexturePath = "File/Texture/Default.png";
-    static const string DefaultCubeAmbientTexture = "File/Texture/CubeAmbient.png";
-    static const string DefaultCubeDiffuseTexture = "File/Texture/CubeDiffuse.png";
-    static const string DefaultCubeSpecularTexture = "File/Texture/CubeSpecular.png";
+    static const std::string DefaultCubeModel = "File/Model/cube.fbx";
+    static const std::string DefaultSphereModel = "File/Model/sphere.fbx";
+    static const std::string DefaultVertexShader = "File/Shader/default.vert";
+    static const std::string DefaultFragmentShader = "File/Shader/default.frag";
+    static const std::string DefaultTexturePath = "File/Texture/Default.png";
+    static const std::string DefaultCubeAmbientTexture = "File/Texture/CubeAmbient.png";
+    static const std::string DefaultCubeDiffuseTexture = "File/Texture/CubeDiffuse.png";
+    static const std::string DefaultCubeSpecularTexture = "File/Texture/CubeSpecular.png";
 
-    inline string GetFileExtension(const string &file_path) {
+    inline std::string GetFileExtension(const std::string &file_path) {
         size_t pos = file_path.find_last_of('.');
         return file_path.substr(pos);
     }
@@ -24,13 +22,13 @@ namespace Files {
 struct ModelFileType {
 	ModelFileType() = delete;
 
-	static string OBJ() {
-		const static string ext = ".obj";
+	static std::string OBJ() {
+		const static std::string ext = ".obj";
 		return ext;
 	}
 
-	static string FBX() {
-		const static string ext = ".fbx";
+	static std::string FBX() {
+		const static std::string ext = ".fbx";
 		return ext;
 	}
 };

@@ -2,6 +2,8 @@
 
 #include <QUuid>
 
+using namespace std;
+
 Resource::Resource() {
     uuid_ = QUuid::createUuid().toString().toStdString();
 }

@@ -1,6 +1,8 @@
 #include "Texture.h"
 #include "Common/Files.h"
 
+using namespace std;
+
 kTexturePtr Texture::default_texture_;
 
 Texture::Texture(const string &name, const string &path) : name_(name),

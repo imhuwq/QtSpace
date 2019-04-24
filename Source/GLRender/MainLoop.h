@@ -15,7 +15,6 @@
 #include "Resource/Scene.h"
 #include "Control/Controller.h"
 
-
 class MainLoop : public QOpenGLWidget, protected QOpenGLFunctions {
 Q_OBJECT
 public:

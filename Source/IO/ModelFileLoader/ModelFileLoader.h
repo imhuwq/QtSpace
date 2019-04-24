@@ -7,9 +7,9 @@ class ModelFileLoader {
 public:
     virtual ~ModelFileLoader();
 
-    static ModelFileLoaderPtr CreateLoader(const string &file_path);
+    static ModelFileLoaderPtr CreateLoader(const std::string &file_path);
 
-    virtual NodePtr Load(const string &file_path) = 0;
+    virtual NodePtr Load(const std::string &file_path) = 0;
 };
 
 #endif //QTSPACE_MODELFILELOADER_H

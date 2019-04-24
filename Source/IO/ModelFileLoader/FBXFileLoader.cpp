@@ -8,6 +8,8 @@
 #include "Resource/Scene.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
+using namespace std;
+
 FBXFileLoader::FBXFileLoader() : root_node_(nullptr),
                                  fbx_manager_(nullptr),
                                  fbx_scene_(nullptr),

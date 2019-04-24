@@ -12,10 +12,10 @@ public:
 
     Resource&operator=(const Resource& rhs);
 
-    string uuid() const;
+	std::string uuid() const;
 
 private:
-    string uuid_;
+	std::string uuid_;
 };
 
 #endif //QTSPACE_RESOURCE_H

@@ -5,8 +5,6 @@
 #include "Resource/Scene.h"
 #include "GLRender/MainLoop.h"
 
-using namespace std;
-
 class SceneAnimator {
 public:
 	explicit SceneAnimator(ScenePtr scene);

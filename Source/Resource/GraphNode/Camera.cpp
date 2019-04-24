@@ -3,6 +3,8 @@
 #include "Camera.h"
 #include "Common/Consts.h"
 
+using namespace std;
+
 Camera::Camera(const string &name, const QVector3D &target) : Node(name, NodeType::kCamera),
                                                               target_(target),
                                                               fov_(25.0f) {

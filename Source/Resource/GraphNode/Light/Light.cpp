@@ -1,5 +1,7 @@
 #include "Light.h"
 
+using namespace std;
+
 Light::Light(const string &name,
              LightType::Type light_type) : Node(name, NodeType::kLight),
                                            light_type_(light_type),

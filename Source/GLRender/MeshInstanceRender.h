@@ -8,8 +8,6 @@
 #include "Resource/GraphNode/Node.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
-using namespace std;
-
 class MeshInstanceRender {
 public:
     MeshInstanceRender(const kNodePtr &node,

@@ -1,5 +1,7 @@
 #include "MeshInstance.h"
 
+using namespace std;
+
 MeshInstance::MeshInstance(const string &name,
                            kMeshPtr mesh,
                            MaterialPtr material,

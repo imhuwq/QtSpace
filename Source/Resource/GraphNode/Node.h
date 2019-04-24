@@ -7,24 +7,24 @@
 #include <QMatrix4x4>
 #include <QVector3D>
 
-#include "../Resource.h"
 #include "Common/Consts.h"
 #include "Common/TypeDef.h"
+#include "Resource/Resource.h"
 
 class Node : public Resource {
 public:
-    explicit Node(const string &name,
+    explicit Node(const std::string &name,
                   NodeType::Type node_type = NodeType::kGeneral);
 
     const NodeType::Type node_type() const;
 
-    const string name() const;
+    const std::string name() const;
 
     size_t node_size() const;
 
-    vector<kNodePtr> nodes() const;
+	std::vector<kNodePtr> nodes() const;
 
-    vector<NodePtr> nodes();
+	std::vector<NodePtr> nodes();
 
     void AddNode(const NodePtr &child);
 
@@ -57,9 +57,9 @@ public:
     virtual ~Node();
 
 protected:
-    string name_;
+	std::string name_;
     NodeType::Type node_type_;
-    vector<NodePtr> nodes_;
+	std::vector<NodePtr> nodes_;
 
     bool dirty_;
     QVector3D translation_;
@@ -68,7 +68,6 @@ protected:
     QMatrix4x4 transformation_;
 
     float move_speed_;
-
 };
 
 #endif //QTSPACE_NODE_H

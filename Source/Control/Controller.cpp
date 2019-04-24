@@ -2,6 +2,8 @@
 
 #include "Controller.h"
 
+using namespace std;
+
 Controller::Controller() {
     state_ = make_shared<State>();
 }

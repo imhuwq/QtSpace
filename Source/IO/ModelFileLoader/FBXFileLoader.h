@@ -6,21 +6,19 @@
 #include "Common/TypeDef.h"
 #include "ModelFileLoader.h"
 
-using namespace std;
-
 class FBXFileLoader : public ModelFileLoader {
 public:
     FBXFileLoader();
 
     ~FBXFileLoader() override;
 
-    NodePtr Load(const string &file_path) override;
+    NodePtr Load(const std::string &file_path) override;
 
 private:
     NodePtr root_node_;
     FbxManager *fbx_manager_;
     FbxScene *fbx_scene_;
-    string model_file_;
+    std::string model_file_;
 
     bool InitializeSDK();
 

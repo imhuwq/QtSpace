@@ -6,7 +6,7 @@
 
 class DotLight : public Light {
 public:
-    DotLight(const string &name, float radius);
+    DotLight(const std::string &name, float radius);
 
     float radius() const;
 

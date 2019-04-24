@@ -1,5 +1,7 @@
 #include "DotLight.h"
 
+using namespace std;
+
 DotLight::DotLight(const string &name,
                    float radius) : radius_(radius),
                                    Light(name, LightType::kDotLight) {}
