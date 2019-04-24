@@ -7,6 +7,10 @@ list(APPEND RESOURCE_SOURCES
         Texture.cpp
         Material.h
         Material.cpp
+		Cubemap.h
+		Cubemap.cpp
+		Skybox.h
+		Skybox.cpp
         Mesh.h
         Mesh.cpp
         Scene.h

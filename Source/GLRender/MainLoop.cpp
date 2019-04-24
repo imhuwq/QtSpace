@@ -1,6 +1,8 @@
 #include "MainLoop.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
+using namespace std;
+
 MainLoop::MainLoop(ControllerPtr controller) : controller_(controller), timer_(new QTime()) {
 	InitializeOpenGLFormat();
 }

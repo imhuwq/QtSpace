@@ -101,4 +101,8 @@ DEF_CLS(Light);
 
 DEF_CLS(SpotLight);
 
+DEF_CLS(Cubemap);
+
+DEF_CLS(SkyBox);
+
 #endif // QTSPACE_TYPEDEF_H

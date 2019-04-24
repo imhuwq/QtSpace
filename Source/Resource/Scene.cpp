@@ -18,6 +18,7 @@ Scene::Scene() {
     projection_.setToIdentity();
     InitCamera();
     InitLight();
+	InitSkyBox();
 }
 
 void Scene::LoadModelFile(const string &file_path) {
@@ -63,6 +64,23 @@ void Scene::InitLight() {
 
     light_->AddNode(light_model);
     AddNode(light_);
+}
+
+void Scene::InitSkyBox() {
+	skybox_ = make_shared<SkyBox>();
+
+	string file_path = Files::DefaultCubeModel;
+	ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
+	if (!loader) {
+		cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;
+		return;
+	}
+
+	NodePtr box_model = loader->Load(file_path)->nodes()[0]->nodes()[0];
+	skybox_->SetBox(box_model);
+
+	CubemapPtr cubemap = Cubemap::CreateDefault();
+	skybox_->SetCubemap(cubemap);
 }
 
 void Scene::AddNode(NodePtr node) {

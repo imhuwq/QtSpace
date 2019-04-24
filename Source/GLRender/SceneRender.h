@@ -8,8 +8,6 @@
 #include "MeshInstanceRender.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
-using namespace std;
-
 class SceneRender : protected QOpenGLFunctions {
 public:
     explicit SceneRender(kScenePtr scene);
@@ -18,7 +16,7 @@ public:
 
 private:
     kScenePtr scene_;
-    vector<MeshInstanceRenderPtr> mesh_instance_renders_;
+    std::vector<MeshInstanceRenderPtr> mesh_instance_renders_;
     size_t vbo_size_;
     size_t ebo_size_;
 
@@ -26,17 +24,20 @@ private:
     QGLVAOPtr vao_;
     QGLVBOPtr vbo_;
     QGLVBOPtr ebo_;
-    map<string, QOpenGLTexturePtr> textures_;
+	std::map<std::string, QOpenGLTexturePtr> textures_;
+	std::map<std::string, QOpenGLTexturePtr> cubemaps_;
 
     void CreateShaderProgram();
 
-    void CreateMeshInstanceRenders(kNodePtr node, map<string, size_t> &mesh_buffer_size, QMatrix4x4 transformation);
+    void CreateMeshInstanceRenders(kNodePtr node, std::map<std::string, size_t> &mesh_buffer_size, QMatrix4x4 transformation);
 
     void CreateMeshInstanceRenders();
 
     void CreateBuffers();
 
     void CreateTextures();
+
+	void CreateCubemaps();
 
     void PrepareGLBuffers(QOpenGLFunctionsPtr gl_functions);
 

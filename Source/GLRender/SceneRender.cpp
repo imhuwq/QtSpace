@@ -1,5 +1,7 @@
 #include "SceneRender.h"
 
+using namespace std;
+
 SceneRender::SceneRender(kScenePtr scene) : scene_(scene),
                                             vao_(new QOpenGLVertexArrayObject()),
                                             vbo_(new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer)),
@@ -107,6 +109,10 @@ void SceneRender::CreateTextures() {
             }
         }
     }
+}
+
+void SceneRender::CreateCubemaps() {
+
 }
 
 void SceneRender::PrepareGLBuffers(QOpenGLFunctionsPtr gl_functions) {

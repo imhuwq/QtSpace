@@ -57,7 +57,7 @@ public:
 
 	std::vector<kTexturePtr> textures() const;
 
-    static MaterialPtr Default();
+    static MaterialPtr CreateDefault();
 
 private:
 	std::string name_;

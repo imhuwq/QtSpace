@@ -9,7 +9,7 @@ MeshInstance::MeshInstance(const string &name,
                                                                   mesh_(mesh),
                                                                   indices_(indices),
                                                                   material_(material) {
-    if (material == nullptr) material_ = Material::Default();
+    if (material == nullptr) material_ = Material::CreateDefault();
 }
 
 kMeshPtr MeshInstance::mesh() const { return mesh_; }

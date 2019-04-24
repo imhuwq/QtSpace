@@ -4,6 +4,7 @@
 #include <QTime>
 #include <QMatrix4x4>
 
+#include "Skybox.h"
 #include "Common/TypeDef.h"
 #include "GraphNode/Camera.h"
 #include "Control/Controller.h"
@@ -24,6 +25,8 @@ public:
     void InitCamera();
 
     void InitLight();
+
+	void InitSkyBox();
 
     QMatrix4x4 transformation() const;
 
@@ -46,6 +49,7 @@ private:
     CameraPtr camera_;
     QMatrix4x4 projection_;
     LightPtr light_;
+	SkyBoxPtr skybox_;
 
 	std::vector<NodePtr> nodes_;
 	std::map<std::string, wkMeshPtr> meshes_;

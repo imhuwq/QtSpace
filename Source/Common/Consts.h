@@ -29,7 +29,7 @@ namespace VertexPropertyType {
 		kColors,
 		kTangent0,
 		kTangent1,
-		kNumPropertyType
+		kNumType
 	};
 }
 
@@ -43,7 +43,7 @@ namespace VertexPropertySize {
 		kColor = 4,
 		kTangent0 = 3,
 		kTangent1 = 3,
-		kNumPropertyTyp
+		kNumSize
 	};
 }
 
@@ -53,7 +53,8 @@ namespace VertexAttributeLocation {
 		kNormal = 1,
 		kUV0 = 2,
 		kUV1 = 3,
-		kColor = 4
+		kColor = 4,
+		kNumLocation
 	};
 }
 
@@ -61,7 +62,8 @@ namespace TextureUnitLocation {
 	enum Location {
 		kAmbient = 0,
 		kDiffuse = 1,
-		kSpecular = 2
+		kSpecular = 2,
+		kNumLocation
 	};
 }
 
@@ -71,7 +73,7 @@ namespace NodeType {
 		kCamera,
 		kLight,
 		kMeshInstance,
-		kNumGraphNodeType
+		kNumType
 	};
 }
 
@@ -81,7 +83,19 @@ namespace LightType {
 		kDotLight,
 		kSpotLight,
 		kDirectionLight,
-		kNumLightType
+		kNumType
+	};
+}
+
+namespace CubemapFace {
+	enum Face {
+		kRight = 0,
+		kLeft = 1,
+		kUp = 2,
+		kDown = 3,
+		kBack = 4,
+		kFront = 5,
+		kNumFace
 	};
 }
 
