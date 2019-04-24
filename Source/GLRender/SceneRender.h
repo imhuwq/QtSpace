@@ -23,37 +23,37 @@ private:
     QGLVAOPtr vao_;
     QGLVBOPtr vbo_;
     QGLVBOPtr ebo_;
-	QGLShaderPtr mi_shader_;
-	std::map<std::string, wQGLTexturePtr> textures_;
-	std::vector<MeshInstanceRenderPtr> mesh_instance_renders_;
+    QGLShaderPtr mi_shader_;
+    std::map<std::string, wQGLTexturePtr> textures_;
+    std::vector<MeshInstanceRenderPtr> mesh_instance_renders_;
 
-	size_t light_vbo_size_;
-	size_t light_ebo_size_;
-	QGLVAOPtr light_vao_;
-	QGLVBOPtr light_vbo_;
-	QGLVBOPtr light_ebo_;
-	QGLShaderPtr light_shader_;
-	LightRenderPtr light_render_;
+    size_t light_vbo_size_;
+    size_t light_ebo_size_;
+    QGLVAOPtr light_vao_;
+    QGLVBOPtr light_vbo_;
+    QGLVBOPtr light_ebo_;
+    QGLShaderPtr light_shader_;
+    LightRenderPtr light_render_;
 
-	std::map<std::string, wQGLTexturePtr> cubemaps_;
+    std::map<std::string, wQGLTexturePtr> cubemaps_;
 
-	void CreateLightShader();
+    void CreateLightShader();
 
-	void CreateLightRender();
+    void CreateLightRender();
 
-	void CreateLightBuffer();
+    void CreateLightBuffer();
 
-	void PrepareLightShader(QGLFunctionsPtr gl_functions);
+    void PrepareLightShader(QGLFunctionsPtr gl_functions);
 
-	void PrepareLightBuffer(QGLFunctionsPtr gl_functions);
+    void PrepareLightBuffer(QGLFunctionsPtr gl_functions);
 
-	void RenderLight(QGLFunctionsPtr gl_functions);
+    void RenderLight(QGLFunctionsPtr gl_functions);
 
-	void CreateSkyboxShader();
+    void CreateSkyboxShader();
 
-	void CreateSkyboxRender();
+    void CreateSkyboxRender();
 
-	void CreateSkyboxBuffer();
+    void CreateSkyboxBuffer();
 
     void CreateMeshInstanceShader();
 

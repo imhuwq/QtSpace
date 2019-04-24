@@ -18,7 +18,7 @@ Scene::Scene() {
     projection_.setToIdentity();
     InitCamera();
     InitLight();
-	InitSkyBox();
+    InitSkyBox();
 }
 
 void Scene::LoadModelFile(const string &file_path) {
@@ -42,7 +42,7 @@ void Scene::InitLight() {
     light_ = make_shared<DirectionLight>("light");
     light_->TranslateTo(-2, 2, 2);
     light_->Scale(0.8, 0.8, 0.8);
-    vector<float> light_color = {255/255.0f, 183/255.0f, 130/255.0f};
+    vector<float> light_color = {255 / 255.0f, 183 / 255.0f, 130 / 255.0f};
     light_->SetColor(light_color[0], light_color[1], light_color[2]);
 
     string file_path = Files::DefaultSphereModel;
@@ -66,20 +66,20 @@ void Scene::InitLight() {
 }
 
 void Scene::InitSkyBox() {
-	skybox_ = make_shared<SkyBox>();
+    skybox_ = make_shared<SkyBox>();
 
-	string file_path = Files::DefaultCubeModel;
-	ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
-	if (!loader) {
-		cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;
-		return;
-	}
+    string file_path = Files::DefaultCubeModel;
+    ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
+    if (!loader) {
+        cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;
+        return;
+    }
 
-	NodePtr box_model = loader->Load(file_path)->nodes()[0];
-	skybox_->SetBox(box_model);
+    NodePtr box_model = loader->Load(file_path)->nodes()[0];
+    skybox_->SetBox(box_model);
 
-	CubemapPtr cubemap = Cubemap::CreateDefault();
-	skybox_->SetCubemap(cubemap);
+    CubemapPtr cubemap = Cubemap::CreateDefault();
+    skybox_->SetCubemap(cubemap);
 }
 
 void Scene::AddNode(NodePtr node) {

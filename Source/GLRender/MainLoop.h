@@ -48,12 +48,12 @@ protected slots:
     void update();
 
 private:
-	ControllerPtr controller_ = nullptr;
-	QTimePtr timer_ = nullptr;
-	QGLFunctionsPtr gl_functions_ = nullptr;
+    ControllerPtr controller_ = nullptr;
+    QTimePtr timer_ = nullptr;
+    QGLFunctionsPtr gl_functions_ = nullptr;
 
-	SceneAnimatorPtr scene_animator_ = nullptr;
-	SceneRenderPtr scene_render_ = nullptr;
+    SceneAnimatorPtr scene_animator_ = nullptr;
+    SceneRenderPtr scene_render_ = nullptr;
     ScenePtr scene_ = nullptr;
 
     int frame_count_ = 0;
@@ -62,13 +62,13 @@ private:
     int frame_delta_ = 0;
     int fps_ = 0;
 
-	void InitializeOpenGLFormat();
+    void InitializeOpenGLFormat();
 
-	void InitializeOpenGLFunctions();
+    void InitializeOpenGLFunctions();
 
-	void InitializeOpenGLFeatures();
+    void InitializeOpenGLFeatures();
 
-	void InitializeScene();
+    void InitializeScene();
 };
 
 #endif //QTSPACE_GLWIDGET_H

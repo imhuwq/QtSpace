@@ -8,25 +8,25 @@
 
 class SkyBox : public Resource {
 public:
-	SkyBox();
+    SkyBox();
 
-	SkyBoxPtr CreateDefault();
+    SkyBoxPtr CreateDefault();
 
-	kNodePtr box() const;
+    kNodePtr box() const;
 
-	NodePtr box();
+    NodePtr box();
 
-	void SetBox(NodePtr node);
+    void SetBox(NodePtr node);
 
-	kCubemapPtr cubemap() const;
+    kCubemapPtr cubemap() const;
 
-	CubemapPtr cubemap();
+    CubemapPtr cubemap();
 
-	void SetCubemap(CubemapPtr cubemap);
+    void SetCubemap(CubemapPtr cubemap);
 
 private:
-	NodePtr box_ = nullptr;
-	CubemapPtr cubemap_ = nullptr;
+    NodePtr box_ = nullptr;
+    CubemapPtr cubemap_ = nullptr;
 };
 
 #endif // QTSPACE_SKYBOX_H
