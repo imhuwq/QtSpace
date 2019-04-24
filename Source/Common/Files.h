@@ -19,18 +19,9 @@ namespace Files {
     }
 }
 
-struct ModelFileType {
-	ModelFileType() = delete;
-
-	static std::string OBJ() {
-		const static std::string ext = ".obj";
-		return ext;
-	}
-
-	static std::string FBX() {
-		const static std::string ext = ".fbx";
-		return ext;
-	}
-};
+namespace ModelFileType {
+	static const std::string OBJ = ".obj";
+	static const std::string FBX = ".fbx";
+}
 
 #endif //QTSPACE_FILES_H
