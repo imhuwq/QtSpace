@@ -57,6 +57,8 @@ DEF_CLS(SceneAnimator);
 
 DEF_CLS(MeshInstanceRender);
 
+DEF_CLS(LightRender);
+
 DEF_CLS(SceneRender);
 
 DEF_CLS(MainLoop);

@@ -24,7 +24,7 @@ private:
 
     bool ImportModelFile();
 
-    void CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr &parent_node);
+    void CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr parent);
 
     NodePtr CollectFbxNodeData(FbxNode *fbx_node);
 

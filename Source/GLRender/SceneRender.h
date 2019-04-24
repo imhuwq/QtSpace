@@ -43,8 +43,6 @@ private:
 
     void PrepareMeshInstanceShader(QGLFunctionsPtr gl_functions);
 
-    void PrepareMaterials(const kMeshInstanceRenderPtr &render);
-
     void RenderMeshInstances(QGLFunctionsPtr gl_functions);
 };
 

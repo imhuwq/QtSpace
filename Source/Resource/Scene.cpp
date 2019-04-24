@@ -52,7 +52,7 @@ void Scene::InitLight() {
         return;
     }
 
-    NodePtr light_model = loader->Load(file_path)->nodes()[0]->nodes()[0];
+    NodePtr light_model = loader->Load(file_path)->nodes()[0];
     MeshInstancePtr light_instance = dynamic_pointer_cast<MeshInstance>(light_model);
     MaterialPtr light_material = light_instance->material();
     light_material->SetDiffuseColor(light_color[0], light_color[1], light_color[2]);
@@ -76,7 +76,7 @@ void Scene::InitSkyBox() {
 		return;
 	}
 
-	NodePtr box_model = loader->Load(file_path)->nodes()[0]->nodes()[0];
+	NodePtr box_model = loader->Load(file_path)->nodes()[0];
 	skybox_->SetBox(box_model);
 
 	CubemapPtr cubemap = Cubemap::CreateDefault();
