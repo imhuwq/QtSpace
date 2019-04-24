@@ -5,6 +5,7 @@
 #include "Common/TypeDef.h"
 #include "Resource/Scene.h"
 #include "GLRender/MainLoop.h"
+#include "LightRender.h"
 #include "MeshInstanceRender.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
@@ -16,16 +17,43 @@ public:
 
 private:
     kScenePtr scene_;
-    std::vector<MeshInstanceRenderPtr> mesh_instance_renders_;
+
     size_t vbo_size_;
     size_t ebo_size_;
-
-    QGLShaderPtr mesh_instance_shader_;
     QGLVAOPtr vao_;
     QGLVBOPtr vbo_;
     QGLVBOPtr ebo_;
+	QGLShaderPtr mi_shader_;
 	std::map<std::string, wQGLTexturePtr> textures_;
+	std::vector<MeshInstanceRenderPtr> mesh_instance_renders_;
+
+	size_t light_vbo_size_;
+	size_t light_ebo_size_;
+	QGLVAOPtr light_vao_;
+	QGLVBOPtr light_vbo_;
+	QGLVBOPtr light_ebo_;
+	QGLShaderPtr light_shader_;
+	LightRenderPtr light_render_;
+
 	std::map<std::string, wQGLTexturePtr> cubemaps_;
+
+	void CreateLightShader();
+
+	void CreateLightRender();
+
+	void CreateLightBuffer();
+
+	void PrepareLightShader(QGLFunctionsPtr gl_functions);
+
+	void PrepareLightBuffer(QGLFunctionsPtr gl_functions);
+
+	void RenderLight(QGLFunctionsPtr gl_functions);
+
+	void CreateSkyboxShader();
+
+	void CreateSkyboxRender();
+
+	void CreateSkyboxBuffer();
 
     void CreateMeshInstanceShader();
 
@@ -36,8 +64,6 @@ private:
     void CreateMeshInstanceBuffers();
 
     void CreateMeshInstanceTextures();
-
-	void CreateCubemaps();
 
     void PrepareMeshInstanceBuffers(QGLFunctionsPtr gl_functions);
 

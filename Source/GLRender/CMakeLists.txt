@@ -5,6 +5,8 @@ list(APPEND GLRENDER_SOURCES
         MainLoop.cpp
 		SceneAnimator.h
 		SceneAnimator.cpp
+		LightRender.h
+		LightRender.cpp
 		MeshInstanceRender.h
         MeshInstanceRender.cpp
         SceneRender.h

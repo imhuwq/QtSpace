@@ -63,7 +63,6 @@ void Scene::InitLight() {
     light_material->SetSpecularStrength(1.0f);
 
     light_->AddNode(light_model);
-    AddNode(light_);
 }
 
 void Scene::InitSkyBox() {
