@@ -8,61 +8,38 @@ Cubemap::Cubemap(const std::string& front_face,
 				 const std::string& up_face,
 				 const std::string& down_face,
 				 const std::string& left_face,
-				 const std::string& right_face): faces_(CubemapFace::kNumFace, "") {
-	faces_[CubemapFace::kFront] = front_face;
-	faces_[CubemapFace::kBack] = back_face;
-	faces_[CubemapFace::kUp] = up_face;
-	faces_[CubemapFace::kDown] = down_face;
-	faces_[CubemapFace::kLeft] = left_face;
-	faces_[CubemapFace::kRight] = right_face;
+				 const std::string& right_face){
+
+	front_ = make_shared<Texture>("front", front_face);
+	front_ = make_shared<Texture>("back", back_face);
+	front_ = make_shared<Texture>("left", left_face);
+	front_ = make_shared<Texture>("right", right_face);
+	front_ = make_shared<Texture>("up", up_face);
+	front_ = make_shared<Texture>("down", down_face);
 }
 
-string Cubemap::front_face_path() const { 
-	return faces_[CubemapFace::kFront]; 
+kTexturePtr Cubemap::front() const { 
+	return front_; 
 }
 
-void Cubemap::SetFrontFacePath(const std::string& path) {
-	faces_[CubemapFace::kFront] = path;
+kTexturePtr Cubemap::back() const {
+	return back_;
 }
 
-string Cubemap::back_face_path() const {
-	return faces_[CubemapFace::kBack];
+kTexturePtr Cubemap::up() const {
+	return up_;
 }
 
-void Cubemap::SetBackFacePath(const std::string& path) {
-	faces_[CubemapFace::kBack] = path;
+kTexturePtr Cubemap::down() const {
+	return down_;
 }
 
-string Cubemap::up_face_path() const {
-	return faces_[CubemapFace::kUp];
+kTexturePtr Cubemap::left() const {
+	return left_;
 }
 
-void Cubemap::SetUpFacePath(const std::string& path) {
-	faces_[CubemapFace::kUp] = path;
-}
-
-string Cubemap::down_face_path() const {
-	return faces_[CubemapFace::kDown];
-}
-
-void Cubemap::SetDownFacePath(const std::string& path) {
-	faces_[CubemapFace::kDown] = path;
-}
-
-string Cubemap::left_face_path() const {
-	return faces_[CubemapFace::kLeft];
-}
-
-void Cubemap::SetLeftFacePath(const std::string& path) {
-	faces_[CubemapFace::kLeft] = path;
-}
-
-string Cubemap::right_face_path() const {
-	return faces_[CubemapFace::kRight];
-}
-
-void Cubemap::SetRightFacePath(const std::string& path) {
-	faces_[CubemapFace::kRight] = path;
+kTexturePtr Cubemap::right() const {
+	return right_;
 }
 
 CubemapPtr Cubemap::CreateDefault() {

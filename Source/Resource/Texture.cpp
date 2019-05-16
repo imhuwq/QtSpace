@@ -12,7 +12,7 @@ string Texture::name() const { return name_; }
 
 string Texture::path() const { return path_; }
 
-kTexturePtr Texture::DEFAULT_TEXTURE() {
+kTexturePtr Texture::Create_Default() {
     if (!default_texture_) default_texture_ = make_shared<Texture>("default_texture", Files::DefaultTexturePath);
     return default_texture_;
 }

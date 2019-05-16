@@ -9,9 +9,8 @@ LightRender::LightRender(kNodePtr node,
                          QGLShaderPtr shader) :
         node_(node),
         index_buffer_size_(index_buffer_size),
-        transformation_(transformation) {
-    shader_ = shader;
-}
+        transformation_(transformation),
+	    shader_(shader) {}
 
 kNodePtr LightRender::node() const { return node_; }
 

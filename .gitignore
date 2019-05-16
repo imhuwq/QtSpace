@@ -4,3 +4,4 @@ play.py
 File/Model
 copy_files.sh
 cmake-build-debug
+cmake-build-debug-visual-studio

@@ -9,12 +9,11 @@ MeshInstanceRender::MeshInstanceRender(kNodePtr node,
                                        const QMatrix4x4 &transformation,
                                        QGLShaderPtr shader) :
         node_(node),
-        transformation_(transformation),
+	    transformation_(transformation),
         index_buffer_size_(index_buffer_size),
         vertex_buffer_offset_(vertex_buffer_offset),
-        index_buffer_offset_(index_buffer_offset) {
-    shader_ = shader;
-}
+        index_buffer_offset_(index_buffer_offset),
+	    shader_(shader) {}
 
 kNodePtr MeshInstanceRender::node() const { return node_; }
 

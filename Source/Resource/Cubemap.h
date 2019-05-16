@@ -14,34 +14,27 @@ public:
 			const std::string& left_face,
 			const std::string& right_face);
 
-	std::string front_face_path() const;
+	kTexturePtr front() const;
 
-	void SetFrontFacePath(const std::string& path);
+	kTexturePtr back() const;
 
-	std::string back_face_path() const;
+	kTexturePtr up() const;
 
-	void SetBackFacePath(const std::string& path);
+	kTexturePtr down() const;
 
-	std::string up_face_path() const;
+	kTexturePtr left() const;
 
-	void SetUpFacePath(const std::string& path);
-
-	std::string down_face_path() const;
-
-	void SetDownFacePath(const std::string& path);
-
-	std::string left_face_path() const;
-
-	void SetLeftFacePath(const std::string& path);
-
-	std::string right_face_path() const;
-
-	void SetRightFacePath(const std::string& path);
+	kTexturePtr right() const;
 
 	static CubemapPtr CreateDefault();
 
 private:
-	std::vector<std::string> faces_;
+	kTexturePtr front_;
+	kTexturePtr back_;
+	kTexturePtr left_;
+	kTexturePtr right_;
+	kTexturePtr up_;
+	kTexturePtr down_;
 };
 
 #endif //QTSPACE_CUBEMAP_H

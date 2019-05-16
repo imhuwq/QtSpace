@@ -13,6 +13,8 @@ class Material : public Resource {
 public:
     Material(const std::string &name);
 
+	static MaterialPtr CreateDefault();
+
 	std::string name();
 
     kTexturePtr ambient_texture() const;
@@ -56,8 +58,6 @@ public:
     void SetShininess(float shininess);
 
 	std::vector<kTexturePtr> textures() const;
-
-    static MaterialPtr CreateDefault();
 
 private:
 	std::string name_;

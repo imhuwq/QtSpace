@@ -14,7 +14,7 @@ public:
 
 	std::string path() const;
 
-    static kTexturePtr DEFAULT_TEXTURE();
+    static kTexturePtr Create_Default();
 
 private:
 	std::string name_;

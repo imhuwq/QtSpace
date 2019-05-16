@@ -42,38 +42,6 @@ DEF_PTR_ALIAS(QOpenGLFunctions, QGLFunctions);
 DEF_PTR_ALIAS(QOpenGLShaderProgram, QGLShader);
 DEF_PTR_ALIAS(QOpenGLVertexArrayObject, QGLVAO);
 
-// Application
-DEF_CLS(Application);
-
-DEF_CLS(MainWindow);
-
-// Control
-DEF_CLS(State);
-
-DEF_CLS(Controller);
-
-// GLRender
-DEF_CLS(SceneAnimator);
-
-DEF_CLS(MeshInstanceRender);
-
-DEF_CLS(LightRender);
-
-DEF_CLS(SceneRender);
-
-DEF_CLS(MainLoop);
-
-// IO
-DEF_CLS(FbxFileLoader);
-
-DEF_CLS(ModelFileLoader);
-
-DEF_CLS(VertexContext);
-
-DEF_CLS(VertexPack);
-
-DEF_CLS(VertexTable);
-
 // Resource
 DEF_CLS(Material);
 
@@ -106,5 +74,39 @@ DEF_CLS(SpotLight);
 DEF_CLS(Cubemap);
 
 DEF_CLS(SkyBox);
+
+// Application
+DEF_CLS(Application);
+
+DEF_CLS(MainWindow);
+
+// Control
+DEF_CLS(State);
+
+DEF_CLS(Controller);
+
+// IO
+DEF_CLS(FbxFileLoader);
+
+DEF_CLS(ModelFileLoader);
+
+DEF_CLS(VertexContext);
+
+DEF_CLS(VertexPack);
+
+DEF_CLS(VertexTable);
+
+// GLRender
+DEF_CLS(SceneAnimator);
+
+DEF_CLS(MeshInstanceRender);
+
+DEF_CLS(LightRender);
+
+DEF_CLS(SkyBoxRender);
+
+DEF_CLS(SceneRender);
+
+DEF_CLS(MainLoop);
 
 #endif // QTSPACE_TYPEDEF_H

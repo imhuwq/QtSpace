@@ -10,8 +10,6 @@ class SkyBox : public Resource {
 public:
     SkyBox();
 
-    SkyBoxPtr CreateDefault();
-
     kNodePtr box() const;
 
     NodePtr box();

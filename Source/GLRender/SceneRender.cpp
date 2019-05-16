@@ -14,13 +14,14 @@ SceneRender::SceneRender(kScenePtr scene) : scene_(scene),
     CreateLightRender();
     CreateLightBuffer();
 
-    // Init Skybox Render
-    CreateSkyboxShader();
-    CreateSkyboxRender();
-    CreateSkyboxBuffer();
+	// Init Skybox Render
+	CreateSkyboxShaders();
+	CreateSkyboxRender();
+	CreateSkyboxBuffer();
+	CreateSkyboxTextures();
 
     // Init MeshInstance Renders
-    CreateMeshInstanceShader();
+    CreateMeshInstanceShaders();
     CreateMeshInstanceRenders();
     CreateMeshInstanceBuffers();
     CreateMeshInstanceTextures();
@@ -38,7 +39,7 @@ void SceneRender::CreateLightRender() {
     light_ebo_size_ = 0;
     map<string, size_t> mesh_buffer_size;
 
-    kNodePtr node = scene_->light()->nodes()[0];
+    kNodePtr node = scene_->light_->nodes()[0];
 
     QMatrix4x4 transform = scene_->light()->transformation();
     transform = transform * node->transformation();
@@ -98,13 +99,103 @@ void SceneRender::RenderLight(QGLFunctionsPtr gl_functions) {
     light_render_->Render(gl_functions);
 }
 
-void SceneRender::CreateSkyboxShader() {}
+void SceneRender::CreateSkyboxShaders() {
+	skybox_shader_ = make_shared<QOpenGLShaderProgram>();
+	skybox_shader_->addShaderFromSourceFile(QOpenGLShader::Vertex, QString(Files::DefaultSkyboxVertexShader.c_str()));
+	skybox_shader_->addShaderFromSourceFile(QOpenGLShader::Fragment, QString(Files::DefaultSkyboxFragmentShader.c_str()));
+	skybox_shader_->link();
+}
 
-void SceneRender::CreateSkyboxRender() {}
+void SceneRender::CreateSkyboxRender() {
+	skybox_vbo_size_ = 0;
+	skybox_ebo_size_ = 0;
+    map<string, size_t> mesh_buffer_size;
 
-void SceneRender::CreateSkyboxBuffer() {}
+    kNodePtr node = scene_->skybox_->box();
+    kMeshInstancePtr mesh_instance = dynamic_pointer_cast<const MeshInstance>(node);
+    kMeshPtr mesh = mesh_instance->mesh();
+	skybox_vbo_size_ = mesh->vertex_buffer_size();
+	skybox_ebo_size_ = mesh_instance->indices_size();
+	skybox_render_ = make_shared<SkyBoxRender>(node, skybox_ebo_size_, skybox_shader_);
+}
 
-void SceneRender::CreateMeshInstanceShader() {
+void SceneRender::CreateSkyboxBuffer() {
+	skybox_vao_->create();
+	skybox_vbo_->create();
+	skybox_ebo_->create();
+	skybox_vbo_->setUsagePattern(QOpenGLBuffer::StaticDraw);
+	skybox_ebo_->setUsagePattern(QOpenGLBuffer::StaticDraw);
+
+	kMeshInstancePtr mesh_instance = dynamic_pointer_cast<const MeshInstance>(skybox_render_->node());
+	kMeshPtr mesh = mesh_instance->mesh();
+	const vector<float> &mesh_vertex_buffer = mesh->vertex_buffer();
+	const vector<unsigned int> &mesh_index_buffer = mesh_instance->indices();
+
+	skybox_vao_->bind();
+	skybox_vbo_->bind();
+	skybox_vbo_->allocate(mesh_vertex_buffer.data(), (int)skybox_vbo_size_ * sizeof(float));
+	skybox_ebo_->bind();
+	skybox_ebo_->allocate(mesh_index_buffer.data(), (int)skybox_ebo_size_ * sizeof(unsigned int));
+}
+
+void SceneRender::CreateSkyboxTextures() {
+	kTexturePtr texture;
+	map<string, QGLTexturePtr> textures;
+	kCubemapPtr cubemap = scene_->skybox_->cubemap();
+
+	for (int location = 0; location < CubemapLocation::kNumCubemapLocation; location++) {
+		switch (location) {
+		case CubemapLocation::kFront:
+			texture = cubemap->front();
+			break;
+		case CubemapLocation::kBack:
+			texture = cubemap->back();
+			break;
+		case CubemapLocation::kLeft:
+			texture = cubemap->left();
+			break;
+		case CubemapLocation::kRight:
+			texture = cubemap->right();
+			break;
+		case CubemapLocation::kUp:
+			texture = cubemap->up();
+			break;
+		case CubemapLocation::kDown:
+			texture = cubemap->down();
+			break;
+		}
+
+		QGLTexturePtr gl_texture = make_shared<QOpenGLTexture>(QImage(texture->path().c_str()).mirrored());
+		gl_texture->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
+		gl_texture->setMagnificationFilter(QOpenGLTexture::Linear);
+		gl_texture->setWrapMode(QOpenGLTexture::DirectionS, QOpenGLTexture::ClampToEdge);
+		gl_texture->setWrapMode(QOpenGLTexture::DirectionT, QOpenGLTexture::ClampToEdge);
+		gl_texture->setWrapMode(QOpenGLTexture::DirectionR, QOpenGLTexture::ClampToEdge);
+		textures[texture->uuid()] = gl_texture;
+		skybox_render_->AddTexture(texture->uuid(), gl_texture);
+	}
+
+	for (auto &pair : textures) textures_[pair.first] = pair.second;
+}
+
+void SceneRender::PrepareSkyboxShader(QGLFunctionsPtr gl_functions) {
+	skybox_shader_->bind();
+	skybox_shader_->setUniformValue("u_vp_matrix", scene_->projection() * scene_->camera()->transformation() * scene_->transformation());
+}
+
+void SceneRender::PrepareSkyboxBuffer(QGLFunctionsPtr gl_functions) {
+	skybox_vao_->bind();
+	skybox_vbo_->bind();
+	skybox_ebo_->bind();
+}
+
+void SceneRender::RenderSkybox(QGLFunctionsPtr gl_functions) {
+	PrepareSkyboxShader(gl_functions);
+	PrepareSkyboxBuffer(gl_functions);
+	skybox_render_->Render(gl_functions);
+}
+
+void SceneRender::CreateMeshInstanceShaders() {
     mi_shader_ = make_shared<QOpenGLShaderProgram>();
     mi_shader_->addShaderFromSourceFile(QOpenGLShader::Vertex, QString(Files::DefaultVertexShader.c_str()));
     mi_shader_->addShaderFromSourceFile(QOpenGLShader::Fragment, QString(Files::DefaultFragmentShader.c_str()));
@@ -237,5 +328,6 @@ void SceneRender::RenderMeshInstances(QGLFunctionsPtr gl_functions) {
 void SceneRender::Render(kStatePtr state, QGLFunctionsPtr gl_functions) {
     gl_functions->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     RenderLight(gl_functions);
+	RenderSkybox(gl_functions);
     RenderMeshInstances(gl_functions);
 }

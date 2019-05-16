@@ -6,6 +6,7 @@
 #include "Resource/Scene.h"
 #include "GLRender/MainLoop.h"
 #include "LightRender.h"
+#include "SkyboxRender.h"
 #include "MeshInstanceRender.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
@@ -35,6 +36,14 @@ private:
     QGLShaderPtr light_shader_;
     LightRenderPtr light_render_;
 
+	size_t skybox_vbo_size_;
+	size_t skybox_ebo_size_;
+	QGLVAOPtr skybox_vao_;
+	QGLVBOPtr skybox_vbo_;
+	QGLVBOPtr skybox_ebo_;
+	QGLShaderPtr skybox_shader_;
+	SkyBoxRenderPtr skybox_render_;
+
     std::map<std::string, wQGLTexturePtr> cubemaps_;
 
     void CreateLightShader();
@@ -49,13 +58,21 @@ private:
 
     void RenderLight(QGLFunctionsPtr gl_functions);
 
-    void CreateSkyboxShader();
+	void CreateSkyboxShaders();
 
-    void CreateSkyboxRender();
+	void CreateSkyboxRender();
 
-    void CreateSkyboxBuffer();
+	void CreateSkyboxBuffer();
 
-    void CreateMeshInstanceShader();
+	void CreateSkyboxTextures();
+
+	void PrepareSkyboxShader(QGLFunctionsPtr gl_functions);
+
+	void PrepareSkyboxBuffer(QGLFunctionsPtr gl_functions);
+
+	void RenderSkybox(QGLFunctionsPtr gl_functions);
+
+    void CreateMeshInstanceShaders();
 
     void CreateMeshInstanceRenders(kNodePtr node, std::map<std::string, size_t> &mesh_buffer_size, QMatrix4x4 transformation);
 

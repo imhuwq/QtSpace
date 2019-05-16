@@ -11,10 +11,14 @@ Material::Material(const string &name) : name_(name),
                                          specular_color_(3, 1.0f),
                                          specular_strength_(0.5f),
                                          shininess_(32.0f) {
-    kTexturePtr default_texture = Texture::DEFAULT_TEXTURE();
+    kTexturePtr default_texture = Texture::Create_Default();
     ambient_texture_ = default_texture;
     diffuse_texture_ = default_texture;
     specular_texture_ = default_texture;
+}
+
+MaterialPtr Material::CreateDefault() {
+	return make_shared<Material>("default_material");
 }
 
 string Material::name() { return name_; }
@@ -61,6 +65,3 @@ void Material::SetShininess(float shininess) { shininess_ = shininess; }
 
 vector<kTexturePtr> Material::textures() const { return {ambient_texture_, diffuse_texture_, specular_texture_}; }
 
-MaterialPtr Material::CreateDefault() {
-    return make_shared<Material>("default_material");
-}

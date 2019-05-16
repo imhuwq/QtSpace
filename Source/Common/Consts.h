@@ -67,6 +67,18 @@ namespace TextureUnitLocation {
     };
 }
 
+namespace CubemapLocation {
+	enum Location {
+		kFront = 0,
+		kBack = 1,
+		kLeft = 2,
+		kRight = 3,
+		kUp = 4,
+		kDown = 5,
+		kNumCubemapLocation
+	};
+}
+
 namespace NodeType {
     enum Type {
         kGeneral = 0,
