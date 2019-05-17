@@ -195,12 +195,21 @@ void SceneRender::CreateSkyboxTexture() {
 }
 
 void SceneRender::PrepareSkyboxShader(QGLFunctionsPtr gl_functions) {
+    static QMatrix4x4 initial_projection;
+    static bool projection_inited = false;
+
+    if (!projection_inited) {
+        initial_projection = scene_->projection();
+        projection_inited = true;
+    }
+
     skybox_shader_->bind();
     QMatrix4x4 view_matrix = scene_->camera()->transformation();
     QVector4D identity_vec4(0, 0, 0, 1);
     view_matrix.setRow(3, identity_vec4);
     view_matrix.setColumn(3, identity_vec4);
-    skybox_shader_->setUniformValue("u_vp_matrix", scene_->projection() * view_matrix);
+
+    skybox_shader_->setUniformValue("u_vp_matrix", initial_projection * view_matrix);
     skybox_shader_->setUniformValue("u_model_matrix", skybox_render_->node()->transformation());
 }
 
