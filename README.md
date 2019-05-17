@@ -12,7 +12,7 @@
  - [x] 基于 FBX 的模型加载
  - [x] 基本光照和材质(Phong Shading)
  - [x] 画出光源
- - [ ] 支持 cubemap
+ - [x] 支持 cubemap
  - [ ] 支持多光源
  - [ ] 使用 PBR 代替 Phong
  
