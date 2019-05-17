@@ -32,8 +32,8 @@ SceneRender::SceneRender(kScenePtr scene) : scene_(scene),
 
 void SceneRender::CreateLightShader() {
     light_shader_ = make_shared<QOpenGLShaderProgram>();
-    light_shader_->addShaderFromSourceFile(QOpenGLShader::Vertex, QString(Files::DefaultLightVertexShader.c_str()));
-    light_shader_->addShaderFromSourceFile(QOpenGLShader::Fragment, QString(Files::DefaultLightFragmentShader.c_str()));
+    light_shader_->addShaderFromSourceFile(QOpenGLShader::Vertex, QString(Files::LightVertexShader.c_str()));
+    light_shader_->addShaderFromSourceFile(QOpenGLShader::Fragment, QString(Files::LightFragmentShader.c_str()));
     light_shader_->link();
 }
 
@@ -104,8 +104,8 @@ void SceneRender::RenderLight(QGLFunctionsPtr gl_functions) {
 
 void SceneRender::CreateSkyboxShaders() {
     skybox_shader_ = make_shared<QOpenGLShaderProgram>();
-    skybox_shader_->addShaderFromSourceFile(QOpenGLShader::Vertex, QString(Files::DefaultSkyboxVertexShader.c_str()));
-    skybox_shader_->addShaderFromSourceFile(QOpenGLShader::Fragment, QString(Files::DefaultSkyboxFragmentShader.c_str()));
+    skybox_shader_->addShaderFromSourceFile(QOpenGLShader::Vertex, QString(Files::SkyboxVertexShader.c_str()));
+    skybox_shader_->addShaderFromSourceFile(QOpenGLShader::Fragment, QString(Files::SkyboxFragmentShader.c_str()));
     skybox_shader_->link();
 }
 
@@ -218,8 +218,8 @@ void SceneRender::RenderSkybox(QGLFunctionsPtr gl_functions) {
 
 void SceneRender::CreateMeshInstanceShaders() {
     mi_shader_ = make_shared<QOpenGLShaderProgram>();
-    mi_shader_->addShaderFromSourceFile(QOpenGLShader::Vertex, QString(Files::DefaultVertexShader.c_str()));
-    mi_shader_->addShaderFromSourceFile(QOpenGLShader::Fragment, QString(Files::DefaultFragmentShader.c_str()));
+    mi_shader_->addShaderFromSourceFile(QOpenGLShader::Vertex, QString(Files::ObjectVertexShader.c_str()));
+    mi_shader_->addShaderFromSourceFile(QOpenGLShader::Fragment, QString(Files::ObjectFragmentShader.c_str()));
     mi_shader_->link();
 }
 

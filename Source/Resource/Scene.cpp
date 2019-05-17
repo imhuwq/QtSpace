@@ -33,7 +33,7 @@ void Scene::LoadModelFile(const string &file_path) {
 }
 
 void Scene::LoadDefaultModelFile() {
-    LoadModelFile(Files::DefaultCubeModel);
+    LoadModelFile(Files::CubeModel);
 }
 
 void Scene::InitCamera() { camera_ = make_shared<Camera>("camera"); }
@@ -45,7 +45,7 @@ void Scene::InitLight() {
     vector<float> light_color = {255 / 255.0f, 183 / 255.0f, 130 / 255.0f};
     light_->SetColor(light_color[0], light_color[1], light_color[2]);
 
-    string file_path = Files::DefaultSphereModel;
+    string file_path = Files::SphereModel;
     ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
     if (!loader) {
         cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;
@@ -68,7 +68,7 @@ void Scene::InitLight() {
 void Scene::InitSkyBox() {
     skybox_ = make_shared<SkyBox>();
 
-    string file_path = Files::DefaultCubeModel;
+    string file_path = Files::CubeModel;
     ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
     if (!loader) {
         cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;

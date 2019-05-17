@@ -42,10 +42,10 @@ kTexturePtr Cubemap::right() const {
 }
 
 CubemapPtr Cubemap::CreateDefault() {
-    return make_shared<Cubemap>(Files::DefaultCubemapFront,
-                                Files::DefaultCubemapBack,
-                                Files::DefaultCubemapUp,
-                                Files::DefaultCubemapDown,
-                                Files::DefaultCubemapLeft,
-                                Files::DefaultCubemapRight);
+    return make_shared<Cubemap>(Files::CubemapFront,
+                                Files::CubemapBack,
+                                Files::CubemapUp,
+                                Files::CubemapDown,
+                                Files::CubemapLeft,
+                                Files::CubemapRight);
 }
