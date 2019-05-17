@@ -1,5 +1,7 @@
 #include "Node.h"
 
+using namespace std;
+
 Node::Node(const string &name,
            NodeType::Type node_type) : name_(name),
                                        node_type_(node_type),

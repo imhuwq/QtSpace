@@ -1,5 +1,7 @@
 #include "Mesh.h"
 
+using namespace std;
+
 Mesh::Mesh(vector<float> &vertex_buffer,
            kVertexSemanticPtr &vertex_semantic) : vertex_semantic_(vertex_semantic) {
     vertex_buffer_ = std::move(vertex_buffer);

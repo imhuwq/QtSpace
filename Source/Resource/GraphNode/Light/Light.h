@@ -9,11 +9,11 @@
 
 class Light : public Node {
 public:
-    Light(const string &name, LightType::Type light_type);
+    Light(const std::string &name, LightType::Type light_type);
 
     LightType::Type light_type() const;
 
-    vector<float> color() const;
+	std::vector<float> color() const;
 
     void SetColor(float r, float g, float b);
 
@@ -25,7 +25,7 @@ public:
 
 protected:
     LightType::Type light_type_;
-    vector<float> color_;
+	std::vector<float> color_;
     float strength_;
 };
 

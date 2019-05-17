@@ -10,7 +10,7 @@
 
 class Mesh : public Resource {
 public:
-    Mesh(vector<float> &vertex_buffer,
+    Mesh(std::vector<float> &vertex_buffer,
          kVertexSemanticPtr &vertex_semantic);
 
     size_t vertex_size() const;
@@ -27,12 +27,12 @@ public:
 
     size_t vertex_buffer_size() const;
 
-    const vector<float> &vertex_buffer() const;
+    const std::vector<float> &vertex_buffer() const;
 
 private:
     size_t num_vertices_;
     kVertexSemanticPtr vertex_semantic_;
-    vector<float> vertex_buffer_;
+	std::vector<float> vertex_buffer_;
 };
 
 #endif //QTSPACE_MESH_H

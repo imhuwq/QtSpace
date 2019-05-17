@@ -4,6 +4,7 @@
 #include <QTime>
 #include <QMatrix4x4>
 
+#include "SkyBox.h"
 #include "Common/TypeDef.h"
 #include "GraphNode/Camera.h"
 #include "Control/Controller.h"
@@ -17,7 +18,7 @@ class Scene : public Resource {
 public:
     Scene();
 
-    void LoadModelFile(const string &file_path);
+    void LoadModelFile(const std::string &file_path);
 
     void LoadDefaultModelFile();
 
@@ -25,13 +26,15 @@ public:
 
     void InitLight();
 
+    void InitSkyBox();
+
     QMatrix4x4 transformation() const;
 
     QMatrix4x4 projection() const;
 
-    vector<kNodePtr> nodes() const;
+    std::vector<kNodePtr> nodes() const;
 
-    vector<NodePtr> nodes();
+    std::vector<NodePtr> nodes();
 
     void AddNode(NodePtr node);
 
@@ -46,11 +49,12 @@ private:
     CameraPtr camera_;
     QMatrix4x4 projection_;
     LightPtr light_;
+    SkyBoxPtr skybox_;
 
-    vector<NodePtr> nodes_;
-    map<string, wkMeshPtr> meshes_;
-    map<string, wkMaterialPtr> materials_;
-    map<string, wkTexturePtr> textures_;
+    std::vector<NodePtr> nodes_;
+    std::map<std::string, wkMeshPtr> meshes_;
+    std::map<std::string, wkMaterialPtr> materials_;
+    std::map<std::string, wkTexturePtr> textures_;
 };
 
 #endif //QTSPACE_SCENE_H

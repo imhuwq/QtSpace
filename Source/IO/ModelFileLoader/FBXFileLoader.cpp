@@ -8,6 +8,8 @@
 #include "Resource/Scene.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
+using namespace std;
+
 FBXFileLoader::FBXFileLoader() : root_node_(nullptr),
                                  fbx_manager_(nullptr),
                                  fbx_scene_(nullptr),
@@ -200,7 +202,7 @@ void CollectVertexTangent1(VertexPackPtr &pack, FbxMesh *fbx_mesh, const VertexC
     if (found) { pack->tangent1 = {(float) tangent[0], (float) tangent[1], (float) tangent[2]}; }
 }
 
-void FBXFileLoader::CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr &parent_node) {
+void FBXFileLoader::CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr parent) {
     string fbx_node_name = fbx_node->GetName();
 
     auto *fbx_mesh = (FbxMesh *) fbx_node->GetNodeAttribute();
@@ -216,7 +218,7 @@ void FBXFileLoader::CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr &paren
     context.vertex_id = 0;
 
     VertexTable table(context.controlpoint_count);
-    map<string, vector<unsigned int>> mesh_instances;
+    map<string, vector<unsigned int>> instances;
 
     for (int t_idx = 0; t_idx < fbx_mesh->GetPolygonCount(); t_idx++) {
         context.triangle_index = t_idx;
@@ -249,10 +251,10 @@ void FBXFileLoader::CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr &paren
                 FbxSurfaceMaterial *fbx_material = fbx_mesh->GetNode()->GetMaterial(material_id);
                 material_name = fbx_material->GetName();
             }
-            for (size_t i = 0; i < 3; i++) mesh_instances[material_name].push_back(context.triangle_buffer_indices[i]);
+            for (size_t i = 0; i < 3; i++) instances[material_name].push_back(context.triangle_buffer_indices[i]);
         } else {
             string material_name = fbx_mesh->GetNode()->GetName();
-            for (size_t i = 0; i < 3; i++) mesh_instances[material_name].push_back(context.triangle_buffer_indices[i]);
+            for (size_t i = 0; i < 3; i++) instances[material_name].push_back(context.triangle_buffer_indices[i]);
         }
     }
 
@@ -262,10 +264,10 @@ void FBXFileLoader::CollectFbxMeshInstanceData(FbxNode *fbx_node, NodePtr &paren
     kVertexSemanticPtr semantic = table.Flatten(buffer);
     MeshPtr mesh = make_shared<Mesh>(buffer, semantic);
 
-    for (auto &mesh_instance:mesh_instances) {
-        string name = fbx_node_name + "_" + mesh_instance.first;
-        MeshInstancePtr node = make_shared<MeshInstance>(name, mesh, nullptr, mesh_instance.second);
-        parent_node->AddNode(node);
+    for (auto &pair: instances) {
+        string name = fbx_node_name + "_" + pair.first;
+        MeshInstancePtr node = make_shared<MeshInstance>(name, mesh, nullptr, pair.second);
+		parent->AddNode(node);
     }
 }
 
@@ -276,18 +278,30 @@ NodePtr FBXFileLoader::CollectFbxNodeData(FbxNode *fbx_node) {
     FbxVector4 local_rotation = fbx_node->GetGeometricRotation(FbxNode::eSourcePivot);
     FbxVector4 local_scale = fbx_node->GetGeometricScaling(FbxNode::eSourcePivot);
     NodePtr node = make_shared<Node>(node_name);
-    node->Translate((float) local_position[0], (float) local_position[1], (float) local_position[2]);
-    node->Rotate((float) local_rotation[0], (float) local_rotation[1], (float) local_rotation[2]);
-    node->Scale((float) local_scale[0], (float) local_scale[1], (float) local_scale[2]);
-    node->ComputeTransformation();
 
-    if (IsMeshNode(fbx_node)) CollectFbxMeshInstanceData(fbx_node, node);
+	if (IsMeshNode(fbx_node)) {
+		vector<MeshInstancePtr> mesh_instances;
+		CollectFbxMeshInstanceData(fbx_node, node);
+		for (auto &child : node->nodes()) {
+			child->Translate((float)local_position[0], (float)local_position[1], (float)local_position[2]);
+			child->Rotate((float)local_rotation[0], (float)local_rotation[1], (float)local_rotation[2]);
+			child->Scale((float)local_scale[0], (float)local_scale[1], (float)local_scale[2]);
+			child->ComputeTransformation();
+		}
+	}
+	else {
+		node->Translate((float)local_position[0], (float)local_position[1], (float)local_position[2]);
+		node->Rotate((float)local_rotation[0], (float)local_rotation[1], (float)local_rotation[2]);
+		node->Scale((float)local_scale[0], (float)local_scale[1], (float)local_scale[2]);
+		node->ComputeTransformation();
+	}
     return node;
 }
 
 void FBXFileLoader::WalkFbxNodeTree(FbxNode *fbx_node, NodePtr &parent_node) {
     NodePtr node = CollectFbxNodeData(fbx_node);
-    parent_node->AddNode(node);
+	if (! IsMeshNode(fbx_node)) parent_node->AddNode(node);
+	else for (const auto& child : node->nodes()) parent_node->AddNode(child);
 
     for (int index = 0; index < fbx_node->GetChildCount(); index++) {
         FbxNode *fbx_child_node = fbx_node->GetChild(index);

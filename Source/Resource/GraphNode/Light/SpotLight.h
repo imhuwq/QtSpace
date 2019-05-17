@@ -6,7 +6,7 @@
 
 class SpotLight : public Light {
 public:
-    SpotLight(const string &name, float angle, float distance);
+    SpotLight(const std::string &name, float angle, float distance);
 
     float angle() const;
 

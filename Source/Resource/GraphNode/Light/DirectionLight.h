@@ -6,7 +6,7 @@
 
 class DirectionLight : public Light {
 public:
-    DirectionLight(const string &name);
+    DirectionLight(const std::string &name);
 };
 
 #endif //QTSPACE_DIRECTIONLIGHT_H

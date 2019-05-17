@@ -3,6 +3,8 @@
 #include "Camera.h"
 #include "Common/Consts.h"
 
+using namespace std;
+
 Camera::Camera(const string &name, const QVector3D &target) : Node(name, NodeType::kCamera),
                                                               target_(target),
                                                               fov_(25.0f) {
@@ -19,10 +21,7 @@ float Camera::fov() const { return fov_; }
 
 QVector3D Camera::target() const { return target_; }
 
-void Camera::Translate(float x, float y, float z) { Node::Translate(-x, -y, z); }
-
 void Camera::ComputeTransformation() {
-    TranslateTo(translation_);
     transformation_.setToIdentity();
     transformation_.lookAt(translation_, target_, up_);
     dirty_ = false;

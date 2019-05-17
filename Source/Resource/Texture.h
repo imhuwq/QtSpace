@@ -8,17 +8,17 @@
 
 class Texture : public Resource {
 public:
-    Texture(const string &name, const string &path);
+    Texture(const std::string &name, const std::string &path);
 
-    string name() const;
+	std::string name() const;
 
-    string path() const;
+	std::string path() const;
 
-    static kTexturePtr DEFAULT_TEXTURE();
+    static kTexturePtr Create_Default();
 
 private:
-    string name_;
-    string path_;
+	std::string name_;
+	std::string path_;
     static kTexturePtr default_texture_;
 };
 

@@ -1,17 +1,11 @@
 #ifndef QTSPACE_CONTROLLER_H
 #define QTSPACE_CONTROLLER_H
 
-#include <string>
-#include <vector>
-#include <memory>
-
 #include <QTimer>
 #include <QDebug>
 #include <QKeyEvent>
 
 #include "State.h"
-
-using namespace std;
 
 class Controller : QObject {
 Q_OBJECT

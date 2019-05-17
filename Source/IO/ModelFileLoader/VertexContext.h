@@ -5,8 +5,6 @@
 #include <fbxsdk.h>
 #include "Common/TypeDef.h"
 
-using namespace std;
-
 class VertexContext {
 public:
 	size_t triangle_count = 0;
@@ -15,8 +13,8 @@ public:
 	size_t vertex_triangle_index = 0;
 	size_t vertex_index = 0;
 	size_t vertex_id = 0;
-	size_t buffer_index = 0;  // ×îÖÕ±»¼ÓÈë indices buffer µÄÖµ
-	vector<size_t> triangle_buffer_indices = {};  // Ò»¸öÈý½ÇÐÎµÄÈý¸ö buffer index
+	size_t buffer_index = 0;  // æœ€ç»ˆè¢«åŠ å…¥ indices buffer çš„å€¼
+	std::vector<size_t> triangle_buffer_indices = {};  // ä¸€ä¸ªä¸‰è§’å½¢çš„ä¸‰ä¸ª buffer index
 	FbxAMatrix position_offset_matrix;
 };
 

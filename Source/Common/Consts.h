@@ -20,69 +20,96 @@ namespace Vector3D {
 };
 
 namespace VertexPropertyType {
-	enum Type {
-		kGeneral = 0,
-		kPosition,
-		kNormal,
-		kUV0,
-		kUV1,
-		kColors,
-		kTangent0,
-		kTangent1,
-		kNumPropertyType
-	};
+    enum Type {
+        kGeneral = 0,
+        kPosition,
+        kNormal,
+        kUV0,
+        kUV1,
+        kColors,
+        kTangent0,
+        kTangent1,
+        kNumType
+    };
 }
 
 namespace VertexPropertySize {
-	enum Size {
-		kGeneral = 0,
-		kPosition = 3,
-		kNormal = 3,
-		kUV0 = 2,
-		kUV1 = 2,
-		kColor = 4,
-		kTangent0 = 3,
-		kTangent1 = 3,
-		kNumPropertyTyp
-	};
+    enum Size {
+        kGeneral = 0,
+        kPosition = 3,
+        kNormal = 3,
+        kUV0 = 2,
+        kUV1 = 2,
+        kColor = 4,
+        kTangent0 = 3,
+        kTangent1 = 3,
+        kNumSize
+    };
 }
 
 namespace VertexAttributeLocation {
-	enum Location {
-		kPosition = 0,
-		kNormal = 1,
-		kUV0 = 2,
-		kUV1 = 3,
-		kColor = 4
-	};
+    enum Location {
+        kPosition = 0,
+        kNormal = 1,
+        kUV0 = 2,
+        kUV1 = 3,
+        kColor = 4,
+        kNumLocation
+    };
 }
 
 namespace TextureUnitLocation {
+    enum Location {
+        kAmbient = 0,
+        kDiffuse = 1,
+        kSpecular = 2,
+        kCubemap = 3,
+        kNumLocation
+    };
+}
+
+namespace CubemapLocation {
 	enum Location {
-		kAmbient = 0,
-		kDiffuse = 1,
-		kSpecular = 2
+		kFront = 0,
+		kBack = 1,
+		kLeft = 2,
+		kRight = 3,
+		kUp = 4,
+		kDown = 5,
+		kNumCubemapLocation
 	};
 }
 
 namespace NodeType {
-	enum Type {
-		kGeneral = 0,
-		kCamera,
-		kLight,
-		kMeshInstance,
-		kNumGraphNodeType
-	};
+    enum Type {
+        kGeneral = 0,
+        kCamera,
+        kLight,
+        kMeshInstance,
+        kNumType
+    };
 }
 
 namespace LightType {
-	enum Type {
-		kGeneralLight = 0,
-		kDotLight,
-		kSpotLight,
-		kDirectionLight,
-		kNumLightType
-	};
+    enum Type {
+        kGeneralLight = 0,
+        kDotLight,
+        kSpotLight,
+        kDirectionLight,
+        kNumType
+    };
+}
+
+namespace CubemapFace {
+    enum Face {
+        kRight = 0,
+        kLeft = 1,
+        kUp = 2,
+        kDown = 3,
+        kBack = 4,
+        kFront = 5,
+        kNumFace
+    };
 }
 
 #endif //QTSPACE_CONSTS_H

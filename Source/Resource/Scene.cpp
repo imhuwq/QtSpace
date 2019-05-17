@@ -11,11 +11,14 @@
 #include "GraphNode/Light/DirectionLight.h"
 #include "IO/ModelFileLoader/ModelFileLoader.h"
 
+using namespace std;
+
 Scene::Scene() {
     transform_.setToIdentity();
     projection_.setToIdentity();
     InitCamera();
     InitLight();
+    InitSkyBox();
 }
 
 void Scene::LoadModelFile(const string &file_path) {
@@ -30,7 +33,7 @@ void Scene::LoadModelFile(const string &file_path) {
 }
 
 void Scene::LoadDefaultModelFile() {
-    LoadModelFile(Files::DefaultCubeModel);
+    LoadModelFile(Files::CubeModel);
 }
 
 void Scene::InitCamera() { camera_ = make_shared<Camera>("camera"); }
@@ -39,17 +42,17 @@ void Scene::InitLight() {
     light_ = make_shared<DirectionLight>("light");
     light_->TranslateTo(-2, 2, 2);
     light_->Scale(0.8, 0.8, 0.8);
-    vector<float> light_color = {255/255.0f, 183/255.0f, 130/255.0f};
+    vector<float> light_color = {255 / 255.0f, 183 / 255.0f, 130 / 255.0f};
     light_->SetColor(light_color[0], light_color[1], light_color[2]);
 
-    string file_path = Files::DefaultSphereModel;
+    string file_path = Files::SphereModel;
     ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
     if (!loader) {
         cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;
         return;
     }
 
-    NodePtr light_model = loader->Load(file_path)->nodes()[0]->nodes()[0];
+    NodePtr light_model = loader->Load(file_path)->nodes()[0];
     MeshInstancePtr light_instance = dynamic_pointer_cast<MeshInstance>(light_model);
     MaterialPtr light_material = light_instance->material();
     light_material->SetDiffuseColor(light_color[0], light_color[1], light_color[2]);
@@ -60,7 +63,24 @@ void Scene::InitLight() {
     light_material->SetSpecularStrength(1.0f);
 
     light_->AddNode(light_model);
-    AddNode(light_);
+}
+
+void Scene::InitSkyBox() {
+    skybox_ = make_shared<SkyBox>();
+
+    string file_path = Files::CubeModel;
+    ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
+    if (!loader) {
+        cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;
+        return;
+    }
+
+    NodePtr box_model = loader->Load(file_path)->nodes()[0];
+    box_model->Scale(10.0f, 10.0f, 10.0f);
+    skybox_->SetBox(box_model);
+
+    CubemapPtr cubemap = Cubemap::CreateDefault();
+    skybox_->SetCubemap(cubemap);
 }
 
 void Scene::AddNode(NodePtr node) {
