@@ -1,52 +1,51 @@
 #include "Cubemap.h"
+#include "Texture.h"
 #include "Common/Files.h"
 
 using namespace std;
 
-Cubemap::Cubemap(const std::string& front_face,
-				 const std::string& back_face,
-				 const std::string& up_face,
-				 const std::string& down_face,
-				 const std::string& left_face,
-				 const std::string& right_face){
+Cubemap::Cubemap(const std::string &front_face,
+                 const std::string &back_face,
+                 const std::string &up_face,
+                 const std::string &down_face,
+                 const std::string &left_face,
+                 const std::string &right_face) :
+        front_(new Texture("front", front_face)),
+        back_(new Texture("back", back_face)),
+        left_(new Texture("left", left_face)),
+        right_(new Texture("right", right_face)),
+        up_(new Texture("up", up_face)),
+        down_(new Texture("down", down_face)) {}
 
-	front_ = make_shared<Texture>("front", front_face);
-	front_ = make_shared<Texture>("back", back_face);
-	front_ = make_shared<Texture>("left", left_face);
-	front_ = make_shared<Texture>("right", right_face);
-	front_ = make_shared<Texture>("up", up_face);
-	front_ = make_shared<Texture>("down", down_face);
-}
-
-kTexturePtr Cubemap::front() const { 
-	return front_; 
+kTexturePtr Cubemap::front() const {
+    return front_;
 }
 
 kTexturePtr Cubemap::back() const {
-	return back_;
+    return back_;
 }
 
 kTexturePtr Cubemap::up() const {
-	return up_;
+    return up_;
 }
 
 kTexturePtr Cubemap::down() const {
-	return down_;
+    return down_;
 }
 
 kTexturePtr Cubemap::left() const {
-	return left_;
+    return left_;
 }
 
 kTexturePtr Cubemap::right() const {
-	return right_;
+    return right_;
 }
 
 CubemapPtr Cubemap::CreateDefault() {
-	return make_shared<Cubemap>(Files::DefaultCubemapFront,
-								Files::DefaultCubemapBack,
-								Files::DefaultCubemapUp,
-								Files::DefaultCubemapDown,
-								Files::DefaultCubemapLeft,
-								Files::DefaultCubemapRight);
+    return make_shared<Cubemap>(Files::DefaultCubemapFront,
+                                Files::DefaultCubemapBack,
+                                Files::DefaultCubemapUp,
+                                Files::DefaultCubemapDown,
+                                Files::DefaultCubemapLeft,
+                                Files::DefaultCubemapRight);
 }

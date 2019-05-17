@@ -7,8 +7,8 @@ list(APPEND GLRENDER_SOURCES
 		SceneAnimator.cpp
 		LightRender.h
 		LightRender.cpp
-		SkyboxRender.h
-		SkyboxRender.cpp
+		SkyBoxRender.h
+		SkyBoxRender.cpp
 		MeshInstanceRender.h
         MeshInstanceRender.cpp
         SceneRender.h

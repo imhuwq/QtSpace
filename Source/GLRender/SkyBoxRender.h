@@ -17,7 +17,11 @@ public:
 
 	kNodePtr node() const;
 
-	void AddTexture(const std::string &texture_uuid, QGLTexturePtr texture);
+	kQGLTexturePtr texture() const;
+
+	QGLTexturePtr texture();
+
+	void SetTexture(QGLTexturePtr texture);
 
 	void Render(QGLFunctionsPtr gl_functions);
 
@@ -25,7 +29,7 @@ private:
 	kNodePtr node_;
 	size_t index_buffer_size_;
 	QGLShaderPtr shader_;
-	std::map<std::string, QGLTexturePtr> textures_;
+	QGLTexturePtr texture_;
 
 	void PrepareBuffer();
 

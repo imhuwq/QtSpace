@@ -53,11 +53,7 @@ void MainLoop::InitializeOpenGLFunctions() {
     connect(this, SIGNAL(frameSwapped()), this, SLOT(update()));
 }
 
-void MainLoop::InitializeOpenGLFeatures() {
-    gl_functions_->glEnable(GL_DEPTH_TEST);
-    gl_functions_->glEnable(GL_CULL_FACE);
-    gl_functions_->glClearColor(0, 0, 0, 0);
-}
+void MainLoop::InitializeOpenGLFeatures() { }
 
 void MainLoop::InitializeScene() {
     timer_->start();

@@ -6,7 +6,7 @@
 #include "Resource/Scene.h"
 #include "GLRender/MainLoop.h"
 #include "LightRender.h"
-#include "SkyboxRender.h"
+#include "SkyBoxRender.h"
 #include "MeshInstanceRender.h"
 #include "Resource/GraphNode/MeshInstance.h"
 
@@ -64,7 +64,7 @@ private:
 
 	void CreateSkyboxBuffer();
 
-	void CreateSkyboxTextures();
+	void CreateSkyboxTexture();
 
 	void PrepareSkyboxShader(QGLFunctionsPtr gl_functions);
 

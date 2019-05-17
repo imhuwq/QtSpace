@@ -76,6 +76,7 @@ void Scene::InitSkyBox() {
     }
 
     NodePtr box_model = loader->Load(file_path)->nodes()[0];
+    box_model->Scale(10.0f, 10.0f, 10.0f);
     skybox_->SetBox(box_model);
 
     CubemapPtr cubemap = Cubemap::CreateDefault();

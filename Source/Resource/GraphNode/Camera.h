@@ -13,8 +13,6 @@ public:
 
     QVector3D target() const;
 
-    void Translate(float x, float y, float z) override;
-
     void ComputeTransformation() override;
 
     void Zoom(float distance);

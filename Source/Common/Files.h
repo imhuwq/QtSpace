@@ -19,12 +19,12 @@ namespace Files {
     static const std::string DefaultCubeDiffuseTexture = "File/Texture/CubeDiffuse.png";
     static const std::string DefaultCubeSpecularTexture = "File/Texture/CubeSpecular.png";
 
-    static const std::string DefaultCubemapFront = "File/Cubemap/front.png";
-    static const std::string DefaultCubemapBack = "File/Cubemap/back.png";
-    static const std::string DefaultCubemapUp = "File/Cubemap/top.png";
-    static const std::string DefaultCubemapDown = "File/Cubemap/down.png";
-    static const std::string DefaultCubemapLeft = "File/Cubemap/left.png";
-    static const std::string DefaultCubemapRight = "File/Cubemap/right.png";
+    static const std::string DefaultCubemapFront = "File/Cubemap/front.jpg";
+    static const std::string DefaultCubemapBack = "File/Cubemap/back.jpg";
+    static const std::string DefaultCubemapUp = "File/Cubemap/up.jpg";
+    static const std::string DefaultCubemapDown = "File/Cubemap/down.jpg";
+    static const std::string DefaultCubemapLeft = "File/Cubemap/left.jpg";
+    static const std::string DefaultCubemapRight = "File/Cubemap/right.jpg";
 
     inline std::string GetFileExtension(const std::string &file_path) {
         size_t pos = file_path.find_last_of('.');
