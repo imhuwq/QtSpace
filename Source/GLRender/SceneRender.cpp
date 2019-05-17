@@ -338,6 +338,10 @@ void SceneRender::PrepareMeshInstanceShader(QGLFunctionsPtr gl_functions) {
     mi_shader_->setUniformValue("u_global_light.strength", light->strength());
     mi_shader_->setUniformValue("u_global_light.position", position[0], position[1], position[2]);
 
+    QGLTexturePtr cubemap_texture = skybox_render_->texture();
+    cubemap_texture->bind(TextureUnitLocation::kCubemap);
+    mi_shader_->setUniformValue("u_skybox", TextureUnitLocation::kCubemap);
+
     const kCameraPtr camera = scene_->camera();
     position = camera->translation();
     mi_shader_->setUniformValue("u_camera_position", position[0], position[1], position[2]);

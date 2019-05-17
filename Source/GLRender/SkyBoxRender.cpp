@@ -35,8 +35,8 @@ void SkyBoxRender::PrepareBuffer() {
 }
 
 void SkyBoxRender::PrepareCubemap() {
-    texture_->bind(0);
-    shader_->setUniformValue("u_skybox", 0);
+    texture_->bind(TextureUnitLocation::kCubemap);
+    shader_->setUniformValue("u_skybox", TextureUnitLocation::kCubemap);
 }
 
 void SkyBoxRender::Render(QGLFunctionsPtr gl_functions) {

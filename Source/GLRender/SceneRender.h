@@ -44,8 +44,6 @@ private:
 	QGLShaderPtr skybox_shader_;
 	SkyBoxRenderPtr skybox_render_;
 
-    std::map<std::string, wQGLTexturePtr> cubemaps_;
-
     void CreateLightShader();
 
     void CreateLightRender();

@@ -63,6 +63,7 @@ namespace TextureUnitLocation {
         kAmbient = 0,
         kDiffuse = 1,
         kSpecular = 2,
+        kCubemap = 3,
         kNumLocation
     };
 }
