@@ -23,7 +23,7 @@ QVector3D Camera::target() const { return target_; }
 
 void Camera::ComputeTransformation() {
     transformation_.setToIdentity();
-    transformation_.lookAt(translation_, target_, up_);
+    transformation_.lookAt(translation_, target_, Vector3D::Up);
     dirty_ = false;
 }
 
@@ -34,24 +34,35 @@ void Camera::Zoom(float fov_delta) {
     fov_ = new_fov;
 }
 
-void Camera::Orbit(float around_y_angle, float around_x_angle) {
-    static QMatrix4x4 y_axis_rotation_matrix, x_axis_rotation_matrix;
+void Camera::Orbit(float orbiting_y_delta, float orbiting_x_delta) {
+    static float orbiting_x_total = 0;
+    static float orbiting_x_max = 85.0f;
+    static float orbiting_x_min = -85.0f;
+    static QMatrix4x4 orbiting_y_matrix;
+    static QMatrix4x4 orbiting_x_matrix;
 
-    y_axis_rotation_matrix.setToIdentity();
-    x_axis_rotation_matrix.setToIdentity();
+    orbiting_y_matrix.setToIdentity();
+    orbiting_x_matrix.setToIdentity();
+
+    orbiting_x_total += orbiting_x_delta;
+    if (orbiting_x_total >= orbiting_x_max) {
+        orbiting_x_delta = orbiting_x_max - (orbiting_x_total - orbiting_x_delta);
+        orbiting_x_total = orbiting_x_max;
+    } else if (orbiting_x_total <= orbiting_x_min) {
+        orbiting_x_delta = orbiting_x_min - (orbiting_x_total - orbiting_x_delta);
+        orbiting_x_total = orbiting_x_min;
+    }
 
     direction_ = translation_ - target_;
-    y_axis_rotation_matrix.rotate(around_y_angle, up_);
-    translation_ = target_ + y_axis_rotation_matrix * direction_;
 
-    direction_ = translation_ - target_;
-    right_ = QVector3D::crossProduct(up_, direction_);
+    orbiting_y_matrix.rotate(orbiting_y_delta, Vector3D::Up);
+    orbiting_x_matrix.rotate(orbiting_x_delta, right_);
+    direction_ = orbiting_x_matrix * orbiting_y_matrix * direction_;
+    QVector3D possible_translation = target_ + direction_;
+
+    translation_ = possible_translation;
+    right_ = QVector3D::crossProduct(Vector3D::Up, direction_);
     right_.normalize();
-
-    x_axis_rotation_matrix.rotate(around_x_angle, right_);
-    translation_ = target_ + x_axis_rotation_matrix * direction_;
-    up_ = QVector3D::crossProduct(direction_, right_);
-    up_.normalize();
 
     dirty_ = true;
 }

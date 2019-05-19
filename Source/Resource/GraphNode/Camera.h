@@ -17,7 +17,7 @@ public:
 
     void Zoom(float distance);
 
-    void Orbit(float around_y_angle, float around_x_angle);
+    void Orbit(float orbiting_y_delta, float orbiting_x_delta);
 	
 private:
     float fov_;

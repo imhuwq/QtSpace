@@ -6,6 +6,7 @@
 namespace Files {
     static const std::string CubeModel = "File/Model/cube.fbx";
     static const std::string SphereModel = "File/Model/sphere.fbx";
+    static const std::string DefaultModel = "File/Model/model.fbx";
 
     static const std::string ObjectVertexShader = "File/Shader/object.vert";
     static const std::string ObjectFragmentShader = "File/Shader/object.frag";
