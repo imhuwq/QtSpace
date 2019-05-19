@@ -9,7 +9,7 @@
 #include "Common/Consts.h"
 #include "GraphNode/MeshInstance.h"
 #include "GraphNode/Light/DirectionLight.h"
-#include "IO/ModelFileLoader/ModelFileLoader.h"
+#include "ModelLoader/ModelFileLoader.h"
 
 using namespace std;
 

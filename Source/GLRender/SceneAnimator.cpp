@@ -13,24 +13,25 @@ void SceneAnimator::Animate(kStatePtr state, int frame_time_delta, QGLFunctionsP
         anim_timer_offset = anim_timer_->elapsed() - last_anim_time_;
     }
 
-    if (state->camera_orbiting) {
-        static const float mouse2degree = 9.0f / 25.0f;
-        float orbiting_y_delta = state->mid_mouse_x_delta * mouse2degree;
-        float orbiting_x_delta = state->mid_mouse_y_delta * mouse2degree;
-        scene_->camera_->Orbit(orbiting_y_delta, orbiting_x_delta);
+    if (state->camera_resetting) {
+        scene_->camera_->ReSet();
+    } else if (state->camera_orbiting) {
+        scene_->camera_->Orbit(-state->mouse_y_delta * 0.2, -state->mouse_x_delta * 0.2, 0);
     }
 
     if (state->camera_zooming) {
-        float camera_fov_delta = -state->mid_mouse_z_delta / 120.0f;
+        float camera_fov_delta = -state->mouse_z_delta / 120.0f;
         scene_->camera_->Zoom(camera_fov_delta);
         scene_->projection_.setToIdentity();
-        scene_->projection_.perspective(scene_->camera()->fov(), state->window_width / float(state->window_height),
+        scene_->projection_.perspective(scene_->camera()->fov(),
+                                        state->window_width / float(state->window_height),
                                         0.01f, 100.0f);
     }
 }
 
 void SceneAnimator::Resize(kStatePtr state) {
     scene_->projection_.setToIdentity();
-    scene_->projection_.perspective(scene_->camera_->fov(), state->window_width / float(state->window_height), 0.01f,
+    scene_->projection_.perspective(scene_->camera_->fov(),
+                                    state->window_width / float(state->window_height), 0.01f,
                                     100.0f);
 }
