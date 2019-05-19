@@ -12,9 +12,11 @@ Q_OBJECT
 public:
     Controller();
 
-    void StartStateTimer();
-
     kStatePtr state() const;
+
+    void Update();
+
+    void LateUpdate();
 
     void ProcessKeyPressEvent(QKeyEvent *event);
 

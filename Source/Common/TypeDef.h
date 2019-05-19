@@ -85,7 +85,7 @@ DEF_CLS(State);
 
 DEF_CLS(Controller);
 
-// IO
+// ModelLoader
 DEF_CLS(FbxFileLoader);
 
 DEF_CLS(ModelFileLoader);

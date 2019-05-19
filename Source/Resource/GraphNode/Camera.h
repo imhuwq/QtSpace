@@ -13,19 +13,26 @@ public:
 
     QVector3D target() const;
 
-    void ComputeTransformation() override;
+    float target_distance() const;
+
+    virtual void ComputeTransformation();
 
     void Zoom(float distance);
 
-    void Orbit(float around_y_angle, float around_x_angle);
-	
-private:
-    float fov_;
+    void ReSet();
 
+    void Orbit(float pitch, float yaw, float roll);
+
+private:
+    static constexpr float max_pitch_ = 89.0f;
+    static constexpr float min_pitch_ = -89.0f;
+
+    float fov_;
     QVector3D target_;
-    QVector3D direction_;
-    QVector3D right_;
-    QVector3D up_;
+    float target_distance_;
+    QVector3D angel_;
+    QVector3D init_direction_;
+    QQuaternion quaternion_;
 
     void Rotate(float x, float y, float z) override;
 

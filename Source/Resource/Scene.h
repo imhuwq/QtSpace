@@ -18,7 +18,7 @@ class Scene : public Resource {
 public:
     Scene();
 
-    void LoadModelFile(const std::string &file_path);
+    NodePtr LoadModelFile(const std::string &file_path);
 
     void LoadDefaultModelFile();
 

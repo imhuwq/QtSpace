@@ -5,25 +5,27 @@
 
 using namespace std;
 
-Camera::Camera(const string &name, const QVector3D &target) : Node(name, NodeType::kCamera),
-                                                              target_(target),
-                                                              fov_(25.0f) {
-    Translate(0, 0, 25);
+Camera::Camera(const string &name, const QVector3D &target) :
+        Node(name, NodeType::kCamera),
+        target_(target),
+        target_distance_(25.0f),
+        fov_(25.0f) {
+    Translate(0, 0, target_distance_);
+    init_direction_ = translation_ - target_;
     move_speed_ = 2.0f;
-
-    direction_ = translation_ - target_;
-    up_ = translation_ + Vector3D::Up;
-    right_ = QVector3D::crossProduct(up_, direction_);
-    right_.normalize();
 }
 
 float Camera::fov() const { return fov_; }
 
 QVector3D Camera::target() const { return target_; }
 
+float Camera::target_distance() const { return target_distance_; }
+
 void Camera::ComputeTransformation() {
+    if (!dirty_) return;
+
     transformation_.setToIdentity();
-    transformation_.lookAt(translation_, target_, up_);
+    transformation_.lookAt(translation_, target_, Vector3D::Up);
     dirty_ = false;
 }
 
@@ -34,25 +36,26 @@ void Camera::Zoom(float fov_delta) {
     fov_ = new_fov;
 }
 
-void Camera::Orbit(float around_y_angle, float around_x_angle) {
-    static QMatrix4x4 y_axis_rotation_matrix, x_axis_rotation_matrix;
 
-    y_axis_rotation_matrix.setToIdentity();
-    x_axis_rotation_matrix.setToIdentity();
+void Camera::ReSet() {
+    angel_ = QVector3D(0, 0, 0);
+    translation_ = target_ + init_direction_;
+    dirty_ = true;
+}
 
-    direction_ = translation_ - target_;
-    y_axis_rotation_matrix.rotate(around_y_angle, up_);
-    translation_ = target_ + y_axis_rotation_matrix * direction_;
+inline float Clamp(float val, float min_val, float max_val) {
+    if (val < min_val) return min_val;
+    if (val > max_val) return max_val;
+    return val;
+}
 
-    direction_ = translation_ - target_;
-    right_ = QVector3D::crossProduct(up_, direction_);
-    right_.normalize();
+void Camera::Orbit(float pitch, float yaw, float roll) {
+    angel_ += QVector3D(pitch, yaw, roll);
+    angel_.setX(Clamp(angel_.x(), min_pitch_, max_pitch_));
+    qDebug() << angel_ << endl;
 
-    x_axis_rotation_matrix.rotate(around_x_angle, right_);
-    translation_ = target_ + x_axis_rotation_matrix * direction_;
-    up_ = QVector3D::crossProduct(direction_, right_);
-    up_.normalize();
-
+    quaternion_ = QQuaternion::fromEulerAngles(angel_);
+    translation_ = target_ + quaternion_.rotatedVector(init_direction_);
     dirty_ = true;
 }
 

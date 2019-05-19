@@ -25,8 +25,10 @@ void MainLoop::resizeGL(int w, int h) {
 }
 
 void MainLoop::paintGL() {
+    controller_->Update();
     scene_animator_->Animate(controller_->state(), frame_delta_, gl_functions_);
     scene_render_->Render(controller_->state(), gl_functions_);
+    controller_->LateUpdate();
 
     frame_count_++;
     current_time_ = timer_->elapsed();
@@ -61,7 +63,6 @@ void MainLoop::InitializeScene() {
     scene_->LoadDefaultModelFile();
     scene_animator_ = make_shared<SceneAnimator>(scene_);
     scene_render_ = make_shared<SceneRender>(scene_);
-    controller_->StartStateTimer();
 }
 
 void MainLoop::TearDownGL() {}

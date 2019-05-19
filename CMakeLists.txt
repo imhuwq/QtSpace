@@ -26,7 +26,7 @@ include_directories(
         ${Qt5Widgets_INCLUDE_DIRS})
 
 # sub directories
-add_subdirectory(Source/IO)
+add_subdirectory(Source/ModelLoader)
 add_subdirectory(Source/Resource)
 add_subdirectory(Source/GLRender)
 add_subdirectory(Source/Application)
@@ -36,7 +36,7 @@ add_subdirectory(Source/Control)
 list(APPEND PRJ_LIBRARIES
         ${CMAKE_DL_LIBS}
         ${Qt5Widgets_LIBRARIES}
-        glrender resource io control)
+        glrender resource model_loader control)
 
 if (UNIX)
     list(APPEND PRJ_LIBRARIES "${CMAKE_CURRENT_SOURCE_DIR}/Lib/UNIX/fbxsdk/libfbxsdk.so")
@@ -48,3 +48,6 @@ endif()
 
 add_executable(QtSpace Source/Application/main.cpp)
 target_link_libraries(QtSpace application ${PRJ_LIBRARIES})
+
+add_executable(debug debug.cpp)
+target_link_libraries(debug ${Qt5Widgets_LIBRARIES})

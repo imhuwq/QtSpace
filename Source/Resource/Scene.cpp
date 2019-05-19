@@ -9,7 +9,7 @@
 #include "Common/Consts.h"
 #include "GraphNode/MeshInstance.h"
 #include "GraphNode/Light/DirectionLight.h"
-#include "IO/ModelFileLoader/ModelFileLoader.h"
+#include "ModelLoader/ModelFileLoader.h"
 
 using namespace std;
 
@@ -21,19 +21,21 @@ Scene::Scene() {
     InitSkyBox();
 }
 
-void Scene::LoadModelFile(const string &file_path) {
+NodePtr Scene::LoadModelFile(const string &file_path) {
     ModelFileLoaderPtr loader = ModelFileLoader::CreateLoader(file_path);
     if (!loader) {
         cerr << "Scene::LoadModelFile: Cannot create loader for file '" << file_path << "'." << endl;
-        return;
+        return nullptr;
     }
 
     NodePtr model_root_node = loader->Load(file_path);
     AddNode(model_root_node);
+    return model_root_node;
 }
 
 void Scene::LoadDefaultModelFile() {
-    LoadModelFile(Files::CubeModel);
+    NodePtr root_node = LoadModelFile(Files::DefaultModel);
+    root_node->Scale(0.6, 0.6, 0.6); // TODO: just for temporary use
 }
 
 void Scene::InitCamera() { camera_ = make_shared<Camera>("camera"); }
@@ -42,7 +44,7 @@ void Scene::InitLight() {
     light_ = make_shared<DirectionLight>("light");
     light_->TranslateTo(-2, 2, 2);
     light_->Scale(0.8, 0.8, 0.8);
-    vector<float> light_color = {255 / 255.0f, 183 / 255.0f, 130 / 255.0f};
+    vector<float> light_color = {255 / 255.0f, 255 / 255.0f, 255 / 255.0f};
     light_->SetColor(light_color[0], light_color[1], light_color[2]);
 
     string file_path = Files::SphereModel;

@@ -6,7 +6,7 @@
 
 #include "Resource.h"
 #include "Common/TypeDef.h"
-#include "IO/ModelFileLoader/VertexSemantic.h"
+#include "ModelLoader/VertexSemantic.h"
 
 class Mesh : public Resource {
 public:
